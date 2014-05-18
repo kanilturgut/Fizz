@@ -1,7 +1,8 @@
 package com.rkm.fizz.volley;
 
-import android.app.Application;
+import android.content.Context;
 import android.text.TextUtils;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -12,28 +13,31 @@ import com.android.volley.toolbox.Volley;
  * Date     : 18/05/14
  * Time     : 16:31
  */
-public class AppController extends Application{
+public class AppController {
 
     public static final String TAG = "AppController";
+    Context context;
 
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
 
     private static AppController appController = null;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        appController = this;
+
+    public static synchronized AppController getInstance(Context context) {
+        if (appController == null)
+            appController = new AppController(context.getApplicationContext());
+
+        return appController;
     }
 
-    public static synchronized AppController getInstance() {
-        return appController;
+    private AppController(Context context) {
+        this.context = context;
     }
 
     public RequestQueue getRequestQueue() {
         if (requestQueue == null)
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue = Volley.newRequestQueue(context);
 
         return requestQueue;
     }
@@ -53,6 +57,7 @@ public class AppController extends Application{
 
     public <T> void addToRequestQueue(Request<T> request) {
         request.setTag(TAG);
+        request.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
         getRequestQueue().add(request);
     }
 
