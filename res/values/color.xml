@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="twitter_background_start">#36AAD0</color>
+    <color name="twitter_background_finish">#26738D</color>
+
+    <color name="instagram_background_start">#c08d64</color>
+    <color name="instagram_background_finish">#886345</color>
+
+    <color name="foursquare_background_start">#3ED683</color>
+    <color name="foursquare_background_finish">#218B51</color>
+</resources>
