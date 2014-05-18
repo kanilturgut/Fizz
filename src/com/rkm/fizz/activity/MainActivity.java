@@ -1,7 +1,8 @@
-package com.rkm.fizz;
+package com.rkm.fizz.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.rkm.fizz.R;
 
 public class MainActivity extends Activity {
     /**
