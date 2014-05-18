@@ -1,5 +1,6 @@
 package com.rkm.fizz.socialnetwork.page;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.LinkedList;
  * Date     : 18/05/14
  * Time     : 16:53
  */
-public class SocialNetwork implements PageType{
+public class SocialNetwork implements PageType, Serializable{
 
     public static LinkedList<SocialNetwork> socialNetworks = new LinkedList<SocialNetwork>();
 

@@ -1,22 +1,25 @@
 package com.rkm.fizz.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.rkm.fizz.R;
+import com.rkm.fizz.fragment.FizzFragment;
+import com.rkm.fizz.fragment.SplashFragment;
 import com.rkm.fizz.util.Logs;
-import com.rkm.fizz.volley.AppController;
+
 import org.json.JSONArray;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
     Context context;
+    FragmentManager fragmentManager = null;
 
     /**
      * Called when the activity is first created.
@@ -27,22 +30,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
         context = this;
 
-        String tag_json_arry = "json_array_req";
+        fragmentManager = getSupportFragmentManager();
+        mainToSplash();
+
         String url = "http://onurcansert.com:3000/initialTweets";
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray jsonArray) {
-                Logs.d("bla", "bla");
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Logs.e("bla", "hataa");
-            }
-        });
-
-        //AppController.getInstance(context).addToRequestQueue(jsonArrayRequest, tag_json_arry);
 
         AQuery aQuery = new AQuery(this);
         aQuery.ajax(url, JSONArray.class, new AjaxCallback<JSONArray>() {
@@ -53,5 +44,19 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
+
+    public void mainToSplash() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        SplashFragment splashFragment = new SplashFragment();
+        fragmentTransaction.replace(R.id.frameMain, splashFragment);
+        fragmentTransaction.commit();
+    }
+
+    public void splashToFizz() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FizzFragment fizzFragment = new FizzFragment();
+        fragmentTransaction.replace(R.id.frameMain, fizzFragment);
+        fragmentTransaction.commit();
     }
 }
