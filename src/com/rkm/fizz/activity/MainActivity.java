@@ -41,6 +41,8 @@ public class MainActivity extends FragmentActivity {
             public void callback(String url, JSONArray object, AjaxStatus status) {
                 super.callback(url, object, status);
                 Logs.d("stri", object.toString());
+
+                splashToFizz();
             }
         });
 

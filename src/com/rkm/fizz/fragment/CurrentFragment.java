@@ -21,7 +21,7 @@ public class CurrentFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
         Bundle bundle = this.getArguments();
-        SocialNetwork socialNetwork = (SocialNetwork) bundle.getSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY);
+        //SocialNetwork socialNetwork = (SocialNetwork) bundle.getSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY);
     }
 
     @Override

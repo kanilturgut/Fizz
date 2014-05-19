@@ -21,7 +21,24 @@ public class FizzFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fizz, null);
 
+        fizzToCurrent();
+        fizzToLoading();
+
         return view;
+    }
+
+    public void fizzToCurrent() {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        CurrentFragment currentFragment = new CurrentFragment();
+        fragmentTransaction.replace(R.id.frameCurrent, currentFragment);
+        fragmentTransaction.commit();
+    }
+
+    public void fizzToLoading() {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        LoadingFragment loadingFragment = new LoadingFragment();
+        fragmentTransaction.replace(R.id.frameLoading, loadingFragment);
+        fragmentTransaction.commit();
     }
 
     public void currentToCurrent() {
@@ -38,7 +55,7 @@ public class FizzFragment extends Fragment{
     public void loadingToLoading() {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         LoadingFragment loadingFragment = new LoadingFragment();
-        fragmentTransaction.replace(R.id.frameCurrent, loadingFragment);
+        fragmentTransaction.replace(R.id.frameLoading, loadingFragment);
         fragmentTransaction.commit();
     }
 }
