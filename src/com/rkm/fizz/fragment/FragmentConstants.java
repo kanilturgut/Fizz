@@ -1,7 +1,9 @@
 package com.rkm.fizz.fragment;
 
 /**
- * Created by kanilturgut on 18.05.2014.
+ * Author   : kanilturgut
+ * Date     : 18.05.2014
+ * Time     : 17:44
  */
 public class FragmentConstants {
 

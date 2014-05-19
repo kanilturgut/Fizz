@@ -8,10 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rkm.fizz.R;
+import com.rkm.fizz.operation.PageChangeController;
 import com.rkm.fizz.socialnetwork.page.SocialNetwork;
 
 /**
- * Created by kanilturgut on 18.05.2014.
+ * Author   : kanilturgut
+ * Date     : 18.05.2014
+ * Time     : 17:44
  */
 public class FizzFragment extends Fragment{
 
@@ -20,9 +23,11 @@ public class FizzFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fizz, null);
-
         fizzToCurrent();
         fizzToLoading();
+
+        PageChangeController pageChangeController = PageChangeController.getInstance(getFragmentManager());
+        pageChangeController.startApp();
 
         return view;
     }
@@ -41,21 +46,4 @@ public class FizzFragment extends Fragment{
         fragmentTransaction.commit();
     }
 
-    public void currentToCurrent() {
-        CurrentFragment currentFragment = new CurrentFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY, new SocialNetwork());
-        currentFragment.setArguments(bundle);
-
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frameCurrent, currentFragment);
-        fragmentTransaction.commit();
-    }
-
-    public void loadingToLoading() {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        LoadingFragment loadingFragment = new LoadingFragment();
-        fragmentTransaction.replace(R.id.frameLoading, loadingFragment);
-        fragmentTransaction.commit();
-    }
 }

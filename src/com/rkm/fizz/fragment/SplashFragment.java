@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import com.rkm.fizz.R;
 
 /**
- * Created by kanilturgut on 18.05.2014.
+ * Author   : kanilturgut
+ * Date     : 18.05.2014
+ * Time     : 17:45
  */
 public class SplashFragment extends Fragment {
 

@@ -6,12 +6,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Author   : kanilturgut
  * Date     : 18/05/14
  * Time     : 16:50
  */
-public class Twitter extends SocialNetwork {
+public class Twitter extends SocialNetwork implements Serializable{
 
     SocialUser socialUser;
     String hashTagOfTweet;
