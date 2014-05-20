@@ -33,4 +33,15 @@ public class Queue<T> {
     public void offerToSecond(T element) {
         linkedList.add(1, element);
     }
+
+    public int size() {
+        return linkedList.size();
+    }
+
+    public boolean isEmpty() {
+        if (linkedList == null)
+            return true;
+        else
+            return linkedList.size() == 0;
+    }
 }

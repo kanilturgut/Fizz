@@ -2,6 +2,8 @@ package com.rkm.fizz.socialnetwork.page.model;
 
 import com.rkm.fizz.socialnetwork.page.SocialNetwork;
 import com.rkm.fizz.socialnetwork.user.SocialUser;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Author   : kanilturgut
@@ -50,5 +52,22 @@ public class Instagram extends SocialNetwork{
     @Override
     public int getPageType() {
         return PAGE_TYPE_INSTAGRAM;
+    }
+
+    public static Instagram fromJSON(JSONObject jsonObject) throws JSONException {
+
+        Instagram instagram = new Instagram();
+
+        SocialUser socialUser = new SocialUser();
+        JSONObject userObj = jsonObject.getJSONObject("user");
+        socialUser.setFullname(userObj.getString("full_name"));
+        socialUser.setAvatar(userObj.getString("profile_picture"));
+        socialUser.setUsername(userObj.getString("username"));
+        instagram.setSocialUser(socialUser);
+
+        instagram.setPost(jsonObject.getString("text"));
+        instagram.setImageOfInstagram(jsonObject.getString("image"));
+
+        return instagram;
     }
 }
