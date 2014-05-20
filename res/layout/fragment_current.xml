@@ -2,6 +2,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent" android:layout_height="match_parent"
+                android:padding="20dp"
                 android:background="@color/twitter_background_start">
 
     <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -9,6 +10,7 @@
                   android:layout_centerInParent="true">
 
         <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:layout_gravity="center_horizontal"
                       android:orientation="horizontal">
 
             <com.rkm.fizz.component.CircularImageView
@@ -24,7 +26,6 @@
 
                 <TextView
                         android:id="@+id/tvCurrentFragmentUserFullname"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/current_fragment_text_size"
@@ -34,7 +35,6 @@
 
                 <TextView
                         android:id="@+id/tvCurrentFragmentUsername"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/current_fragment_text_size"
@@ -45,6 +45,7 @@
         </LinearLayout>
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:gravity="center_horizontal"
                   android:layout_gravity="center_horizontal"
                   android:id="@+id/tvCurrentFragmentContentOfTweet"
                   android:textSize="@dimen/current_fragment_text_size"

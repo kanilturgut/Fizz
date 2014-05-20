@@ -5,13 +5,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-
-import android.util.Log;
 import android.view.View;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
-import com.androidquery.util.AQUtility;
 import com.rkm.fizz.R;
 import com.rkm.fizz.aquery.AQueryUtilities;
 import com.rkm.fizz.fragment.FizzFragment;
@@ -19,7 +16,6 @@ import com.rkm.fizz.fragment.SplashFragment;
 import com.rkm.fizz.socialnetwork.page.SocialNetwork;
 import com.rkm.fizz.socialnetwork.page.model.Twitter;
 import com.rkm.fizz.util.Logs;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,7 +60,8 @@ public class MainActivity extends FragmentActivity {
                         try {
                             JSONObject jsonObject = responseArray.getJSONObject(i);
                             Twitter twitter = Twitter.fromJSON(jsonObject);
-                            SocialNetwork.socialNetworks.add(twitter);
+
+                            SocialNetwork.socialNetworkQueue.offer(twitter);
                         } catch (JSONException e) {
                             Logs.e(TAG, "ERROR occured on reading JSON response", e);
                         }

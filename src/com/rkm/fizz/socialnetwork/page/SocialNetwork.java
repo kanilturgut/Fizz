@@ -1,7 +1,8 @@
 package com.rkm.fizz.socialnetwork.page;
 
+import com.rkm.fizz.Queue;
+
 import java.io.Serializable;
-import java.util.LinkedList;
 
 /**
  * Author   : kanilturgut
@@ -10,7 +11,7 @@ import java.util.LinkedList;
  */
 public class SocialNetwork implements PageType, Serializable{
 
-    public static LinkedList<SocialNetwork> socialNetworks = new LinkedList<SocialNetwork>();
+    public static Queue<SocialNetwork> socialNetworkQueue = new Queue<SocialNetwork>();
 
     @Override
     public int getPageType() {

@@ -6,10 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.rkm.fizz.R;
 import com.rkm.fizz.operation.PageChangeController;
-import com.rkm.fizz.socialnetwork.page.SocialNetwork;
 
 /**
  * Author   : kanilturgut
@@ -19,6 +17,7 @@ import com.rkm.fizz.socialnetwork.page.SocialNetwork;
 public class FizzFragment extends Fragment{
 
     final String TAG = "FizzFragment";
+    public static int count = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

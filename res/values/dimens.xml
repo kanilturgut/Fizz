@@ -3,12 +3,12 @@
 
     <!-- loading fragment -->
     <dimen name="loading_fragment_text_size">18sp</dimen>
-    <dimen name="loading_fragment_circular_image_view">50dp</dimen>
+    <dimen name="loading_fragment_circular_image_view">75dp</dimen>
     <dimen name="loading_fragment_circular_image_view_right_margin">15dp</dimen>
 
     <!-- current fragment -->
     <dimen name="current_fragment_text_size">22sp</dimen>
-    <dimen name="current_fragment_circular_image_view">75dp</dimen>
+    <dimen name="current_fragment_circular_image_view">150dp</dimen>
     <dimen name="current_fragment_circular_image_view_right_margin">20dp</dimen>
 
 </resources>

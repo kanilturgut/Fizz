@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 import com.androidquery.AQuery;
 import com.androidquery.callback.ImageOptions;
 import com.rkm.fizz.R;
@@ -60,8 +61,8 @@ public class CurrentFragment extends Fragment{
             if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
                 Twitter twitter = (Twitter) socialNetwork;
 
-                tvCurrentFragmentUserFullname.setText(twitter.getSocialUser().getFullname());
-                tvCurrentFragmentUsername.setText(twitter.getSocialUser().getUsername());
+                tvCurrentFragmentUserFullname.setText(twitter.getSocialUser().getFullname() + "(" + FizzFragment.count++ + ")");
+                tvCurrentFragmentUsername.setText("@" + twitter.getSocialUser().getUsername());
                 tvCurrentFragmentContentOfTweet.setText(twitter.getContentOfTweet());
 
                 ImageOptions options = new ImageOptions();
@@ -75,6 +76,7 @@ public class CurrentFragment extends Fragment{
             }
 
         }
+
         return view;
     }
 }

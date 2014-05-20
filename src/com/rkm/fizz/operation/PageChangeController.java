@@ -18,12 +18,14 @@ import com.rkm.fizz.socialnetwork.page.SocialNetwork;
  */
 public class PageChangeController {
 
-    static int index = 0;
     FragmentManager fragmentManager = null;
     static PageChangeController pageChangeController = null;
 
     private PageChangeController(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
+
+        PubnubController pubnubController = PubnubController.getInstance();
+        pubnubController.subscribeToChannel();
     }
 
     public static PageChangeController getInstance(FragmentManager fragmentManager) {
@@ -36,25 +38,18 @@ public class PageChangeController {
 
     public void startApp() {
 
-        final int sizeOfArray = SocialNetwork.socialNetworks.size();
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                currentToCurrent(SocialNetwork.socialNetworks.get(index));
-
-                if (index == (sizeOfArray - 1))
-                    index = 0;
-                else
-                    index++;
-
-                loadingToLoading(SocialNetwork.socialNetworks.get(index));
-
+                currentToCurrent(SocialNetwork.socialNetworkQueue.poll());
+                loadingToLoading(SocialNetwork.socialNetworkQueue.peek());
 
                 startApp();
+
             }
         }, Constant.PAGE_SHOW_TIME);
+
     }
 
 
