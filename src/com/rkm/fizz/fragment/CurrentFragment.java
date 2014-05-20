@@ -2,6 +2,7 @@ package com.rkm.fizz.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,8 +11,10 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 import com.androidquery.AQuery;
+import com.androidquery.callback.ImageOptions;
 import com.rkm.fizz.R;
 import com.rkm.fizz.aquery.AQueryUtilities;
+import com.rkm.fizz.component.CircularImageView;
 import com.rkm.fizz.socialnetwork.page.PageType;
 import com.rkm.fizz.socialnetwork.page.SocialNetwork;
 import com.rkm.fizz.socialnetwork.page.model.Twitter;
@@ -45,7 +48,10 @@ public class CurrentFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_current, null);
-        TextView tvTwitter = (TextView) view.findViewById(R.id.tvTweet);
+        TextView tvCurrentFragmentUserFullname = (TextView) view.findViewById(R.id.tvCurrentFragmentUserFullname);
+        TextView tvCurrentFragmentUsername = (TextView) view.findViewById(R.id.tvCurrentFragmentUsername);
+        TextView tvCurrentFragmentContentOfTweet = (TextView) view.findViewById(R.id.tvCurrentFragmentContentOfTweet);
+        CircularImageView civCurrentFragmentUserAvatar = (CircularImageView) view.findViewById(R.id.civCurrentFragmentUserAvatar);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -54,7 +60,18 @@ public class CurrentFragment extends Fragment{
             if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
                 Twitter twitter = (Twitter) socialNetwork;
 
-                tvTwitter.setText("Adı : " + twitter.getSocialUser().getFullname() + ", tweet : " + twitter.getContentOfTweet());
+                tvCurrentFragmentUserFullname.setText(twitter.getSocialUser().getFullname());
+                tvCurrentFragmentUsername.setText(twitter.getSocialUser().getUsername());
+                tvCurrentFragmentContentOfTweet.setText(twitter.getContentOfTweet());
+
+                ImageOptions options = new ImageOptions();
+                options.memCache = true;
+                options.targetWidth = 0;
+                Bitmap bitmap = aQuery.getCachedImage(twitter.getSocialUser().getAvatar());
+                if (bitmap == null)
+                    aQuery.id(civCurrentFragmentUserAvatar).image(twitter.getSocialUser().getAvatar(), options);
+                else
+                    civCurrentFragmentUserAvatar.setImageBitmap(bitmap);
             }
 
         }

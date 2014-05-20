@@ -9,4 +9,9 @@
 
     <color name="foursquare_background_start">#3ED683</color>
     <color name="foursquare_background_finish">#218B51</color>
+
+
+    <!-- normal colors-->
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
 </resources>
