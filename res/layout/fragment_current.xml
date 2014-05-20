@@ -3,7 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent" android:layout_height="match_parent"
                 android:padding="20dp"
-                android:background="@color/twitter_background_start">
+                android:id="@+id/rlFragmentCurrent">
 
     <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:orientation="vertical"
@@ -44,10 +44,14 @@
             </LinearLayout>
         </LinearLayout>
 
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                   android:id="@+id/ivCurrentFragmentImageOfPost"
+                   android:visibility="gone"/>
+
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:gravity="center_horizontal"
                   android:layout_gravity="center_horizontal"
-                  android:id="@+id/tvCurrentFragmentContentOfTweet"
+                  android:id="@+id/tvCurrentFragmentContentOfPost"
                   android:textSize="@dimen/current_fragment_text_size"
                   android:textStyle="bold"
                   android:text="adsadsa"

@@ -5,6 +5,7 @@ import com.pubnub.api.Pubnub;
 import com.pubnub.api.PubnubError;
 import com.pubnub.api.PubnubException;
 import com.rkm.fizz.socialnetwork.page.SocialNetwork;
+import com.rkm.fizz.socialnetwork.page.model.Instagram;
 import com.rkm.fizz.socialnetwork.page.model.Twitter;
 import com.rkm.fizz.util.Logs;
 import org.json.JSONException;
@@ -69,7 +70,12 @@ public class PubnubController {
                             Twitter twitter = Twitter.fromJSON(new JSONObject(o.toString()));
                             SocialNetwork.socialNetworkQueue.offerToSecond(twitter);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            try {
+                                Instagram instagram = Instagram.fromJSON(new JSONObject(o.toString()));
+                                SocialNetwork.socialNetworkQueue.offer(instagram);
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
                         }
 
                     }

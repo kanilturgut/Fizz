@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.ImageOptions;
@@ -17,6 +18,7 @@ import com.rkm.fizz.aquery.AQueryUtilities;
 import com.rkm.fizz.component.CircularImageView;
 import com.rkm.fizz.socialnetwork.page.PageType;
 import com.rkm.fizz.socialnetwork.page.SocialNetwork;
+import com.rkm.fizz.socialnetwork.page.model.Instagram;
 import com.rkm.fizz.socialnetwork.page.model.Twitter;
 
 /**
@@ -50,6 +52,7 @@ public class LoadingFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_loading, null);
         TextView tvLoadingFragmentNextUserName = (TextView) view.findViewById(R.id.tvLoadingFragmentNextUserName);
         CircularImageView circularImageView = (CircularImageView) view.findViewById(R.id.civLoadingFragmentNextUserAvatar);
+        RelativeLayout rlFragmentLoading = (RelativeLayout) view.findViewById(R.id.rlFragmentLoading);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -58,6 +61,7 @@ public class LoadingFragment extends Fragment{
             if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
                 Twitter twitter = (Twitter) socialNetwork;
 
+                rlFragmentLoading.setBackgroundColor(getResources().getColor(R.color.twitter_background_finish));
                 tvLoadingFragmentNextUserName.setText(twitter.getSocialUser().getFullname());
 
                 ImageOptions options = new ImageOptions();
@@ -69,6 +73,22 @@ public class LoadingFragment extends Fragment{
                 else
                     circularImageView.setImageBitmap(bitmap);
 
+            } else if (socialNetwork.getPageType() == PageType.PAGE_TYPE_INSTAGRAM) {
+                Instagram instagram = (Instagram) socialNetwork;
+
+                rlFragmentLoading.setBackgroundColor(getResources().getColor(R.color.instagram_background_finish));
+                tvLoadingFragmentNextUserName.setText(instagram.getSocialUser().getFullname());
+
+                ImageOptions options = new ImageOptions();
+                options.memCache = true;
+                options.targetWidth = 0;
+                Bitmap bitmap = aQuery.getCachedImage(instagram.getSocialUser().getAvatar());
+                if (bitmap == null)
+                    aQuery.id(circularImageView).image(instagram.getSocialUser().getAvatar(), options);
+                else
+                    circularImageView.setImageBitmap(bitmap);
+
+                aQuery.image(instagram.getImageOfInstagram(), options);
             }
 
         }
