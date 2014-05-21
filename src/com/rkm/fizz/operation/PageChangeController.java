@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentTransaction;
 import com.rkm.fizz.Constant;
 import com.rkm.fizz.R;
 import com.rkm.fizz.fragment.CurrentFragment;
+import com.rkm.fizz.fragment.FollowUsFragment;
 import com.rkm.fizz.fragment.FragmentConstants;
 import com.rkm.fizz.fragment.LoadingFragment;
-import com.rkm.fizz.fragment.LoadingToFollowUs;
 import com.rkm.fizz.socialnetwork.page.SocialNetwork;
 
 /**
@@ -71,7 +71,7 @@ public class PageChangeController {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                loadingToLoadingToFollowUs(socialNetwork);
+                loadingToFollowUs(socialNetwork);
             }
         }, Constant.LOADING_FRAGMENT_SHOW_TIME);
     }
@@ -90,8 +90,8 @@ public class PageChangeController {
         }
     }
 
-    public void loadingToLoadingToFollowUs(SocialNetwork socialNetwork) {
-        LoadingToFollowUs loadingToFollowUs = new LoadingToFollowUs();
+    public void loadingToFollowUs(SocialNetwork socialNetwork) {
+        FollowUsFragment loadingToFollowUs = new FollowUsFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY, socialNetwork);
         loadingToFollowUs.setArguments(bundle);

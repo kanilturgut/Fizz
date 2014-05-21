@@ -16,7 +16,7 @@ import com.rkm.fizz.socialnetwork.page.SocialNetwork;
  * Date     : 20/05/14
  * Time     : 20:09
  */
-public class LoadingToFollowUs extends Fragment{
+public class FollowUsFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public class LoadingToFollowUs extends Fragment{
                 rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.twitter_background_start));
                 tvFollowUsFragment.setText("#OccupyCHP hashtagine tweet atabilirsiniz");
             }
+
         }
 
         return view;
