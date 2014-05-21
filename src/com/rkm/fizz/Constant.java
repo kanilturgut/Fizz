@@ -7,5 +7,7 @@ package com.rkm.fizz;
  */
 public class Constant {
 
-    public static final int PAGE_SHOW_TIME = 10 * 1000;
+    public static final int PAGE_SHOW_TIME = 15 * 1000;
+    public static final int LOADING_FRAGMENT_SHOW_TIME = 9 * 1000;
+    public static final int FOLLOW_US_FRAGMENT_SHOW_TIME = 6 * 1000;
 }

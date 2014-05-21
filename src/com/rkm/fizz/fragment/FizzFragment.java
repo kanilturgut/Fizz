@@ -17,7 +17,7 @@ import com.rkm.fizz.operation.PageChangeController;
 public class FizzFragment extends Fragment{
 
     final String TAG = "FizzFragment";
-    public static int count = 0;
+    public static int count = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

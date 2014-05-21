@@ -9,6 +9,7 @@ import com.rkm.fizz.R;
 import com.rkm.fizz.fragment.CurrentFragment;
 import com.rkm.fizz.fragment.FragmentConstants;
 import com.rkm.fizz.fragment.LoadingFragment;
+import com.rkm.fizz.fragment.LoadingToFollowUs;
 import com.rkm.fizz.socialnetwork.page.SocialNetwork;
 
 /**
@@ -53,7 +54,7 @@ public class PageChangeController {
     }
 
 
-    public void currentToCurrent(SocialNetwork socialNetwork) {
+    public void currentToCurrent(final SocialNetwork socialNetwork) {
         CurrentFragment currentFragment = new CurrentFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY, socialNetwork);
@@ -65,6 +66,14 @@ public class PageChangeController {
             fragmentTransaction.replace(R.id.frameCurrent, currentFragment);
             fragmentTransaction.commit();
         }
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingToLoadingToFollowUs(socialNetwork);
+            }
+        }, Constant.LOADING_FRAGMENT_SHOW_TIME);
     }
 
     public void loadingToLoading(SocialNetwork socialNetwork) {
@@ -77,6 +86,20 @@ public class PageChangeController {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
             fragmentTransaction.replace(R.id.frameLoading, loadingFragment);
+            fragmentTransaction.commit();
+        }
+    }
+
+    public void loadingToLoadingToFollowUs(SocialNetwork socialNetwork) {
+        LoadingToFollowUs loadingToFollowUs = new LoadingToFollowUs();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY, socialNetwork);
+        loadingToFollowUs.setArguments(bundle);
+
+        if (fragmentManager != null) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+            fragmentTransaction.replace(R.id.frameLoading, loadingToFollowUs);
             fragmentTransaction.commit();
         }
     }
