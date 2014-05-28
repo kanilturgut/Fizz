@@ -94,7 +94,7 @@ public class LoadingFragment extends Fragment {
                 else
                     circularImageView.setImageBitmap(bitmap);
 
-                //aQuery.image(instagram.getImageOfInstagram(), options);
+                aQuery.image(instagram.getImageOfInstagram(), options);
 
                 ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_instagram);
             }
