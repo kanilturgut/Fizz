@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="twitter_background_start">#36AAD0</color>
-    <color name="twitter_background_finish">#26738D</color>
+    <color name="post_background">#8036AAD0</color>
 
-    <color name="instagram_background_start">#c08d64</color>
-    <color name="instagram_background_finish">#886345</color>
+    <color name="twitter_follow_us_background">#3EADEF</color>
+    <color name="instagram_follow_us_background">#2E5F86</color>
+
+    <color name="twitter_blue">#3EADEF</color>
+    <color name="instagram_blue">#2E5F86</color>
 
     <color name="foursquare_background_start">#3ED683</color>
     <color name="foursquare_background_finish">#218B51</color>
 
 
+    <!-- Fizz Fragment Background colors-->
+    <color name="fizz_fragment_background_twitter_start">#18619F</color>
+    <color name="fizz_fragment_background_twitter_finish">#E1CAA1</color>
+
+    <color name="fizz_fragment_background_instagram_start">#26646F</color>
+    <color name="fizz_fragment_background_instagram_finish">#E1CAA1</color>
+
+
     <!-- normal colors-->
     <color name="white">#FFF</color>
     <color name="black">#000</color>
+    <color name="grey">#999</color>
 </resources>

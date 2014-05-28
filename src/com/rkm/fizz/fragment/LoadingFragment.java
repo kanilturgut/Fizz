@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.androidquery.AQuery;
@@ -26,11 +26,12 @@ import com.rkm.fizz.socialnetwork.page.model.Twitter;
  * Date     : 18.05.2014
  * Time     : 17:44
  */
-public class LoadingFragment extends Fragment{
+public class LoadingFragment extends Fragment {
 
     final String TAG = "LoadingFragment";
     Context context = null;
     AQuery aQuery = null;
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -50,9 +51,12 @@ public class LoadingFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_loading, null);
+
+
         TextView tvLoadingFragmentNextUserName = (TextView) view.findViewById(R.id.tvLoadingFragmentNextUserName);
         CircularImageView circularImageView = (CircularImageView) view.findViewById(R.id.civLoadingFragmentNextUserAvatar);
-        RelativeLayout rlFragmentLoading = (RelativeLayout) view.findViewById(R.id.rlFragmentLoading);
+        ImageView ivLoadingFragmentSocialMediaIcon = (ImageView) view.findViewById(R.id.ivLoadingFragmentSocialMediaIcon);
+        RelativeLayout rlLoadingFragmentBackground = (RelativeLayout) view.findViewById(R.id.rlLoadingFragmentBackground);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -61,7 +65,7 @@ public class LoadingFragment extends Fragment{
             if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
                 Twitter twitter = (Twitter) socialNetwork;
 
-                rlFragmentLoading.setBackgroundColor(getResources().getColor(R.color.twitter_background_finish));
+                rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_twitter_background));
                 tvLoadingFragmentNextUserName.setText(twitter.getSocialUser().getFullname());
 
                 ImageOptions options = new ImageOptions();
@@ -73,10 +77,12 @@ public class LoadingFragment extends Fragment{
                 else
                     circularImageView.setImageBitmap(bitmap);
 
+                ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_twitter);
+
             } else if (socialNetwork.getPageType() == PageType.PAGE_TYPE_INSTAGRAM) {
                 Instagram instagram = (Instagram) socialNetwork;
 
-                rlFragmentLoading.setBackgroundColor(getResources().getColor(R.color.instagram_background_finish));
+                rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_instagram_background));
                 tvLoadingFragmentNextUserName.setText(instagram.getSocialUser().getFullname());
 
                 ImageOptions options = new ImageOptions();
@@ -88,10 +94,13 @@ public class LoadingFragment extends Fragment{
                 else
                     circularImageView.setImageBitmap(bitmap);
 
-                aQuery.image(instagram.getImageOfInstagram(), options);
+                //aQuery.image(instagram.getImageOfInstagram(), options);
+
+                ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_instagram);
             }
 
         }
+
         return view;
     }
 }

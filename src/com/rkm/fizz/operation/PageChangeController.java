@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import com.rkm.fizz.Constant;
 import com.rkm.fizz.R;
 import com.rkm.fizz.fragment.CurrentFragment;
@@ -20,18 +22,21 @@ import com.rkm.fizz.socialnetwork.page.SocialNetwork;
 public class PageChangeController {
 
     FragmentManager fragmentManager = null;
+    LinearLayout llBackgroundOfFizz;
+
     static PageChangeController pageChangeController = null;
 
-    private PageChangeController(FragmentManager fragmentManager) {
+    private PageChangeController(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz) {
         this.fragmentManager = fragmentManager;
+        this.llBackgroundOfFizz = llBackgroundOfFizz;
 
         PubnubController pubnubController = PubnubController.getInstance();
         pubnubController.subscribeToChannel();
     }
 
-    public static PageChangeController getInstance(FragmentManager fragmentManager) {
+    public static PageChangeController getInstance(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, RelativeLayout rlLoadingFragmentBackground) {
         if (pageChangeController == null)
-            pageChangeController = new PageChangeController(fragmentManager);
+            pageChangeController = new PageChangeController(fragmentManager, llBackgroundOfFizz);
 
         return pageChangeController;
     }
@@ -55,7 +60,7 @@ public class PageChangeController {
 
 
     public void currentToCurrent(final SocialNetwork socialNetwork) {
-        CurrentFragment currentFragment = new CurrentFragment();
+        CurrentFragment currentFragment = new CurrentFragment(llBackgroundOfFizz);
         Bundle bundle = new Bundle();
         bundle.putSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY, socialNetwork);
         currentFragment.setArguments(bundle);

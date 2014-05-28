@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <View android:layout_width="match_parent" android:layout_height="55dp"
+          android:id="@+id/viewTransparent"
+          android:background="@android:color/transparent"/>
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="165dp"
+                    android:background="@color/white"
+                    android:layout_below="@+id/viewTransparent"
+                    android:layout_alignBottom="@+id/civCurrentFragmentUserAvatar">
+
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:layout_centerVertical="true"
+                      android:layout_marginLeft="230dp" android:id="@+id/linearLayout">
+
+            <TextView
+                    android:id="@+id/tvCurrentFragmentUserFullname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="Kadir Anıl T."/>
+
+        </LinearLayout>
+
+        <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
+                   android:id="@+id/ivSocialMediaIcon"
+                   android:layout_alignParentRight="true"
+                   android:layout_centerVertical="true"
+                   android:adjustViewBounds="true"
+                   android:src="@drawable/triangle_twitter"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Small Text"
+                android:id="@+id/tvCounter"
+                android:layout_below="@+id/linearLayout"
+                android:layout_alignLeft="@+id/linearLayout"
+                android:layout_alignStart="@+id/linearLayout"/>
+
+
+    </RelativeLayout>
+
+    <com.rkm.fizz.component.CircularImageView
+            android:layout_width="@dimen/current_fragment_circular_image_view"
+            android:layout_height="@dimen/current_fragment_circular_image_view"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/anil"
+            android:id="@+id/civCurrentFragmentUserAvatar"/>
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                    android:id="@+id/rlCurrentFragmentPostBackground"
+                    android:background="@color/post_background"
+                    android:padding="100dp"
+                    android:layout_below="@+id/civCurrentFragmentUserAvatar">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/tvCurrentFragmentTweet"
+                  android:layout_centerInParent="true"
+                  android:gravity="left"
+                  android:textSize="36sp"
+                  android:textColor="@color/white"
+                  android:text="1lkjd adl skandsk jadbs dbsadksdsadn ajsdbas dsabd kjsabd sdb sand sajdbs adbsa dsabdsdnsdl jsad sbadksbd sad basdb asdjbs ds bdasjb dsdd sd"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
