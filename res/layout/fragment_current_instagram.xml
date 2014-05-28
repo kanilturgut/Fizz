@@ -79,7 +79,7 @@
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                       android:id="@+id/tvCurrentFragmentInstagramPost"
                       android:layout_centerInParent="true"
-                      android:gravity="left"
+                      android:gravity="center"
                       android:textSize="22sp"
                       android:textColor="@color/white"
                       android:text="1lkjd adl skandsk jadbs dbsadksdsadn ajsdbas dsabd kjsabd sdb sand sajdbs adbsa dsabdsdnsdl jsad sbadksbd sad basdb asdjbs ds bdasjb dsdd sd"/>

@@ -30,10 +30,10 @@ public class FollowUsFragment extends Fragment{
             SocialNetwork socialNetwork = (SocialNetwork) bundle.getSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY);
 
             if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
-                rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.twitter_follow_us_background));
+                rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.instagram_follow_us_background));
                 tvFollowUsFragment.setText("#selfie hashtagine fotoğraflarınızı yollayabilirsiniz");
             } else if (socialNetwork.getPageType() == PageType.PAGE_TYPE_INSTAGRAM) {
-                rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.instagram_follow_us_background));
+                rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.twitter_follow_us_background));
                 tvFollowUsFragment.setText("#OccupyCHP hashtagine tweet atabilirsiniz");
             }
 

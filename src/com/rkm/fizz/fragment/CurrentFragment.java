@@ -16,7 +16,6 @@ import com.androidquery.callback.ImageOptions;
 import com.rkm.fizz.R;
 import com.rkm.fizz.aquery.AQueryUtilities;
 import com.rkm.fizz.component.CircularImageView;
-import com.rkm.fizz.socialnetwork.page.PageType;
 import com.rkm.fizz.socialnetwork.page.SocialNetwork;
 import com.rkm.fizz.socialnetwork.page.model.Instagram;
 import com.rkm.fizz.socialnetwork.page.model.Twitter;
@@ -68,7 +67,7 @@ public class CurrentFragment extends Fragment {
 
                         break;
                     case SocialNetwork.PAGE_TYPE_INSTAGRAM:
-                        view = inflater.inflate(R.layout.current_fragment_instagram, container, false);
+                        view = inflater.inflate(R.layout.fragment_current_instagram, container, false);
                         llBackgroundOfFizz.setBackground(getResources().getDrawable(R.drawable.gradient_instagram));
                         instagramPage(socialNetwork, view);
                         break;

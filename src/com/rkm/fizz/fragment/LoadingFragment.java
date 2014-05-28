@@ -8,7 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.androidquery.AQuery;
@@ -31,7 +34,7 @@ public class LoadingFragment extends Fragment {
     final String TAG = "LoadingFragment";
     Context context = null;
     AQuery aQuery = null;
-
+    Animation animation;
 
     @Override
     public void onAttach(Activity activity) {
@@ -46,6 +49,7 @@ public class LoadingFragment extends Fragment {
         AQueryUtilities aQueryUtilities = AQueryUtilities.getInstance(context);
         aQuery = aQueryUtilities.aQuery;
 
+        animation = AnimationUtils.loadAnimation(context, R.anim.move);
     }
 
     @Override
@@ -58,12 +62,19 @@ public class LoadingFragment extends Fragment {
         ImageView ivLoadingFragmentSocialMediaIcon = (ImageView) view.findViewById(R.id.ivLoadingFragmentSocialMediaIcon);
         RelativeLayout rlLoadingFragmentBackground = (RelativeLayout) view.findViewById(R.id.rlLoadingFragmentBackground);
 
+        LinearLayout animationView = (LinearLayout) view.findViewById(R.id.animateView);
+        animationView.startAnimation(animation);
+
+        View animationViewDevami = view.findViewById(R.id.animationViewDevami);
+
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             SocialNetwork socialNetwork = (SocialNetwork) bundle.getSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY);
 
             if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
                 Twitter twitter = (Twitter) socialNetwork;
+
+                animationViewDevami.setBackground(getResources().getDrawable(R.color.twitter_blue));
 
                 rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_twitter_background));
                 tvLoadingFragmentNextUserName.setText(twitter.getSocialUser().getFullname());
@@ -81,6 +92,8 @@ public class LoadingFragment extends Fragment {
 
             } else if (socialNetwork.getPageType() == PageType.PAGE_TYPE_INSTAGRAM) {
                 Instagram instagram = (Instagram) socialNetwork;
+
+                animationViewDevami.setBackground(getResources().getDrawable(R.color.instagram_blue));
 
                 rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_instagram_background));
                 tvLoadingFragmentNextUserName.setText(instagram.getSocialUser().getFullname());

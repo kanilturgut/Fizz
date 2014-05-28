@@ -37,12 +37,21 @@
 
         </LinearLayout>
 
-        <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
-                   android:id="@+id/ivLoadingFragmentSocialMediaIcon"
-                   android:layout_alignParentRight="true"
-                   android:layout_centerVertical="true"
-                   android:adjustViewBounds="true"
-                   android:src="@drawable/triangle_twitter"/>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:layout_alignParentRight="true"
+                      android:layout_centerVertical="true"
+                      android:id="@+id/animateView"
+                      android:orientation="horizontal">
+
+            <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
+                       android:id="@+id/ivLoadingFragmentSocialMediaIcon"
+                       android:adjustViewBounds="true"
+                       android:src="@drawable/triangle_twitter"/>
+
+            <View android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/animationViewDevami"
+                  android:background="@color/twitter_blue"/>
+        </LinearLayout>
 
     </RelativeLayout>
 
