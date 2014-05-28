@@ -85,10 +85,8 @@ public class CurrentFragment extends Fragment {
         TextView tvCurrentFragmentUserFullname = (TextView) view.findViewById(R.id.tvCurrentFragmentUserFullname);
         TextView tvCurrentFragmentTweet = (TextView) view.findViewById(R.id.tvCurrentFragmentTweet);
         CircularImageView civCurrentFragmentUserAvatar = (CircularImageView) view.findViewById(R.id.civCurrentFragmentUserAvatar);
-        //ImageView ivCurrentFragmentImageOfPost = (ImageView) view.findViewById(R.id.ivCurrentFragmentImageOfPost);
 
         tvCurrentFragmentUserFullname.setText(twitter.getSocialUser().getFullname());
-        //ivCurrentFragmentImageOfPost.setVisibility(ImageView.GONE);
         tvCurrentFragmentTweet.setText(twitter.getContentOfTweet());
 
         ImageOptions options = new ImageOptions();
@@ -133,7 +131,6 @@ public class CurrentFragment extends Fragment {
         } else {
             aQuery.id(ivCurrentFragmentImageOfPost).image(instagram.getImageOfInstagram(), options);
         }
-
 
         TextView tvCounter = (TextView) view.findViewById(R.id.tvCounter);
         tvCounter.setText("(" + FizzFragment.count++ + ")");

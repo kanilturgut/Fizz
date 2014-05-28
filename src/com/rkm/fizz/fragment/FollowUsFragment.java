@@ -16,7 +16,7 @@ import com.rkm.fizz.socialnetwork.page.SocialNetwork;
  * Date     : 20/05/14
  * Time     : 20:09
  */
-public class FollowUsFragment extends Fragment{
+public class FollowUsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

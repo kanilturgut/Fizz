@@ -72,7 +72,7 @@ public class PubnubController {
                         } catch (JSONException e) {
                             try {
                                 Instagram instagram = Instagram.fromJSON(new JSONObject(o.toString()));
-                                SocialNetwork.socialNetworkQueue.offer(instagram);
+                                SocialNetwork.socialNetworkQueue.offerToSecond(instagram);
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
                             }

@@ -16,7 +16,7 @@ import com.rkm.fizz.operation.PageChangeController;
  * Date     : 18.05.2014
  * Time     : 17:44
  */
-public class FizzFragment extends Fragment{
+public class FizzFragment extends Fragment {
 
     final String TAG = "FizzFragment";
     public static int count = 1;
@@ -26,7 +26,7 @@ public class FizzFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fizz, null);
+        View view = inflater.inflate(R.layout.fragment_fizz, container, false);
 
         llBackgroundOfFizz = (LinearLayout) view.findViewById(R.id.llBackgroundOfFizz);
 

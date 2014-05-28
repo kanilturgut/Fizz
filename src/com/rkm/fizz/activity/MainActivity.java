@@ -30,7 +30,7 @@ public class MainActivity extends FragmentActivity {
 
 
     Queue<Instagram> instagramQueue = new Queue<Instagram>();
-    Queue<Twitter> twitterQueue= new Queue<Twitter>();
+    Queue<Twitter> twitterQueue = new Queue<Twitter>();
 
     boolean twitter = false;
     boolean instagram = false;
@@ -57,12 +57,12 @@ public class MainActivity extends FragmentActivity {
                 super.callback(url, responseArray, status);
 
                 if (responseArray != null && responseArray.length() > 0) {
-                    
+
                     // add cookies to cookieList
                     if (status != null && status.getCookies().size() > 0) {
                         aQueryUtilities.cookieLinkedList.addAll(status.getCookies());
                     }
-                    
+
                     // add posts to list
                     for (int i = 0; i < responseArray.length(); i++) {
                         try {
@@ -71,7 +71,7 @@ public class MainActivity extends FragmentActivity {
                             Logs.e(TAG, "ERROR occured on reading JSON response", e);
                         }
                     }
-                    
+
                 }
 
                 twitter = true;
