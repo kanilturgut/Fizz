@@ -42,7 +42,7 @@ public class FizzFragment extends Fragment {
         fizzToLoading();
 
         PageChangeController pageChangeController = PageChangeController.getInstance(getFragmentManager(), llBackgroundOfFizz, context);
-        pageChangeController.startApp();
+        pageChangeController.startFirstTime();
 
         return view;
     }
