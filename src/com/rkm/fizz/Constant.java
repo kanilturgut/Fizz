@@ -10,4 +10,6 @@ public class Constant {
     public static final int PAGE_SHOW_TIME = 15 * 1000;
     public static final int LOADING_FRAGMENT_SHOW_TIME = 9 * 1000;
     public static final int FOLLOW_US_FRAGMENT_SHOW_TIME = 6 * 1000;
+
+    public static final int BACKGROUND_TRANSITION_TIME = 4 * 1000;
 }

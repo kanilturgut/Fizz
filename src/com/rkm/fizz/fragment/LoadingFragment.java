@@ -101,13 +101,17 @@ public class LoadingFragment extends Fragment {
                 ImageOptions options = new ImageOptions();
                 options.memCache = true;
                 options.targetWidth = 0;
-                Bitmap bitmap = aQuery.getCachedImage(instagram.getSocialUser().getAvatar());
-                if (bitmap == null)
-                    aQuery.id(circularImageView).image(instagram.getSocialUser().getAvatar(), options);
-                else
-                    circularImageView.setImageBitmap(bitmap);
 
                 aQuery.image(instagram.getImageOfInstagram(), options);
+
+                Bitmap bitmap = aQuery.getCachedImage(instagram.getSocialUser().getAvatar());
+                if (bitmap == null) {
+                    aQuery.id(circularImageView).image(instagram.getSocialUser().getAvatar(), options);
+                }
+                else {
+                    circularImageView.setImageBitmap(bitmap);
+                }
+
 
                 ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_instagram);
             }

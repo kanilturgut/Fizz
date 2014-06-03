@@ -77,7 +77,7 @@ public class PageChangeController {
         TransitionDrawable trans = new TransitionDrawable(colorDrawables);
         llBackgroundOfFizz.setBackground(trans);
         llBackgroundOfFizz.setPadding(20, 20, 20, 20);
-        trans.startTransition(4000);
+        trans.startTransition(Constant.BACKGROUND_TRANSITION_TIME);
 
         startApp();
     }
@@ -97,7 +97,7 @@ public class PageChangeController {
                 TransitionDrawable trans = new TransitionDrawable(colorDrawables);
                 llBackgroundOfFizz.setBackground(trans);
                 llBackgroundOfFizz.setPadding(20, 20, 20, 20);
-                trans.startTransition(4000);
+                trans.startTransition(Constant.BACKGROUND_TRANSITION_TIME);
 
                 startApp();
 
