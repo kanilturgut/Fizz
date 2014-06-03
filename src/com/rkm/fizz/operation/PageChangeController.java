@@ -70,11 +70,12 @@ public class PageChangeController {
                 int aqua = context.getResources().getColor(R.color.new_aqua);
                 int yellow = context.getResources().getColor(R.color.new_yellow);
                 int green = context.getResources().getColor(R.color.new_green);
+                int purple = context.getResources().getColor(R.color.new_purple);
 
-                colors = new int[]{red, blue, aqua, yellow, green};
+                colors = new int[]{red, blue, aqua, yellow, green, purple};
                 random = new Random();
 
-                int newColor = colors[random.nextInt(5)];
+                int newColor = colors[random.nextInt(6)];
                 ColorDrawable[] colorDrawables = {new ColorDrawable(pastColor), new ColorDrawable(newColor)};
                 pastColor = newColor;
                 TransitionDrawable trans = new TransitionDrawable(colorDrawables);

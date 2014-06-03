@@ -32,5 +32,11 @@
     <color name="new_aqua">#4FB7AD</color>
     <color name="new_yellow">#FCD854</color>
     <color name="new_green">#98C11D</color>
+    <color name="new_purple">#DB7CBE</color>
+
+
+    <!-- Splash -->
+    <color name="splash_start">#013375</color>
+    <color name="splash_finish">#0077C0</color>
 
 </resources>

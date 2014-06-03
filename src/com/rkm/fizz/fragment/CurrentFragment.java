@@ -40,9 +40,6 @@ public class CurrentFragment extends Fragment {
     AQuery aQuery = null;
     LinearLayout llBackgroundOfFizz;
 
-    int[] colors;
-    Random random;
-
     public CurrentFragment(LinearLayout linearLayout) {
         this.llBackgroundOfFizz = linearLayout;
     }
@@ -74,13 +71,11 @@ public class CurrentFragment extends Fragment {
                 switch (socialNetwork.getPageType()) {
                     case SocialNetwork.PAGE_TYPE_TWITTER:
                         view = inflater.inflate(R.layout.fragment_current_twitter, container, false);
-                        //llBackgroundOfFizz.setBackground(getResources().getDrawable(R.drawable.gradient_twitter));
                         twitterPage(socialNetwork, view);
 
                         break;
                     case SocialNetwork.PAGE_TYPE_INSTAGRAM:
                         view = inflater.inflate(R.layout.fragment_current_instagram, container, false);
-                        //llBackgroundOfFizz.setBackground(getResources().getDrawable(R.drawable.gradient_instagram));
                         instagramPage(socialNetwork, view);
                         break;
                 }
