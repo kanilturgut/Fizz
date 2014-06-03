@@ -1,5 +1,7 @@
 package com.rkm.fizz.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -22,7 +24,13 @@ public class FizzFragment extends Fragment {
     public static int count = 1;
 
     LinearLayout llBackgroundOfFizz;
-    RelativeLayout rlLoadingFragmentBackground;
+    Context context;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        context = activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,7 +41,7 @@ public class FizzFragment extends Fragment {
         fizzToCurrent(llBackgroundOfFizz);
         fizzToLoading();
 
-        PageChangeController pageChangeController = PageChangeController.getInstance(getFragmentManager(), llBackgroundOfFizz, rlLoadingFragmentBackground);
+        PageChangeController pageChangeController = PageChangeController.getInstance(getFragmentManager(), llBackgroundOfFizz, context);
         pageChangeController.startApp();
 
         return view;

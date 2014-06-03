@@ -1,5 +1,11 @@
 package com.rkm.fizz.operation;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +20,8 @@ import com.rkm.fizz.fragment.FragmentConstants;
 import com.rkm.fizz.fragment.LoadingFragment;
 import com.rkm.fizz.socialnetwork.page.SocialNetwork;
 
+import java.util.Random;
+
 /**
  * Author   : kanilturgut
  * Date     : 19/05/14
@@ -23,20 +31,25 @@ public class PageChangeController {
 
     FragmentManager fragmentManager = null;
     LinearLayout llBackgroundOfFizz;
+    Context context;
+    int[] colors;
+    Random random;
+    static int pastColor = Color.WHITE;
 
     static PageChangeController pageChangeController = null;
 
-    private PageChangeController(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz) {
+    private PageChangeController(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, Context context) {
         this.fragmentManager = fragmentManager;
         this.llBackgroundOfFizz = llBackgroundOfFizz;
+        this.context = context;
 
         PubnubController pubnubController = PubnubController.getInstance();
         pubnubController.subscribeToChannel();
     }
 
-    public static PageChangeController getInstance(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, RelativeLayout rlLoadingFragmentBackground) {
+    public static PageChangeController getInstance(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, Context context) {
         if (pageChangeController == null)
-            pageChangeController = new PageChangeController(fragmentManager, llBackgroundOfFizz);
+            pageChangeController = new PageChangeController(fragmentManager, llBackgroundOfFizz, context);
 
         return pageChangeController;
     }
@@ -50,6 +63,24 @@ public class PageChangeController {
 
                 currentToCurrent(SocialNetwork.socialNetworkQueue.poll());
                 loadingToLoading(SocialNetwork.socialNetworkQueue.peek());
+
+
+                int red = context.getResources().getColor(R.color.new_red);
+                int blue = context.getResources().getColor(R.color.new_blue);
+                int aqua = context.getResources().getColor(R.color.new_aqua);
+                int yellow = context.getResources().getColor(R.color.new_yellow);
+                int green = context.getResources().getColor(R.color.new_green);
+
+                colors = new int[]{red, blue, aqua, yellow, green};
+                random = new Random();
+
+                int newColor = colors[random.nextInt(5)];
+                ColorDrawable[] colorDrawables = {new ColorDrawable(pastColor), new ColorDrawable(newColor)};
+                pastColor = newColor;
+                TransitionDrawable trans = new TransitionDrawable(colorDrawables);
+                llBackgroundOfFizz.setBackground(trans);
+                llBackgroundOfFizz.setPadding(20, 20, 20, 20);
+                trans.startTransition(4000);
 
                 startApp();
 

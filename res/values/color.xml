@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="post_background">#8036AAD0</color>
+    <color name="post_background">#40000000</color>
 
     <color name="twitter_follow_us_background">#3EADEF</color>
     <color name="instagram_follow_us_background">#2E5F86</color>
@@ -25,4 +25,12 @@
     <color name="white">#FFF</color>
     <color name="black">#000</color>
     <color name="grey">#999</color>
+
+    <!-- yeni renkler -->
+    <color name="new_red">#E74A4C</color>
+    <color name="new_blue">#3A97B9</color>
+    <color name="new_aqua">#4FB7AD</color>
+    <color name="new_yellow">#FCD854</color>
+    <color name="new_green">#98C11D</color>
+
 </resources>
