@@ -39,4 +39,12 @@
     <color name="splash_start">#013375</color>
     <color name="splash_finish">#0077C0</color>
 
+
+    <!-- Onur's colors-->
+    <color name="happy_blue">#2C82C9</color>
+    <color name="calm_green">#2CC990</color>
+    <color name="yello">#EEE657</color>
+    <color name="thai_curry">#FCB941</color>
+    <color name="burnt_red">#FC6042</color>
+
 </resources>

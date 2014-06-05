@@ -50,9 +50,14 @@ public class PageChangeController {
         int green = context.getResources().getColor(R.color.new_green);
         int purple = context.getResources().getColor(R.color.new_purple);
 
-        colors = new int[]{red, blue, aqua, yellow, green, purple};
-        random = new Random();
+        int happy_blue = context.getResources().getColor(R.color.happy_blue);
+        int calm_green = context.getResources().getColor(R.color.calm_green);
+        int yello = context.getResources().getColor(R.color.yello);
+        int thai_curry = context.getResources().getColor(R.color.thai_curry);
+        int burnt_red = context.getResources().getColor(R.color.burnt_red);
 
+        colors = new int[]{happy_blue, calm_green, yello, thai_curry, burnt_red, purple};
+        random = new Random();
 
         PubnubController pubnubController = PubnubController.getInstance();
         pubnubController.subscribeToChannel();
