@@ -17,13 +17,12 @@ import org.json.JSONObject;
  */
 public class PubnubController {
 
+    static PubnubController pubnubController = null;
+    static Pubnub pubnub = null;
     final String TAG = "PubnubController";
     final String PUBLISH_KEY = "pub-c-13b31cee-ef79-440f-b46d-e3804f3d5435";
     final String SUBSCRIBE_KEY = "sub-c-3a5a7350-b28d-11e3-b8c3-02ee2ddab7fe";
     final String CHANNEL = "fizz";
-
-    static PubnubController pubnubController = null;
-    static Pubnub pubnub = null;
 
     private PubnubController() {
         pubnub = new Pubnub(PUBLISH_KEY, SUBSCRIBE_KEY);
@@ -99,7 +98,6 @@ public class PubnubController {
     }
 
     private boolean isContain(SocialNetwork socialNetwork) {
-
         Queue<SocialNetwork> temp = SocialNetwork.socialNetworkQueue;
 
         for (int i = 0; i < temp.size(); i++) {
@@ -109,44 +107,4 @@ public class PubnubController {
 
         return false;
     }
-
-    /*
-    private void isContain(SocialNetwork socialNetwork) {
-        if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
-
-
-        } else if (socialNetwork.getPageType() == PageType.PAGE_TYPE_INSTAGRAM) {
-        }
-
-
-    }
-
-    private void checkAndAdd(SocialNetwork socialNetwork) {
-
-        if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
-            Twitter twitter = (Twitter) socialNetwork;
-            if (!SocialNetwork.socialNetworkQueue.isContain(twitter))
-                SocialNetwork.socialNetworkQueue.offerToSecond(twitter);
-
-        } else if (socialNetwork.getPageType() == PageType.PAGE_TYPE_INSTAGRAM) {
-            Instagram instagram = (Instagram) socialNetwork;
-            if (!SocialNetwork.socialNetworkQueue.isContain(instagram))
-                SocialNetwork.socialNetworkQueue.offerToSecond(instagram);
-        }
-    }
-
-    private void chechkAndDelete(SocialNetwork socialNetwork) {
-
-        if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
-            Twitter twitter = (Twitter) socialNetwork;
-            if (SocialNetwork.socialNetworkQueue.isContain(twitter))
-                SocialNetwork.socialNetworkQueue.offerToSecond(twitter);
-
-        } else if (socialNetwork.getPageType() == PageType.PAGE_TYPE_INSTAGRAM) {
-            Instagram instagram = (Instagram) socialNetwork;
-            if (!SocialNetwork.socialNetworkQueue.isContain(instagram))
-                SocialNetwork.socialNetworkQueue.offerToSecond(instagram);
-        }
-    }
-    */
 }
