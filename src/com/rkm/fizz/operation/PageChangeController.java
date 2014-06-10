@@ -1,7 +1,5 @@
 package com.rkm.fizz.operation;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -11,14 +9,13 @@ import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import com.rkm.fizz.Constant;
 import com.rkm.fizz.R;
 import com.rkm.fizz.fragment.CurrentFragment;
 import com.rkm.fizz.fragment.FollowUsFragment;
 import com.rkm.fizz.fragment.FragmentConstants;
 import com.rkm.fizz.fragment.LoadingFragment;
-import com.rkm.fizz.socialnetwork.page.SocialNetwork;
+import com.rkm.fizz.model.SocialNetwork;
 
 import java.util.Random;
 
@@ -80,7 +77,7 @@ public class PageChangeController {
         ColorDrawable[] colorDrawables = {new ColorDrawable(pastColor), new ColorDrawable(newColor)};
         pastColor = newColor;
         TransitionDrawable trans = new TransitionDrawable(colorDrawables);
-        llBackgroundOfFizz.setBackground(trans);
+        llBackgroundOfFizz.setBackgroundDrawable(trans);
         llBackgroundOfFizz.setPadding(20, 20, 20, 20);
         trans.startTransition(Constant.BACKGROUND_TRANSITION_TIME);
 
@@ -100,7 +97,7 @@ public class PageChangeController {
                 ColorDrawable[] colorDrawables = {new ColorDrawable(pastColor), new ColorDrawable(newColor)};
                 pastColor = newColor;
                 TransitionDrawable trans = new TransitionDrawable(colorDrawables);
-                llBackgroundOfFizz.setBackground(trans);
+                llBackgroundOfFizz.setBackgroundDrawable(trans);
                 llBackgroundOfFizz.setPadding(20, 20, 20, 20);
                 trans.startTransition(Constant.BACKGROUND_TRANSITION_TIME);
 

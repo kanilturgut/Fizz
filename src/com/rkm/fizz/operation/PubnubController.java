@@ -4,9 +4,7 @@ import com.pubnub.api.Callback;
 import com.pubnub.api.Pubnub;
 import com.pubnub.api.PubnubError;
 import com.pubnub.api.PubnubException;
-import com.rkm.fizz.socialnetwork.page.SocialNetwork;
-import com.rkm.fizz.socialnetwork.page.model.Instagram;
-import com.rkm.fizz.socialnetwork.page.model.Twitter;
+import com.rkm.fizz.model.SocialNetwork;
 import com.rkm.fizz.util.Logs;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,19 +63,31 @@ public class PubnubController {
                     public void successCallback(String s, Object o) {
 
                         Logs.i(TAG, "SUBSCRIBE : SUCCESS_CALLBACK on channel " + CHANNEL + " : " + o.toString());
-
+/*
                         try {
-                            Twitter twitter = Twitter.fromJSON(new JSONObject(o.toString()));
-                            SocialNetwork.socialNetworkQueue.offerToSecond(twitter);
-                        } catch (JSONException e) {
-                            try {
-                                Instagram instagram = Instagram.fromJSON(new JSONObject(o.toString()));
-                                SocialNetwork.socialNetworkQueue.offerToSecond(instagram);
-                            } catch (JSONException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
+                            JSONObject jsonObject = new JSONObject(o.toString());
 
+                            if (jsonObject.has("delete_id")) {
+                                //delete operation
+                            } else {
+                                //add operation
+                                try {
+                                    Twitter twitter = Twitter.fromJSON(jsonObject);
+                                    checkAndAdd(twitter);
+                                } catch (JSONException e) {
+                                    try {
+                                        Instagram instagram = Instagram.fromJSON(jsonObject);
+                                        checkAndAdd(instagram);
+                                    } catch (JSONException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        */
                     }
                 });
             } catch (PubnubException e) {
@@ -85,4 +95,44 @@ public class PubnubController {
             }
         }
     }
+
+    /*
+    private void isContain(SocialNetwork socialNetwork) {
+        if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
+
+
+        } else if (socialNetwork.getPageType() == PageType.PAGE_TYPE_INSTAGRAM) {
+        }
+
+
+    }
+
+    private void checkAndAdd(SocialNetwork socialNetwork) {
+
+        if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
+            Twitter twitter = (Twitter) socialNetwork;
+            if (!SocialNetwork.socialNetworkQueue.isContain(twitter))
+                SocialNetwork.socialNetworkQueue.offerToSecond(twitter);
+
+        } else if (socialNetwork.getPageType() == PageType.PAGE_TYPE_INSTAGRAM) {
+            Instagram instagram = (Instagram) socialNetwork;
+            if (!SocialNetwork.socialNetworkQueue.isContain(instagram))
+                SocialNetwork.socialNetworkQueue.offerToSecond(instagram);
+        }
+    }
+
+    private void chechkAndDelete(SocialNetwork socialNetwork) {
+
+        if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
+            Twitter twitter = (Twitter) socialNetwork;
+            if (SocialNetwork.socialNetworkQueue.isContain(twitter))
+                SocialNetwork.socialNetworkQueue.offerToSecond(twitter);
+
+        } else if (socialNetwork.getPageType() == PageType.PAGE_TYPE_INSTAGRAM) {
+            Instagram instagram = (Instagram) socialNetwork;
+            if (!SocialNetwork.socialNetworkQueue.isContain(instagram))
+                SocialNetwork.socialNetworkQueue.offerToSecond(instagram);
+        }
+    }
+    */
 }

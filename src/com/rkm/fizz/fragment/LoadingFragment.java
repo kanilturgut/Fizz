@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,7 @@ import com.androidquery.callback.ImageOptions;
 import com.rkm.fizz.R;
 import com.rkm.fizz.aquery.AQueryUtilities;
 import com.rkm.fizz.component.CircularImageView;
-import com.rkm.fizz.socialnetwork.page.PageType;
-import com.rkm.fizz.socialnetwork.page.SocialNetwork;
-import com.rkm.fizz.socialnetwork.page.model.Instagram;
-import com.rkm.fizz.socialnetwork.page.model.Twitter;
+import com.rkm.fizz.model.SocialNetwork;
 
 /**
  * Author   : kanilturgut
@@ -69,51 +67,41 @@ public class LoadingFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            SocialNetwork socialNetwork = (SocialNetwork) bundle.getSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY);
+            final SocialNetwork socialNetwork = (SocialNetwork) bundle.getSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY);
 
-            if (socialNetwork.getPageType() == PageType.PAGE_TYPE_TWITTER) {
-                Twitter twitter = (Twitter) socialNetwork;
+            //Generic
+            tvLoadingFragmentNextUserName.setText(socialNetwork.getUserFullname());
+            ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_twitter);
 
-                animationViewDevami.setBackground(getResources().getDrawable(R.color.twitter_blue));
+            final ImageOptions options = new ImageOptions();
+            options.memCache = true;
+            options.targetWidth = 0;
+            Bitmap bitmap = aQuery.getCachedImage(socialNetwork.getProfileImage());
+            if (bitmap == null) {
+                aQuery.id(circularImageView).image(socialNetwork.getProfileImage(), options);
+            } else {
+                circularImageView.setImageBitmap(bitmap);
+            }
 
+
+            if (socialNetwork.getType() == SocialNetwork.TYPE_TWITTER) {
+                animationViewDevami.setBackgroundColor(getResources().getColor(R.color.twitter_blue));
                 rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_twitter_background));
-                tvLoadingFragmentNextUserName.setText(twitter.getSocialUser().getFullname());
-
-                ImageOptions options = new ImageOptions();
-                options.memCache = true;
-                options.targetWidth = 0;
-                Bitmap bitmap = aQuery.getCachedImage(twitter.getSocialUser().getAvatar());
-                if (bitmap == null)
-                    aQuery.id(circularImageView).image(twitter.getSocialUser().getAvatar(), options);
-                else
-                    circularImageView.setImageBitmap(bitmap);
-
                 ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_twitter);
 
-            } else if (socialNetwork.getPageType() == PageType.PAGE_TYPE_INSTAGRAM) {
-                Instagram instagram = (Instagram) socialNetwork;
-
-                animationViewDevami.setBackground(getResources().getDrawable(R.color.instagram_blue));
-
+            } else if (socialNetwork.getType() == SocialNetwork.TYPE_INSTAGRAM) {
+                animationViewDevami.setBackgroundColor(getResources().getColor(R.color.instagram_blue));
                 rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_instagram_background));
-                tvLoadingFragmentNextUserName.setText(instagram.getSocialUser().getFullname());
-
-                ImageOptions options = new ImageOptions();
-                options.memCache = true;
-                options.targetWidth = 0;
-
-                aQuery.image(instagram.getImageOfInstagram(), options);
-
-                Bitmap bitmap = aQuery.getCachedImage(instagram.getSocialUser().getAvatar());
-                if (bitmap == null) {
-                    aQuery.id(circularImageView).image(instagram.getSocialUser().getAvatar(), options);
-                }
-                else {
-                    circularImageView.setImageBitmap(bitmap);
-                }
-
-
                 ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_instagram);
+
+                if (!socialNetwork.getImage().equals(""))
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            aQuery.image(socialNetwork.getImage(), options);
+                        }
+                    }, 4000);
+
             }
 
         }

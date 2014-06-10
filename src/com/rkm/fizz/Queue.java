@@ -30,6 +30,17 @@ public class Queue<T> {
         return linkedList.getFirst();
     }
 
+    public T remove(T element) {
+        if (linkedList.remove(element))
+            return element;
+
+        return null;
+    }
+
+    public T removeFirst() {
+        return linkedList.removeFirst();
+    }
+
     public void offerToSecond(T element) {
         linkedList.add(1, element);
     }
@@ -44,4 +55,5 @@ public class Queue<T> {
         else
             return linkedList.size() == 0;
     }
+
 }

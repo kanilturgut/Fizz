@@ -16,9 +16,7 @@ import com.androidquery.callback.ImageOptions;
 import com.rkm.fizz.R;
 import com.rkm.fizz.aquery.AQueryUtilities;
 import com.rkm.fizz.component.CircularImageView;
-import com.rkm.fizz.socialnetwork.page.SocialNetwork;
-import com.rkm.fizz.socialnetwork.page.model.Instagram;
-import com.rkm.fizz.socialnetwork.page.model.Twitter;
+import com.rkm.fizz.model.SocialNetwork;
 
 /**
  * Author   : kanilturgut
@@ -60,13 +58,13 @@ public class CurrentFragment extends Fragment {
         if (bundle != null) {
             SocialNetwork socialNetwork = (SocialNetwork) bundle.getSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY);
             if (socialNetwork != null) {
-                switch (socialNetwork.getPageType()) {
-                    case SocialNetwork.PAGE_TYPE_TWITTER:
+                switch (socialNetwork.getType()) {
+                    case SocialNetwork.TYPE_TWITTER:
                         view = inflater.inflate(R.layout.fragment_current_twitter, container, false);
                         twitterPage(socialNetwork, view);
 
                         break;
-                    case SocialNetwork.PAGE_TYPE_INSTAGRAM:
+                    case SocialNetwork.TYPE_INSTAGRAM:
                         view = inflater.inflate(R.layout.fragment_current_instagram, container, false);
                         instagramPage(socialNetwork, view);
                         break;
@@ -80,24 +78,22 @@ public class CurrentFragment extends Fragment {
     }
 
     private void twitterPage(SocialNetwork socialNetwork, View view) {
-        Twitter twitter = (Twitter) socialNetwork;
 
         TextView tvCurrentFragmentUserFullname = (TextView) view.findViewById(R.id.tvCurrentFragmentUserFullname);
         TextView tvCurrentFragmentTweet = (TextView) view.findViewById(R.id.tvCurrentFragmentTweet);
         CircularImageView civCurrentFragmentUserAvatar = (CircularImageView) view.findViewById(R.id.civCurrentFragmentUserAvatar);
 
-        tvCurrentFragmentUserFullname.setText(twitter.getSocialUser().getFullname());
-        tvCurrentFragmentTweet.setText(twitter.getContentOfTweet());
+        tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
+        tvCurrentFragmentTweet.setText(socialNetwork.getText());
 
         ImageOptions options = new ImageOptions();
         options.memCache = true;
         options.targetWidth = 0;
-        Bitmap bitmap = aQuery.getCachedImage(twitter.getSocialUser().getAvatar());
+        Bitmap bitmap = aQuery.getCachedImage(socialNetwork.getProfileImage());
         if (bitmap == null)
-            aQuery.id(civCurrentFragmentUserAvatar).image(twitter.getSocialUser().getAvatar(), options);
+            aQuery.id(civCurrentFragmentUserAvatar).image(socialNetwork.getProfileImage(), options);
         else
             civCurrentFragmentUserAvatar.setImageBitmap(bitmap);
-
 
         TextView tvCounter = (TextView) view.findViewById(R.id.tvCounter);
         tvCounter.setText("(" + FizzFragment.count++ + ")");
@@ -105,31 +101,34 @@ public class CurrentFragment extends Fragment {
 
 
     private void instagramPage(SocialNetwork socialNetwork, View view) {
-        Instagram instagram = (Instagram) socialNetwork;
 
         TextView tvCurrentFragmentUserFullname = (TextView) view.findViewById(R.id.tvCurrentFragmentUserFullname);
         TextView tvCurrentFragmentInstagramPost = (TextView) view.findViewById(R.id.tvCurrentFragmentInstagramPost);
         CircularImageView civCurrentFragmentUserAvatar = (CircularImageView) view.findViewById(R.id.civCurrentFragmentUserAvatar);
         ImageView ivCurrentFragmentImageOfPost = (ImageView) view.findViewById(R.id.ivCurrentFragmentImageOfPost);
 
-        tvCurrentFragmentUserFullname.setText(instagram.getSocialUser().getFullname());
-        tvCurrentFragmentInstagramPost.setText(instagram.getPost());
+        tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
+        tvCurrentFragmentInstagramPost.setText(socialNetwork.getText());
 
         ImageOptions options = new ImageOptions();
         options.memCache = true;
         options.targetWidth = 0;
-        Bitmap bitmap = aQuery.getCachedImage(instagram.getSocialUser().getAvatar());
+
+        Bitmap bitmap = aQuery.getCachedImage(socialNetwork.getProfileImage());
         if (bitmap == null)
-            aQuery.id(civCurrentFragmentUserAvatar).image(instagram.getSocialUser().getAvatar(), options);
+            aQuery.id(civCurrentFragmentUserAvatar).image(socialNetwork.getProfileImage(), options);
         else
             civCurrentFragmentUserAvatar.setImageBitmap(bitmap);
 
-        Bitmap bmp = aQuery.getCachedImage(instagram.getImageOfInstagram());
-        if (bmp != null) {
-            ivCurrentFragmentImageOfPost.setVisibility(ImageView.VISIBLE);
-            ivCurrentFragmentImageOfPost.setImageBitmap(bmp);
-        } else {
-            aQuery.id(ivCurrentFragmentImageOfPost).image(instagram.getImageOfInstagram(), options);
+        if (!socialNetwork.getImage().equals("")) {
+            Bitmap bmp = aQuery.getCachedImage(socialNetwork.getImage());
+            if (bmp != null) {
+                ivCurrentFragmentImageOfPost.setVisibility(ImageView.VISIBLE);
+                ivCurrentFragmentImageOfPost.setImageBitmap(bmp);
+            } else {
+                aQuery.id(ivCurrentFragmentImageOfPost).image(socialNetwork.getImage(), options);
+            }
+
         }
 
         TextView tvCounter = (TextView) view.findViewById(R.id.tvCounter);

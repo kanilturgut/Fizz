@@ -14,12 +14,11 @@ import com.rkm.fizz.R;
 import com.rkm.fizz.aquery.AQueryUtilities;
 import com.rkm.fizz.fragment.FizzFragment;
 import com.rkm.fizz.fragment.SplashFragment;
-import com.rkm.fizz.socialnetwork.page.SocialNetwork;
-import com.rkm.fizz.socialnetwork.page.model.Instagram;
-import com.rkm.fizz.socialnetwork.page.model.Twitter;
+import com.rkm.fizz.model.SocialNetwork;
 import com.rkm.fizz.util.Logs;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends FragmentActivity {
 
@@ -29,8 +28,8 @@ public class MainActivity extends FragmentActivity {
     AQueryUtilities aQueryUtilities = null;
 
 
-    Queue<Instagram> instagramQueue = new Queue<Instagram>();
-    Queue<Twitter> twitterQueue = new Queue<Twitter>();
+    static Queue<SocialNetwork> instagramQueue = new Queue<SocialNetwork>();
+    static Queue<SocialNetwork> twitterQueue = new Queue<SocialNetwork>();
 
     boolean twitter = false;
     boolean instagram = false;
@@ -47,11 +46,19 @@ public class MainActivity extends FragmentActivity {
         fragmentManager = getSupportFragmentManager();
         mainToSplash();
 
-        String urlForTwitter = "http://onurcansert.com:3000/initialTweets";
+        JSONObject params = new JSONObject();
+        try {
+            params.put("hashtag", "fizz");
+        } catch (JSONException e) {
+            params = null;
+            e.printStackTrace();
+        }
+
+        String urlForTwitter = "http://fizzapp.herokuapp.com/venue/getInitialTweets";
 
         aQueryUtilities = AQueryUtilities.getInstance(context);
         AQuery aQuery = aQueryUtilities.aQuery;
-        aQuery.ajax(urlForTwitter, JSONArray.class, new AjaxCallback<JSONArray>() {
+        aQuery.post(urlForTwitter, params, JSONArray.class, new AjaxCallback<JSONArray>() {
             @Override
             public void callback(String url, JSONArray responseArray, AjaxStatus status) {
                 super.callback(url, responseArray, status);
@@ -66,7 +73,7 @@ public class MainActivity extends FragmentActivity {
                     // add posts to list
                     for (int i = 0; i < responseArray.length(); i++) {
                         try {
-                            twitterQueue.offer(Twitter.fromJSON(responseArray.getJSONObject(i)));
+                            twitterQueue.offer(SocialNetwork.fromJSON(responseArray.getJSONObject(i)));
                         } catch (JSONException e) {
                             Logs.e(TAG, "ERROR occured on reading JSON response", e);
                         }
@@ -79,8 +86,8 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-        String urlForInstagram = "http://onurcansert.com:3000/initialInstagramPosts";
-        aQuery.ajax(urlForInstagram, JSONArray.class, new AjaxCallback<JSONArray>() {
+        String urlForInstagram = "http://fizzapp.herokuapp.com/venue/getInitialInstagramPosts";
+        aQuery.post(urlForInstagram, params, JSONArray.class, new AjaxCallback<JSONArray>() {
             @Override
             public void callback(String url, JSONArray responseArray, AjaxStatus status) {
                 super.callback(url, responseArray, status);
@@ -95,7 +102,7 @@ public class MainActivity extends FragmentActivity {
                     // add posts to list
                     for (int i = 0; i < responseArray.length(); i++) {
                         try {
-                            instagramQueue.offer(Instagram.fromJSON(responseArray.getJSONObject(i)));
+                            instagramQueue.offer(SocialNetwork.fromJSON(responseArray.getJSONObject(i)));
                         } catch (JSONException e) {
                             Logs.e(TAG, "ERROR occured on reading JSON response", e);
                         }
@@ -122,9 +129,9 @@ public class MainActivity extends FragmentActivity {
 
             for (int i = 0; i < Math.max(twitterQueue.size(), instagramQueue.size()); i++) {
                 if (!twitterQueue.isEmpty())
-                    SocialNetwork.socialNetworkQueue.offer(twitterQueue.poll());
+                    SocialNetwork.socialNetworkQueue.offer(twitterQueue.removeFirst());
                 if (!instagramQueue.isEmpty())
-                    SocialNetwork.socialNetworkQueue.offer(instagramQueue.poll());
+                    SocialNetwork.socialNetworkQueue.offer(instagramQueue.removeFirst());
             }
 
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
