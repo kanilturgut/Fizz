@@ -4,6 +4,7 @@ import com.pubnub.api.Callback;
 import com.pubnub.api.Pubnub;
 import com.pubnub.api.PubnubError;
 import com.pubnub.api.PubnubException;
+import com.rkm.fizz.Queue;
 import com.rkm.fizz.model.SocialNetwork;
 import com.rkm.fizz.util.Logs;
 import org.json.JSONException;
@@ -63,37 +64,50 @@ public class PubnubController {
                     public void successCallback(String s, Object o) {
 
                         Logs.i(TAG, "SUBSCRIBE : SUCCESS_CALLBACK on channel " + CHANNEL + " : " + o.toString());
-/*
-                        try {
-                            JSONObject jsonObject = new JSONObject(o.toString());
 
-                            if (jsonObject.has("delete_id")) {
-                                //delete operation
-                            } else {
-                                //add operation
-                                try {
-                                    Twitter twitter = Twitter.fromJSON(jsonObject);
-                                    checkAndAdd(twitter);
-                                } catch (JSONException e) {
-                                    try {
-                                        Instagram instagram = Instagram.fromJSON(jsonObject);
-                                        checkAndAdd(instagram);
-                                    } catch (JSONException e1) {
-                                        e1.printStackTrace();
-                                    }
-                                }
-                            }
+                        try {
+                            JSONObject pubnupResponse = new JSONObject(o.toString());
+                            SocialNetwork socialNetwork = SocialNetwork.fromJSON(pubnupResponse);
+
+                            if (pubnupResponse.has("delete_id"))
+                                deleteOperation(socialNetwork);
+                            else
+                                addOperation(socialNetwork);
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Logs.e(TAG, "JSONException on successCallback", e);
+                            //TODO exception olursa bir tane elle yazdığımız post gelsin
                         }
-                        */
                     }
                 });
             } catch (PubnubException e) {
                 Logs.e(TAG, "ERROR on attaching channel " + CHANNEL, e);
             }
         }
+    }
+
+    private void deleteOperation(SocialNetwork socialNetwork) {
+        if (isContain(socialNetwork))
+            SocialNetwork.socialNetworkQueue.remove(socialNetwork);
+
+    }
+
+    private void addOperation(SocialNetwork socialNetwork) {
+        if (!isContain(socialNetwork))
+            SocialNetwork.socialNetworkQueue.offerToSecond(socialNetwork);
+
+    }
+
+    private boolean isContain(SocialNetwork socialNetwork) {
+
+        Queue<SocialNetwork> temp = SocialNetwork.socialNetworkQueue;
+
+        for (int i = 0; i < temp.size(); i++) {
+            if (temp.removeFirst().getId().equals(socialNetwork.getId()))
+                return true;
+        }
+
+        return false;
     }
 
     /*
