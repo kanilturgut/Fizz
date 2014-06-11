@@ -51,6 +51,15 @@
             <View android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:id="@+id/animationViewDevami"
                   android:background="@color/twitter_blue"/>
+
+            <com.rkm.fizz.component.CircularImageView
+                    android:layout_width="@dimen/current_fragment_circular_image_view"
+                    android:layout_height="@dimen/current_fragment_circular_image_view"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone"
+                    android:id="@+id/civFake"/>
         </LinearLayout>
 
     </RelativeLayout>

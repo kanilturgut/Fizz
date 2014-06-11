@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,18 +89,18 @@ public class LoadingFragment extends Fragment {
                 ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_twitter);
 
             } else if (socialNetwork.getType() == SocialNetwork.TYPE_INSTAGRAM) {
+
+                final CircularImageView civFake = (CircularImageView) view.findViewById(R.id.civFake);
+
                 animationViewDevami.setBackgroundColor(getResources().getColor(R.color.instagram_blue));
                 rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_instagram_background));
                 ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_instagram);
 
-                if (!socialNetwork.getImage().equals(""))
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            aQuery.image(socialNetwork.getImage(), options);
-                        }
-                    }, 4000);
-
+                if (!socialNetwork.getImage().equals("")) {
+                    Bitmap instagramImage = aQuery.getCachedImage(socialNetwork.getImage());
+                    if (instagramImage == null)
+                        aQuery.id(civFake).image(socialNetwork.getImage(), options);
+                }
             }
 
         }
