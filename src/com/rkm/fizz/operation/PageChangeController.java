@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.LinearLayout;
 import com.rkm.fizz.Constant;
+import com.rkm.fizz.MyQueue;
 import com.rkm.fizz.R;
 import com.rkm.fizz.fragment.CurrentFragment;
 import com.rkm.fizz.fragment.FollowUsFragment;
@@ -32,6 +33,7 @@ public class PageChangeController {
     int[] colors;
     Random random;
     static int pastColor = Color.WHITE;
+    MyQueue myQueue;
 
     static PageChangeController pageChangeController = null;
 
@@ -39,6 +41,8 @@ public class PageChangeController {
         this.fragmentManager = fragmentManager;
         this.llBackgroundOfFizz = llBackgroundOfFizz;
         this.context = context;
+
+        myQueue = MyQueue.getInstance();
 
         int red = context.getResources().getColor(R.color.new_red);
         int blue = context.getResources().getColor(R.color.new_blue);
@@ -70,14 +74,14 @@ public class PageChangeController {
 
     public void startFirstTime() {
 
-        currentToCurrent(SocialNetwork.socialNetworkQueue.poll());
-        loadingToLoading(SocialNetwork.socialNetworkQueue.peek());
+        currentToCurrent(myQueue.moveToEnd());
+        loadingToLoading(myQueue.peek());
 
         int newColor = colors[random.nextInt(6)];
         ColorDrawable[] colorDrawables = {new ColorDrawable(pastColor), new ColorDrawable(newColor)};
         pastColor = newColor;
         TransitionDrawable trans = new TransitionDrawable(colorDrawables);
-        llBackgroundOfFizz.setBackgroundDrawable(trans);
+        llBackgroundOfFizz.setBackground(trans);
         llBackgroundOfFizz.setPadding(20, 20, 20, 20);
         trans.startTransition(Constant.BACKGROUND_TRANSITION_TIME);
 
@@ -90,14 +94,14 @@ public class PageChangeController {
             @Override
             public void run() {
 
-                currentToCurrent(SocialNetwork.socialNetworkQueue.poll());
-                loadingToLoading(SocialNetwork.socialNetworkQueue.peek());
+                currentToCurrent(myQueue.moveToEnd());
+                loadingToLoading(myQueue.peek());
 
                 int newColor = colors[random.nextInt(6)];
                 ColorDrawable[] colorDrawables = {new ColorDrawable(pastColor), new ColorDrawable(newColor)};
                 pastColor = newColor;
                 TransitionDrawable trans = new TransitionDrawable(colorDrawables);
-                llBackgroundOfFizz.setBackgroundDrawable(trans);
+                llBackgroundOfFizz.setBackground(trans);
                 llBackgroundOfFizz.setPadding(20, 20, 20, 20);
                 trans.startTransition(Constant.BACKGROUND_TRANSITION_TIME);
 
@@ -109,7 +113,7 @@ public class PageChangeController {
     }
 
 
-    public void currentToCurrent(final SocialNetwork socialNetwork) {
+    public void currentToCurrent(SocialNetwork socialNetwork) {
         CurrentFragment currentFragment = new CurrentFragment(llBackgroundOfFizz);
         Bundle bundle = new Bundle();
         bundle.putSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY, socialNetwork);
@@ -121,17 +125,9 @@ public class PageChangeController {
             fragmentTransaction.replace(R.id.frameCurrent, currentFragment);
             fragmentTransaction.commit();
         }
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loadingToFollowUs(socialNetwork);
-            }
-        }, Constant.LOADING_FRAGMENT_SHOW_TIME);
     }
 
-    public void loadingToLoading(SocialNetwork socialNetwork) {
+    public void loadingToLoading(final SocialNetwork socialNetwork) {
         LoadingFragment loadingFragment = new LoadingFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY, socialNetwork);
@@ -142,6 +138,14 @@ public class PageChangeController {
             fragmentTransaction.replace(R.id.frameLoading, loadingFragment);
             fragmentTransaction.commit();
         }
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingToFollowUs(socialNetwork);
+            }
+        }, Constant.LOADING_FRAGMENT_SHOW_TIME);
     }
 
     public void loadingToFollowUs(SocialNetwork socialNetwork) {

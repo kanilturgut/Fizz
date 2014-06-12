@@ -4,7 +4,7 @@ import com.pubnub.api.Callback;
 import com.pubnub.api.Pubnub;
 import com.pubnub.api.PubnubError;
 import com.pubnub.api.PubnubException;
-import com.rkm.fizz.Queue;
+import com.rkm.fizz.MyQueue;
 import com.rkm.fizz.model.SocialNetwork;
 import com.rkm.fizz.util.Logs;
 import org.json.JSONException;
@@ -23,9 +23,11 @@ public class PubnubController {
     final String PUBLISH_KEY = "pub-c-13b31cee-ef79-440f-b46d-e3804f3d5435";
     final String SUBSCRIBE_KEY = "sub-c-3a5a7350-b28d-11e3-b8c3-02ee2ddab7fe";
     final String CHANNEL = "fizz";
+    MyQueue myQueue;
 
     private PubnubController() {
         pubnub = new Pubnub(PUBLISH_KEY, SUBSCRIBE_KEY);
+        myQueue = MyQueue.getInstance();
     }
 
     public static PubnubController getInstance() {
@@ -86,25 +88,13 @@ public class PubnubController {
     }
 
     private void deleteOperation(SocialNetwork socialNetwork) {
-        if (isContain(socialNetwork))
-            SocialNetwork.socialNetworkQueue.remove(socialNetwork);
+        if (myQueue.isContain(socialNetwork))
+            myQueue.remove(socialNetwork);
 
     }
 
     private void addOperation(SocialNetwork socialNetwork) {
-        if (!isContain(socialNetwork))
-            SocialNetwork.socialNetworkQueue.offerToSecond(socialNetwork);
-
-    }
-
-    private boolean isContain(SocialNetwork socialNetwork) {
-        Queue<SocialNetwork> temp = SocialNetwork.socialNetworkQueue;
-
-        for (int i = 0; i < temp.size(); i++) {
-            if (temp.removeFirst().getId().equals(socialNetwork.getId()))
-                return true;
-        }
-
-        return false;
+        if (!myQueue.isContain(socialNetwork))
+            myQueue.offerToSecond(socialNetwork);
     }
 }

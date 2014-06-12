@@ -20,8 +20,6 @@ public class SocialNetwork implements Serializable {
     public static final int DISPLAY_TYPE_SHOW_NORMAL = 0;
     public static final int DISPLAY_TYPE_SHOW_ALLWAYS = 1;
 
-    public static Queue<SocialNetwork> socialNetworkQueue = new Queue<SocialNetwork>();
-
     int type;
     int displayType;
     String text;

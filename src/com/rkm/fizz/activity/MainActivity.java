@@ -9,7 +9,7 @@ import android.view.View;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
-import com.rkm.fizz.Queue;
+import com.rkm.fizz.MyQueue;
 import com.rkm.fizz.R;
 import com.rkm.fizz.aquery.AQueryUtilities;
 import com.rkm.fizz.fragment.FizzFragment;
@@ -20,16 +20,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class MainActivity extends FragmentActivity {
 
     final String TAG = "MainActivity";
     Context context;
     FragmentManager fragmentManager = null;
     AQueryUtilities aQueryUtilities = null;
+    MyQueue myQueue = null;
 
-
-    static Queue<SocialNetwork> instagramQueue = new Queue<SocialNetwork>();
-    static Queue<SocialNetwork> twitterQueue = new Queue<SocialNetwork>();
+    List<SocialNetwork> twitterList = new LinkedList<SocialNetwork>();
+    List<SocialNetwork> instagramList = new LinkedList<SocialNetwork>();
 
     boolean twitter = false;
     boolean instagram = false;
@@ -54,6 +57,8 @@ public class MainActivity extends FragmentActivity {
             e.printStackTrace();
         }
 
+        myQueue = MyQueue.getInstance();
+
         String urlForTwitter = "http://fizzapp.herokuapp.com/venue/getInitialTweets";
 
         aQueryUtilities = AQueryUtilities.getInstance(context);
@@ -73,7 +78,7 @@ public class MainActivity extends FragmentActivity {
                     // add posts to list
                     for (int i = 0; i < responseArray.length(); i++) {
                         try {
-                            twitterQueue.offer(SocialNetwork.fromJSON(responseArray.getJSONObject(i)));
+                            twitterList.add(twitterList.size(), SocialNetwork.fromJSON(responseArray.getJSONObject(i)));
                         } catch (JSONException e) {
                             Logs.e(TAG, "ERROR occured on reading JSON response", e);
                         }
@@ -102,7 +107,7 @@ public class MainActivity extends FragmentActivity {
                     // add posts to list
                     for (int i = 0; i < responseArray.length(); i++) {
                         try {
-                            instagramQueue.offer(SocialNetwork.fromJSON(responseArray.getJSONObject(i)));
+                            instagramList.add(instagramList.size(), SocialNetwork.fromJSON(responseArray.getJSONObject(i)));
                         } catch (JSONException e) {
                             Logs.e(TAG, "ERROR occured on reading JSON response", e);
                         }
@@ -127,11 +132,12 @@ public class MainActivity extends FragmentActivity {
 
         if (twitter && instagram) {
 
-            for (int i = 0; i < Math.max(twitterQueue.size(), instagramQueue.size()); i++) {
-                if (!twitterQueue.isEmpty())
-                    SocialNetwork.socialNetworkQueue.offer(twitterQueue.removeFirst());
-                if (!instagramQueue.isEmpty())
-                    SocialNetwork.socialNetworkQueue.offer(instagramQueue.removeFirst());
+            for (int i = 0; i < Math.max(twitterList.size(), instagramList.size()); i++) {
+                if (i < twitterList.size())
+                    myQueue.offer(twitterList.get(i));
+
+                if (i < instagramList.size())
+                    myQueue.offer(instagramList.get(i));
             }
 
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
