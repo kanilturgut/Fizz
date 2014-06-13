@@ -94,9 +94,6 @@ public class CurrentFragment extends Fragment {
             aQuery.id(civCurrentFragmentUserAvatar).image(socialNetwork.getProfileImage(), options);
         else
             civCurrentFragmentUserAvatar.setImageBitmap(bitmap);
-
-        TextView tvCounter = (TextView) view.findViewById(R.id.tvCounter);
-        tvCounter.setText("(" + FizzFragment.count++ + ")");
     }
 
 
@@ -130,8 +127,5 @@ public class CurrentFragment extends Fragment {
             }
 
         }
-
-        TextView tvCounter = (TextView) view.findViewById(R.id.tvCounter);
-        tvCounter.setText("(" + FizzFragment.count++ + ")");
     }
 }
