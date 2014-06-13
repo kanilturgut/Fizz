@@ -1,6 +1,5 @@
 package com.rkm.fizz.model;
 
-import com.rkm.fizz.Queue;
 import org.json.JSONObject;
 
 import java.io.Serializable;

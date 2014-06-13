@@ -71,7 +71,7 @@ public class PubnubController {
                             SocialNetwork socialNetwork = SocialNetwork.fromJSON(pubnupResponse);
 
                             if (pubnupResponse.has("delete_id"))
-                                deleteOperation(socialNetwork);
+                                deleteOperation(pubnupResponse.getString("delete_id"));
                             else
                                 addOperation(socialNetwork);
 
@@ -87,9 +87,17 @@ public class PubnubController {
         }
     }
 
-    private void deleteOperation(SocialNetwork socialNetwork) {
-        if (myQueue.isContain(socialNetwork))
+    private void deleteOperation(String id) {
+
+        SocialNetwork socialNetwork = myQueue.findPost(id);
+
+        if (socialNetwork != null && myQueue.isContain(socialNetwork))
             myQueue.remove(socialNetwork);
+
+    }
+
+    private void promoteOperation(String id) {
+
 
     }
 

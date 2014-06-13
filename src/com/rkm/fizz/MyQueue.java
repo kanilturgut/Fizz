@@ -84,4 +84,11 @@ public class MyQueue {
         return list.contains(socialNetwork);
     }
 
+    public SocialNetwork findPost(String id) throws NullPointerException{
+        for (SocialNetwork socialNetwork: list)
+            if (id.equals(socialNetwork.getId()))
+                return socialNetwork;
+
+        return null;
+    }
 }
