@@ -47,4 +47,24 @@
     <color name="thai_curry">#FCB941</color>
     <color name="burnt_red">#FC6042</color>
 
+
+    <!-- new gradients-->
+    <color name="bg1_start">#001D55</color>
+    <color name="bg1_finish">#007FC6</color>
+
+    <color name="bg2_start">#BF0880</color>
+    <color name="bg2_finish">#F7C4DB</color>
+
+    <color name="bg3_start">#AE171C</color>
+    <color name="bg3_finish">#E47025</color>
+
+    <color name="bg4_start">#F05E22</color>
+    <color name="bg4_finish">#FFD002</color>
+
+    <color name="bg5_start">#049B4C</color>
+    <color name="bg5_finish">#ABD25E</color>
+
+    <color name="bg6_start">#801E7E</color>
+    <color name="bg6_finish">#A082BB</color>
+
 </resources>

@@ -3,6 +3,7 @@ package com.rkm.fizz.operation;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,6 +36,9 @@ public class PageChangeController {
     static int pastColor = Color.WHITE;
     MyQueue myQueue;
 
+    Drawable[] drawables;
+    static Drawable pastDrawable = null;
+
     static PageChangeController pageChangeController = null;
 
     private PageChangeController(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, Context context) {
@@ -60,6 +64,17 @@ public class PageChangeController {
         colors = new int[]{happy_blue, calm_green, yello, thai_curry, burnt_red, purple};
         random = new Random();
 
+        Drawable bg1 = context.getResources().getDrawable(R.drawable.bg1);
+        Drawable bg2 = context.getResources().getDrawable(R.drawable.bg2);
+        Drawable bg3 = context.getResources().getDrawable(R.drawable.bg3);
+        Drawable bg4 = context.getResources().getDrawable(R.drawable.bg4);
+        Drawable bg5 = context.getResources().getDrawable(R.drawable.bg5);
+        Drawable bg6 = context.getResources().getDrawable(R.drawable.bg6);
+
+        pastDrawable = bg1;
+
+        drawables = new Drawable[]{bg1, bg2, bg3, bg4, bg5, bg6};
+
         PubnubController pubnubController = PubnubController.getInstance();
         pubnubController.subscribeToChannel();
     }
@@ -71,19 +86,27 @@ public class PageChangeController {
         return pageChangeController;
     }
 
-
-    public void startFirstTime() {
+    public void changePage() {
 
         currentToCurrent(myQueue.moveToEnd());
         loadingToLoading(myQueue.peek());
 
-        int newColor = colors[random.nextInt(6)];
-        ColorDrawable[] colorDrawables = {new ColorDrawable(pastColor), new ColorDrawable(newColor)};
-        pastColor = newColor;
-        TransitionDrawable trans = new TransitionDrawable(colorDrawables);
-        llBackgroundOfFizz.setBackground(trans);
-        llBackgroundOfFizz.setPadding(20, 20, 20, 20);
-        trans.startTransition(Constant.BACKGROUND_TRANSITION_TIME);
+        Drawable newDrawable = drawables[random.nextInt(6)];
+
+/*                Drawable[] drawablesArr = {pastDrawable, newDrawable};
+                pastDrawable = newDrawable;
+
+                int newColor = colors[random.nextInt(6)];
+                ColorDrawable[] colorDrawables = {new ColorDrawable(pastColor), new ColorDrawable(newColor)};
+                pastColor = newColor;
+
+                TransitionDrawable trans = new TransitionDrawable(drawablesArr);
+                llBackgroundOfFizz.setBackground(trans);
+                llBackgroundOfFizz.setPadding(20, 20, 20, 20);
+                //trans.startTransition(Constant.BACKGROUND_TRANSITION_TIME);
+
+*/
+        llBackgroundOfFizz.setBackground(newDrawable);
 
         startApp();
     }
@@ -93,20 +116,7 @@ public class PageChangeController {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                currentToCurrent(myQueue.moveToEnd());
-                loadingToLoading(myQueue.peek());
-
-                int newColor = colors[random.nextInt(6)];
-                ColorDrawable[] colorDrawables = {new ColorDrawable(pastColor), new ColorDrawable(newColor)};
-                pastColor = newColor;
-                TransitionDrawable trans = new TransitionDrawable(colorDrawables);
-                llBackgroundOfFizz.setBackground(trans);
-                llBackgroundOfFizz.setPadding(20, 20, 20, 20);
-                trans.startTransition(Constant.BACKGROUND_TRANSITION_TIME);
-
-                startApp();
-
+               changePage();
             }
         }, Constant.PAGE_SHOW_TIME);
 
