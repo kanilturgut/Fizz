@@ -2,13 +2,16 @@
 <resources>
 
     <!-- loading fragment -->
-    <dimen name="loading_fragment_text_size">18sp</dimen>
+    <dimen name="loading_fragment_text_size">22sp</dimen>
     <dimen name="loading_fragment_circular_image_view">75dp</dimen>
     <dimen name="loading_fragment_circular_image_view_right_margin">15dp</dimen>
 
     <!-- current fragment -->
-    <dimen name="current_fragment_text_size">22sp</dimen>
+    <dimen name="current_fragment_twitter_text_size">48sp</dimen>
+    <dimen name="current_fragment_instagram_text_size">36sp</dimen>
     <dimen name="current_fragment_circular_image_view">200dp</dimen>
     <dimen name="current_fragment_circular_image_view_right_margin">20dp</dimen>
+
+    <dimen name="follow_us_fragment_text_size">22sp</dimen>
 
 </resources>

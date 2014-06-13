@@ -15,7 +15,6 @@
                 android:layout_marginLeft="40dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/onur"
                 android:id="@+id/civLoadingFragmentNextUserAvatar"
                 android:layout_marginRight="@dimen/loading_fragment_circular_image_view_right_margin"/>
 
@@ -29,7 +28,7 @@
                     android:id="@+id/tvLoadingFragmentNextUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/current_fragment_text_size"
+                    android:textSize="@dimen/loading_fragment_text_size"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:text="Onur Can S."/>

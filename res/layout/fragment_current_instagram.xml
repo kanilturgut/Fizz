@@ -55,7 +55,6 @@
             android:layout_marginRight="10dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/anil"
             android:id="@+id/civCurrentFragmentUserAvatar"/>
 
     <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
@@ -67,7 +66,6 @@
         <ImageView android:layout_width="match_parent" android:layout_height="wrap_content"
                    android:id="@+id/ivCurrentFragmentImageOfPost"
                    android:scaleType="fitXY"
-                   android:src="@drawable/anil"
                    android:layout_alignParentTop="true"/>
 
         <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -80,7 +78,7 @@
                       android:id="@+id/tvCurrentFragmentInstagramPost"
                       android:layout_centerInParent="true"
                       android:gravity="center"
-                      android:textSize="22sp"
+                      android:textSize="@dimen/current_fragment_instagram_text_size"
                       android:textColor="@color/white"
                       android:text="1lkjd adl skandsk jadbs dbsadksdsadn ajsdbas dsabd kjsabd sdb sand sajdbs adbsa dsabdsdnsdl jsad sbadksbd sad basdb asdjbs ds bdasjb dsdd sd"/>
         </RelativeLayout>

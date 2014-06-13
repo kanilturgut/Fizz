@@ -61,8 +61,11 @@
             android:layout_marginRight="10dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/anil"
             android:id="@+id/civCurrentFragmentUserAvatar"/>
+
+    <ImageView android:layout_width="match_parent" android:layout_height="match_parent"
+               android:layout_below="@+id/civCurrentFragmentUserAvatar"
+               android:src="@drawable/balon"/>
 
     <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
                     android:id="@+id/rlCurrentFragmentPostBackground"
@@ -74,7 +77,7 @@
                   android:id="@+id/tvCurrentFragmentTweet"
                   android:layout_centerInParent="true"
                   android:gravity="left"
-                  android:textSize="36sp"
+                  android:textSize="@dimen/current_fragment_twitter_text_size"
                   android:textColor="@color/white"
                   android:text="1lkjd adl skandsk jadbs dbsadksdsadn ajsdbas dsabd kjsabd sdb sand sajdbs adbsa dsabdsdnsdl jsad sbadksbd sad basdb asdjbs ds bdasjb dsdd sd"/>
 
