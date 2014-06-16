@@ -33,7 +33,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:text="Kadir Anıl T."
-                    myTextView:font="fonts/alexis.ttf"/>
+                    myTextView:font="fonts/GothamNarrow-Book.otf"/>
 
         </LinearLayout>
 

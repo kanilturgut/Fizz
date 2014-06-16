@@ -27,7 +27,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:text="Kadir Anıl T."
-                    myTextView:font="fonts/2Toon Expanded Italic.ttf"/>
+                    myTextView:font="fonts/GothamXNarrow-Light.otf"/>
 
         </LinearLayout>
 

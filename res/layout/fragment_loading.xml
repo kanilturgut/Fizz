@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:myTextView="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/rlLoadingFragmentBackground"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -25,13 +26,14 @@
                       android:layout_toRightOf="@+id/civLoadingFragmentNextUserAvatar"
                       android:layout_gravity="center_vertical">
 
-            <TextView
+            <com.kanilturgut.mylib.MyTextView
                     android:id="@+id/tvLoadingFragmentNextUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/loading_fragment_text_size"
                     android:textStyle="bold"
                     android:textColor="@color/black"
+                    myTextView:font="fonts/GothamNarrow-Book.otf"
                     android:text="Onur Can S."/>
 
         </LinearLayout>
