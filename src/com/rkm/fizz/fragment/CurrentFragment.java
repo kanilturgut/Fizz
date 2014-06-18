@@ -85,6 +85,7 @@ public class CurrentFragment extends Fragment {
 
         tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
         tvCurrentFragmentTweet.setText(socialNetwork.getText());
+//        adjustFontSize(tvCurrentFragmentTweet, socialNetwork.getText());
 
         ImageOptions options = new ImageOptions();
         options.memCache = true;
@@ -106,6 +107,7 @@ public class CurrentFragment extends Fragment {
 
         tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
         tvCurrentFragmentInstagramPost.setText(socialNetwork.getText());
+//        adjustFontSize(tvCurrentFragmentInstagramPost, socialNetwork.getText());
 
         ImageOptions options = new ImageOptions();
         options.memCache = true;
@@ -125,6 +127,24 @@ public class CurrentFragment extends Fragment {
             } else {
                 aQuery.id(ivCurrentFragmentImageOfPost).image(socialNetwork.getImage(), options);
             }
+
+        }
+    }
+
+    private void adjustFontSize(TextView textView, String text) {
+        if (textView != null && !text.isEmpty()) {
+
+            float size = textView.getTextSize();
+
+            if (text.length() >= 90)
+                size = 40;
+            if (text.length() >= 110)
+                size = 35;
+            if (text.length() >= 130)
+                size = 30;
+
+            textView.setText(text);
+            textView.setTextSize(size);
 
         }
     }

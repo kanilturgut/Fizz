@@ -63,16 +63,18 @@
     <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
                     android:id="@+id/rlCurrentFragmentPostBackground"
                     android:background="@color/post_background"
-                    android:padding="100dp"
+                    android:padding="50dp"
                     android:layout_below="@+id/civCurrentFragmentUserAvatar">
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:id="@+id/tvCurrentFragmentTweet"
-                  android:layout_centerInParent="true"
-                  android:gravity="left"
-                  android:textSize="@dimen/current_fragment_twitter_text_size"
-                  android:textColor="@color/white"
-                  android:text="1lkjd adl skandsk jadbs dbsadksdsadn ajsdbas dsabd kjsabd sdb sand sajdbs adbsa dsabdsdnsdl jsad sbadksbd sad basdb asdjbs ds bdasjb dsdd sd"/>
+        <TextView
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/tvCurrentFragmentTweet"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textSize="@dimen/current_fragment_twitter_text_size"
+                android:maxLines="10"
+                android:textColor="@color/white"
+                android:text="1lkjd adl skandsk jadbs dbsadksdsadn ajsdbas dsabd kjsabd sdb sand sajdbs adbsa dsabdsdnsdl jsad sbadksbd sad basdb asdjbs ds bdasjb dsdd sd"/>
 
     </RelativeLayout>
 

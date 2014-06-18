@@ -67,13 +67,15 @@
                         android:background="@android:color/transparent"
                         android:padding="20dp">
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:id="@+id/tvCurrentFragmentInstagramPost"
-                      android:layout_centerInParent="true"
-                      android:gravity="center"
-                      android:textSize="@dimen/current_fragment_instagram_text_size"
-                      android:textColor="@color/white"
-                      android:text="1lkjd adl skandsk jadbs dbsadksdsadn ajsdbas dsabd kjsabd sdb sand sajdbs adbsa dsabdsdnsdl jsad sbadksbd sad basdb asdjbs ds bdasjb dsdd sd"/>
+            <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:id="@+id/tvCurrentFragmentInstagramPost"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:textSize="@dimen/current_fragment_instagram_text_size"
+                    android:maxLines="3"
+                    android:textColor="@color/white"
+                    android:text="1lkjd adl skandsk jadbs dbsadksdsadn ajsdbas dsabd kjsabd sdb sand sajdbs adbsa dsabdsdnsdl jsad sbadksbd sad basdb asdjbs ds bdasjb dsdd sd"/>
         </RelativeLayout>
 
 
