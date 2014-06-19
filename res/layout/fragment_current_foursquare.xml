@@ -58,7 +58,8 @@
 
     <ImageView android:layout_width="match_parent" android:layout_height="match_parent"
                android:layout_below="@+id/civCurrentFragmentUserAvatar"
-               android:src="@drawable/balon"/>
+               android:padding="50dp"
+               android:src="@drawable/checkin"/>
 
     <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
                     android:id="@+id/rlCurrentFragmentPostBackground"

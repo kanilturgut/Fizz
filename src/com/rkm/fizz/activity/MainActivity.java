@@ -41,9 +41,11 @@ public class MainActivity extends FragmentActivity {
 
     List<SocialNetwork> twitterList = new LinkedList<SocialNetwork>();
     List<SocialNetwork> instagramList = new LinkedList<SocialNetwork>();
+    List<SocialNetwork> foursquareList = new LinkedList<SocialNetwork>();
 
     boolean twitter = false;
     boolean instagram = false;
+    boolean foursquare = true;
 
     /**
      * Called when the activity is first created.
@@ -134,6 +136,37 @@ public class MainActivity extends FragmentActivity {
                 splashToFizz();
             }
         });
+
+        /*
+        String urlForFoursquare = "http://fizzapp.herokuapp.com/venue/getInitialInstagramPosts";
+        aQuery.post(urlForInstagram, params, JSONArray.class, new AjaxCallback<JSONArray>() {
+            @Override
+            public void callback(String url, JSONArray responseArray, AjaxStatus status) {
+                super.callback(url, responseArray, status);
+
+                if (responseArray != null && responseArray.length() > 0) {
+
+                    // add cookies to cookieList
+                    if (status != null && status.getCookies().size() > 0) {
+                        aQueryUtilities.cookieLinkedList.addAll(status.getCookies());
+                    }
+
+                    // add posts to list
+                    for (int i = 0; i < responseArray.length(); i++) {
+                        try {
+                            foursquareList.add(foursquareList.size(), SocialNetwork.fromJSON(responseArray.getJSONObject(i)));
+                        } catch (JSONException e) {
+                            Logs.e(TAG, "ERROR occured on reading JSON response", e);
+                        }
+                    }
+
+                }
+
+                foursquare = true;
+                splashToFizz();
+            }
+        });
+        */
     }
 
     public void mainToSplash() {
@@ -145,7 +178,7 @@ public class MainActivity extends FragmentActivity {
 
     public void splashToFizz() {
 
-        if (twitter && instagram && ConnectionDetector.isConnectingToInternet(context)) {
+        if (twitter && instagram && foursquare && ConnectionDetector.isConnectingToInternet(context)) {
 
             for (int i = 0; i < Math.max(twitterList.size(), instagramList.size()); i++) {
                 if (i < twitterList.size())
@@ -153,6 +186,9 @@ public class MainActivity extends FragmentActivity {
 
                 if (i < instagramList.size())
                     myQueue.offer(instagramList.get(i));
+
+                //if (i < foursquareList.size())
+                //    myQueue.offer(foursquareList.get(i));
             }
 
             if (myQueue.size() > 0) {

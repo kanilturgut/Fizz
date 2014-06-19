@@ -113,7 +113,7 @@ public class CurrentFragment extends Fragment {
         CircularImageView civCurrentFragmentUserAvatar = (CircularImageView) view.findViewById(R.id.civCurrentFragmentUserAvatar);
 
         tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
-        tvCurrentFragmentTweet.setText(socialNetwork.getText());
+        tvCurrentFragmentTweet.setText("Az önce check-in yaptı!");
 
 //        adjustFontSize(tvCurrentFragmentTweet, socialNetwork.getText());
 

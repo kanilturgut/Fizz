@@ -13,8 +13,8 @@ public class SocialNetwork implements Serializable {
 
     public static final int TYPE_TWITTER = 0;
     public static final int TYPE_INSTAGRAM = 1;
-    public static final int TYPE_FACEBOOK = 2;
-    public static final int TYPE_FOURSQUARE = 3;
+    public static final int TYPE_FOURSQUARE = 2;
+    public static final int TYPE_FACEBOOK = 3;
 
     public static final int DISPLAY_TYPE_SHOW_NORMAL = 0;
     public static final int DISPLAY_TYPE_SHOW_ALLWAYS = 1;
