@@ -3,8 +3,8 @@ package com.rkm.fizz.broadcastreceiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import com.kanilturgut.mylib.Logs;
 import com.rkm.fizz.activity.MainActivity;
-import com.rkm.fizz.util.Logs;
 
 /**
  * Author   : kanilturgut
