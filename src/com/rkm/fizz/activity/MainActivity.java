@@ -10,6 +10,9 @@ import android.view.WindowManager;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
+import com.androidquery.util.AQUtility;
+import com.kanilturgut.mylib.AlertDialogManager;
+import com.kanilturgut.mylib.ConnectionDetector;
 import com.rkm.fizz.MyQueue;
 import com.rkm.fizz.R;
 import com.rkm.fizz.aquery.AQueryUtilities;
@@ -46,6 +49,12 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         context = this;
+
+        if (!ConnectionDetector.isConnectingToInternet(context)) {
+            AlertDialogManager.noInternetConnection(context);
+
+        }
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         fragmentManager = getSupportFragmentManager();
@@ -132,7 +141,7 @@ public class MainActivity extends FragmentActivity {
 
     public void splashToFizz() {
 
-        if (twitter && instagram) {
+        if (twitter && instagram && ConnectionDetector.isConnectingToInternet(context)) {
 
             for (int i = 0; i < Math.max(twitterList.size(), instagramList.size()); i++) {
                 if (i < twitterList.size())
@@ -169,5 +178,18 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(isTaskRoot()){
+
+            //clean the file cache with advance option
+            long triggerSize = 3000000; //starts cleaning when cache size is larger than 3M
+            long targetSize = 2000000;      //remove the least recently used files until cache size is less than 2M
+            AQUtility.cleanCacheAsync(this, triggerSize, targetSize);
+        }
     }
 }

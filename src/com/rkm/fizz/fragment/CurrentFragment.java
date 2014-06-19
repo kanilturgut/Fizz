@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,8 +107,8 @@ public class CurrentFragment extends Fragment {
         ImageView ivCurrentFragmentImageOfPost = (ImageView) view.findViewById(R.id.ivCurrentFragmentImageOfPost);
 
         tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
-        tvCurrentFragmentInstagramPost.setText(socialNetwork.getText());
-//        adjustFontSize(tvCurrentFragmentInstagramPost, socialNetwork.getText());
+//        tvCurrentFragmentInstagramPost.setText(socialNetwork.getText());
+        adjustFontSize(tvCurrentFragmentInstagramPost, socialNetwork.getText());
 
         ImageOptions options = new ImageOptions();
         options.memCache = true;
@@ -136,15 +137,11 @@ public class CurrentFragment extends Fragment {
 
             float size = textView.getTextSize();
 
-            if (text.length() >= 90)
-                size = 40;
-            if (text.length() >= 110)
-                size = 35;
             if (text.length() >= 130)
-                size = 30;
+                size -= 5;
 
             textView.setText(text);
-            textView.setTextSize(size);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
 
         }
     }
