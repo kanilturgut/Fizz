@@ -29,11 +29,6 @@ public class CurrentFragment extends Fragment {
     final String TAG = "CurrentFragment";
     Context context = null;
     AQuery aQuery = null;
-    LinearLayout llBackgroundOfFizz;
-
-    public CurrentFragment(LinearLayout linearLayout) {
-        this.llBackgroundOfFizz = linearLayout;
-    }
 
     @Override
     public void onAttach(Activity activity) {

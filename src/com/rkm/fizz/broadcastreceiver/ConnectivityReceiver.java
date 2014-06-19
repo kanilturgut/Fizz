@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 import com.kanilturgut.mylib.ConnectionDetector;
+import com.rkm.fizz.operation.PubnubController;
 
 /**
  * Author   : kanilturgut
@@ -15,9 +16,9 @@ public class ConnectivityReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        if (ConnectionDetector.isConnectingToInternet(context))
-            Toast.makeText(context, "Yes", Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(context, "No", Toast.LENGTH_LONG).show();
+        if (ConnectionDetector.isConnectingToInternet(context)) {
+
+        } else {
+        }
     }
 }

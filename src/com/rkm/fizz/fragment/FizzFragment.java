@@ -38,7 +38,7 @@ public class FizzFragment extends Fragment {
 
         llBackgroundOfFizz = (LinearLayout) view.findViewById(R.id.llBackgroundOfFizz);
 
-        fizzToCurrent(llBackgroundOfFizz);
+        fizzToCurrent();
         fizzToLoading();
 
         PageChangeController pageChangeController = PageChangeController.getInstance(getFragmentManager(), llBackgroundOfFizz, context);
@@ -47,9 +47,9 @@ public class FizzFragment extends Fragment {
         return view;
     }
 
-    public void fizzToCurrent(LinearLayout linearLayout) {
+    public void fizzToCurrent() {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        CurrentFragment currentFragment = new CurrentFragment(linearLayout);
+        CurrentFragment currentFragment = new CurrentFragment();
         fragmentTransaction.replace(R.id.frameCurrent, currentFragment);
         fragmentTransaction.commit();
     }

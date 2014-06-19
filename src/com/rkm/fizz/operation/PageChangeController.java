@@ -92,20 +92,6 @@ public class PageChangeController {
         loadingToLoading(myQueue.peek());
 
         Drawable newDrawable = drawables[random.nextInt(6)];
-
-/*                Drawable[] drawablesArr = {pastDrawable, newDrawable};
-                pastDrawable = newDrawable;
-
-                int newColor = colors[random.nextInt(6)];
-                ColorDrawable[] colorDrawables = {new ColorDrawable(pastColor), new ColorDrawable(newColor)};
-                pastColor = newColor;
-
-                TransitionDrawable trans = new TransitionDrawable(drawablesArr);
-                llBackgroundOfFizz.setBackground(trans);
-                llBackgroundOfFizz.setPadding(20, 20, 20, 20);
-                //trans.startTransition(Constant.BACKGROUND_TRANSITION_TIME);
-
-*/
         llBackgroundOfFizz.setBackground(newDrawable);
 
         startApp();
@@ -124,7 +110,7 @@ public class PageChangeController {
 
 
     public void currentToCurrent(SocialNetwork socialNetwork) {
-        CurrentFragment currentFragment = new CurrentFragment(llBackgroundOfFizz);
+        CurrentFragment currentFragment = new CurrentFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY, socialNetwork);
         currentFragment.setArguments(bundle);
