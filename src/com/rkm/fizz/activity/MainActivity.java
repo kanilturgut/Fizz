@@ -155,10 +155,16 @@ public class MainActivity extends FragmentActivity {
                     myQueue.offer(instagramList.get(i));
             }
 
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            FizzFragment fizzFragment = new FizzFragment();
-            fragmentTransaction.replace(R.id.frameMain, fizzFragment);
-            fragmentTransaction.commit();
+            if (myQueue.size() > 0) {
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                FizzFragment fizzFragment = new FizzFragment();
+                fragmentTransaction.replace(R.id.frameMain, fizzFragment);
+                fragmentTransaction.commit();
+            } else {
+                // TODO liste boş yani initialler gelmemiş demektir. Hallet
+                AlertDialogManager.showAlertDialog(context, "Liste Boş", "Initial gelmedi");
+            }
         }
     }
 
