@@ -80,7 +80,18 @@ public class CurrentFragment extends Fragment {
         CircularImageView civCurrentFragmentUserAvatar = (CircularImageView) view.findViewById(R.id.civCurrentFragmentUserAvatar);
 
         tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
-        tvCurrentFragmentTweet.setText(socialNetwork.getText());
+
+        String[] twitterText =socialNetwork.getText().split(" ");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String str: twitterText) {
+            if (str.contains("http://t.co/"))
+                continue;
+            else
+                stringBuilder.append(str + " ");
+        }
+
+        tvCurrentFragmentTweet.setText(stringBuilder);
+
 //        adjustFontSize(tvCurrentFragmentTweet, socialNetwork.getText());
 
         ImageOptions options = new ImageOptions();
