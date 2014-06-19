@@ -1,6 +1,8 @@
 package com.rkm.fizz.activity;
 
 import android.content.Context;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +18,7 @@ import com.kanilturgut.mylib.ConnectionDetector;
 import com.rkm.fizz.MyQueue;
 import com.rkm.fizz.R;
 import com.rkm.fizz.aquery.AQueryUtilities;
+import com.rkm.fizz.broadcastreceiver.ConnectivityReceiver;
 import com.rkm.fizz.fragment.FizzFragment;
 import com.rkm.fizz.fragment.SplashFragment;
 import com.rkm.fizz.model.SocialNetwork;
@@ -34,6 +37,7 @@ public class MainActivity extends FragmentActivity {
     FragmentManager fragmentManager = null;
     AQueryUtilities aQueryUtilities = null;
     MyQueue myQueue = null;
+    ConnectivityReceiver connectivityReceiver = null;
 
     List<SocialNetwork> twitterList = new LinkedList<SocialNetwork>();
     List<SocialNetwork> instagramList = new LinkedList<SocialNetwork>();
@@ -164,6 +168,12 @@ public class MainActivity extends FragmentActivity {
 
         //to hide system bar
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+        if (connectivityReceiver == null)
+            connectivityReceiver = new ConnectivityReceiver();
+
+        registerReceiver(connectivityReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+
     }
 
     @Override
@@ -184,12 +194,15 @@ public class MainActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        if(isTaskRoot()){
+        if (isTaskRoot()) {
 
             //clean the file cache with advance option
             long triggerSize = 3000000; //starts cleaning when cache size is larger than 3M
             long targetSize = 2000000;      //remove the least recently used files until cache size is less than 2M
             AQUtility.cleanCacheAsync(this, triggerSize, targetSize);
         }
+
+        if (connectivityReceiver != null)
+            unregisterReceiver(connectivityReceiver);
     }
 }

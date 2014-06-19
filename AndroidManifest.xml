@@ -41,6 +41,7 @@
             </intent-filter>
 
         </receiver>
+        <receiver android:name=".broadcastreceiver.ConnectivityReceiver"/>
 
     </application>
 </manifest>
