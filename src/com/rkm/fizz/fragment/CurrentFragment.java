@@ -58,12 +58,14 @@ public class CurrentFragment extends Fragment {
                     case SocialNetwork.TYPE_TWITTER:
                         view = inflater.inflate(R.layout.fragment_current_twitter, container, false);
                         twitterPage(socialNetwork, view);
-
                         break;
                     case SocialNetwork.TYPE_INSTAGRAM:
                         view = inflater.inflate(R.layout.fragment_current_instagram, container, false);
                         instagramPage(socialNetwork, view);
                         break;
+                    case SocialNetwork.TYPE_FOURSQUARE:
+                        view = inflater.inflate(R.layout.fragment_current_foursquare, container, false);
+                        foursquarePage(socialNetwork, view);
                 }
             }
 
@@ -91,6 +93,27 @@ public class CurrentFragment extends Fragment {
         }
 
         tvCurrentFragmentTweet.setText(stringBuilder);
+
+//        adjustFontSize(tvCurrentFragmentTweet, socialNetwork.getText());
+
+        ImageOptions options = new ImageOptions();
+        options.memCache = true;
+        options.targetWidth = 0;
+        Bitmap bitmap = aQuery.getCachedImage(socialNetwork.getProfileImage());
+        if (bitmap == null)
+            aQuery.id(civCurrentFragmentUserAvatar).image(socialNetwork.getProfileImage(), options);
+        else
+            civCurrentFragmentUserAvatar.setImageBitmap(bitmap);
+    }
+
+    private void foursquarePage(SocialNetwork socialNetwork, View view) {
+
+        TextView tvCurrentFragmentUserFullname = (TextView) view.findViewById(R.id.tvCurrentFragmentUserFullname);
+        TextView tvCurrentFragmentTweet = (TextView) view.findViewById(R.id.tvCurrentFragmentTweet);
+        CircularImageView civCurrentFragmentUserAvatar = (CircularImageView) view.findViewById(R.id.civCurrentFragmentUserAvatar);
+
+        tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
+        tvCurrentFragmentTweet.setText(socialNetwork.getText());
 
 //        adjustFontSize(tvCurrentFragmentTweet, socialNetwork.getText());
 

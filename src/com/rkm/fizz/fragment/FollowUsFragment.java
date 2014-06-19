@@ -34,6 +34,9 @@ public class FollowUsFragment extends Fragment {
             } else if (socialNetwork.getType() == SocialNetwork.TYPE_INSTAGRAM) {
                 rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.instagram_follow_us_background));
                 tvFollowUsFragment.setText("#" + socialNetwork.getHashtag() + " hashtagine fotoğraflarınızı yollayabilirsiniz");
+            } else if (socialNetwork.getType() == SocialNetwork.TYPE_FOURSQUARE) {
+                rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.foursquare_follow_us_background));
+                tvFollowUsFragment.setText("Mekanımızda check-in yapın, herkes burada olduğunuz görsün");
             }
 
         }

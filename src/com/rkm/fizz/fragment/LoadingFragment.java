@@ -101,6 +101,10 @@ public class LoadingFragment extends Fragment {
                     if (instagramImage == null)
                         aQuery.id(civFake).image(socialNetwork.getImage(), options);
                 }
+            } else if (socialNetwork.getType() == SocialNetwork.TYPE_FOURSQUARE) {
+                animationViewDevami.setBackgroundColor(getResources().getColor(R.color.foursquare_blue));
+                rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_foursquare_background));
+                ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_instagram);
             }
 
         }

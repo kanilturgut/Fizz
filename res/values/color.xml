@@ -5,20 +5,11 @@
 
     <color name="twitter_follow_us_background">#3EADEF</color>
     <color name="instagram_follow_us_background">#2E5F86</color>
+    <color name="foursquare_follow_us_background">#2CB2EB</color>
 
     <color name="twitter_blue">#3EADEF</color>
     <color name="instagram_blue">#2E5F86</color>
-
-    <color name="foursquare_background_start">#3ED683</color>
-    <color name="foursquare_background_finish">#218B51</color>
-
-
-    <!-- Fizz Fragment Background colors-->
-    <color name="fizz_fragment_background_twitter_start">#18619F</color>
-    <color name="fizz_fragment_background_twitter_finish">#E1CAA1</color>
-
-    <color name="fizz_fragment_background_instagram_start">#26646F</color>
-    <color name="fizz_fragment_background_instagram_finish">#E1CAA1</color>
+    <color name="foursquare_blue">#2CB2EB</color>
 
 
     <!-- normal colors-->

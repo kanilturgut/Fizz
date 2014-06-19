@@ -75,7 +75,10 @@ public class PageChangeController {
 
     }
 
-
+    /**
+     *
+     * @param socialNetwork current item
+     */
     public void currentToCurrent(SocialNetwork socialNetwork) {
         CurrentFragment currentFragment = new CurrentFragment();
         Bundle bundle = new Bundle();
@@ -90,6 +93,10 @@ public class PageChangeController {
         }
     }
 
+    /**
+     *
+     * @param socialNetwork next item
+     */
     public void loadingToLoading(final SocialNetwork socialNetwork) {
         LoadingFragment loadingFragment = new LoadingFragment();
         Bundle bundle = new Bundle();
