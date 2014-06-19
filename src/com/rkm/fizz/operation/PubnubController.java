@@ -58,7 +58,7 @@ public class PubnubController {
                     @Override
                     public void errorCallback(String s, PubnubError pubnubError) {
                         super.errorCallback(s, pubnubError);
-                        Logs.i(TAG, "SUBSCRIBE : ERROR on channel : " + CHANNEL + " : " + pubnubError.getErrorString());
+                        Logs.e(TAG, "SUBSCRIBE : ERROR on channel : " + CHANNEL + " : " + pubnubError.getErrorString());
                     }
 
                     @Override

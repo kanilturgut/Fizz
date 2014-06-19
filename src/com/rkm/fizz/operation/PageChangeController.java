@@ -44,9 +44,6 @@ public class PageChangeController {
         myQueue = MyQueue.getInstance();
 
         createColors();
-
-        PubnubController pubnubController = PubnubController.getInstance();
-        pubnubController.subscribeToChannel();
     }
 
     public static PageChangeController getInstance(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, Context context) {

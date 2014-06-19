@@ -17,8 +17,10 @@ public class ConnectivityReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if (ConnectionDetector.isConnectingToInternet(context)) {
-
+            PubnubController pubnubController = PubnubController.getInstance();
+            pubnubController.subscribeToChannel();
         } else {
+
         }
     }
 }
