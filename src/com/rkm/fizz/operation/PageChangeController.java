@@ -1,10 +1,7 @@
 package com.rkm.fizz.operation;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
@@ -33,11 +30,9 @@ public class PageChangeController {
     Context context;
     int[] colors;
     Random random;
-    static int pastColor = Color.WHITE;
     MyQueue myQueue;
 
     Drawable[] drawables;
-    static Drawable pastDrawable = null;
 
     static PageChangeController pageChangeController = null;
 
@@ -48,32 +43,7 @@ public class PageChangeController {
 
         myQueue = MyQueue.getInstance();
 
-        int red = context.getResources().getColor(R.color.new_red);
-        int blue = context.getResources().getColor(R.color.new_blue);
-        int aqua = context.getResources().getColor(R.color.new_aqua);
-        int yellow = context.getResources().getColor(R.color.new_yellow);
-        int green = context.getResources().getColor(R.color.new_green);
-        int purple = context.getResources().getColor(R.color.new_purple);
-
-        int happy_blue = context.getResources().getColor(R.color.happy_blue);
-        int calm_green = context.getResources().getColor(R.color.calm_green);
-        int yello = context.getResources().getColor(R.color.yello);
-        int thai_curry = context.getResources().getColor(R.color.thai_curry);
-        int burnt_red = context.getResources().getColor(R.color.burnt_red);
-
-        colors = new int[]{happy_blue, calm_green, yello, thai_curry, burnt_red, purple};
-        random = new Random();
-
-        Drawable bg1 = context.getResources().getDrawable(R.drawable.bg1);
-        Drawable bg2 = context.getResources().getDrawable(R.drawable.bg2);
-        Drawable bg3 = context.getResources().getDrawable(R.drawable.bg3);
-        Drawable bg4 = context.getResources().getDrawable(R.drawable.bg4);
-        Drawable bg5 = context.getResources().getDrawable(R.drawable.bg5);
-        Drawable bg6 = context.getResources().getDrawable(R.drawable.bg6);
-
-        pastDrawable = bg1;
-
-        drawables = new Drawable[]{bg1, bg2, bg3, bg4, bg5, bg6};
+        createColors();
 
         PubnubController pubnubController = PubnubController.getInstance();
         pubnubController.subscribeToChannel();
@@ -102,7 +72,7 @@ public class PageChangeController {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               changePage();
+                changePage();
             }
         }, Constant.PAGE_SHOW_TIME);
 
@@ -156,6 +126,33 @@ public class PageChangeController {
             fragmentTransaction.replace(R.id.frameLoading, loadingToFollowUs);
             fragmentTransaction.commit();
         }
+    }
+
+    void createColors() {
+        int red = context.getResources().getColor(R.color.new_red);
+        int blue = context.getResources().getColor(R.color.new_blue);
+        int aqua = context.getResources().getColor(R.color.new_aqua);
+        int yellow = context.getResources().getColor(R.color.new_yellow);
+        int green = context.getResources().getColor(R.color.new_green);
+        int purple = context.getResources().getColor(R.color.new_purple);
+
+        int happy_blue = context.getResources().getColor(R.color.happy_blue);
+        int calm_green = context.getResources().getColor(R.color.calm_green);
+        int yello = context.getResources().getColor(R.color.yello);
+        int thai_curry = context.getResources().getColor(R.color.thai_curry);
+        int burnt_red = context.getResources().getColor(R.color.burnt_red);
+
+        colors = new int[]{happy_blue, calm_green, yello, thai_curry, burnt_red, purple};
+        random = new Random();
+
+        Drawable bg1 = context.getResources().getDrawable(R.drawable.bg1);
+        Drawable bg2 = context.getResources().getDrawable(R.drawable.bg2);
+        Drawable bg3 = context.getResources().getDrawable(R.drawable.bg3);
+        Drawable bg4 = context.getResources().getDrawable(R.drawable.bg4);
+        Drawable bg5 = context.getResources().getDrawable(R.drawable.bg5);
+        Drawable bg6 = context.getResources().getDrawable(R.drawable.bg6);
+
+        drawables = new Drawable[]{bg1, bg2, bg3, bg4, bg5, bg6};
     }
 
 }

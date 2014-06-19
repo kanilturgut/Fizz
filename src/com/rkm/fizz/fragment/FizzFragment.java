@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import com.rkm.fizz.R;
 import com.rkm.fizz.operation.PageChangeController;
 
@@ -21,7 +20,6 @@ import com.rkm.fizz.operation.PageChangeController;
 public class FizzFragment extends Fragment {
 
     final String TAG = "FizzFragment";
-    public static int count = 1;
 
     LinearLayout llBackgroundOfFizz;
     Context context;
