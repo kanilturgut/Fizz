@@ -23,6 +23,7 @@ import com.rkm.fizz.broadcastreceiver.ConnectivityReceiver;
 import com.rkm.fizz.fragment.FizzFragment;
 import com.rkm.fizz.fragment.SplashFragment;
 import com.rkm.fizz.model.SocialNetwork;
+import com.rkm.fizz.operation.PageChangeController;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -226,10 +227,11 @@ public class MainActivity extends FragmentActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 
-
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
+
+        PageChangeController.cancelAllRunnables();
     }
 
     @Override

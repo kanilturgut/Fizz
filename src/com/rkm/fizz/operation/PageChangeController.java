@@ -31,10 +31,13 @@ public class PageChangeController {
     int[] colors;
     Random random;
     MyQueue myQueue;
-
     Drawable[] drawables;
 
     static PageChangeController pageChangeController = null;
+
+    static Handler handler = null;
+    static Runnable changePageRunnable = null;
+    static Runnable followUsRunnable = null;
 
     private PageChangeController(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, Context context) {
         this.fragmentManager = fragmentManager;
@@ -44,6 +47,15 @@ public class PageChangeController {
         myQueue = MyQueue.getInstance();
 
         createColors();
+
+        handler = new Handler();
+
+        changePageRunnable = new Runnable() {
+            @Override
+            public void run() {
+                changePage();
+            }
+        };
     }
 
     public static PageChangeController getInstance(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, Context context) {
@@ -65,14 +77,7 @@ public class PageChangeController {
     }
 
     public void startApp() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                changePage();
-            }
-        }, Constant.PAGE_SHOW_TIME);
-
+        handler.postDelayed(changePageRunnable, Constant.PAGE_SHOW_TIME);
     }
 
     /**
@@ -98,7 +103,7 @@ public class PageChangeController {
      * @param socialNetwork next item
      */
     public void loadingToLoading(final SocialNetwork socialNetwork) {
-        LoadingFragment loadingFragment = new LoadingFragment();
+        final LoadingFragment loadingFragment = new LoadingFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY, socialNetwork);
         loadingFragment.setArguments(bundle);
@@ -110,12 +115,15 @@ public class PageChangeController {
         }
 
 
-        new Handler().postDelayed(new Runnable() {
+
+        followUsRunnable = new Runnable() {
             @Override
             public void run() {
                 loadingToFollowUs(socialNetwork);
             }
-        }, Constant.LOADING_FRAGMENT_SHOW_TIME);
+        };
+
+        handler.postDelayed(followUsRunnable, Constant.LOADING_FRAGMENT_SHOW_TIME);
     }
 
     public void loadingToFollowUs(SocialNetwork socialNetwork) {
@@ -157,6 +165,19 @@ public class PageChangeController {
         Drawable bg6 = context.getResources().getDrawable(R.drawable.bg6);
 
         drawables = new Drawable[]{bg1, bg2, bg3, bg4, bg5, bg6};
+    }
+
+    public static void cancelAllRunnables() {
+
+        if (handler != null) {
+            if (changePageRunnable != null)
+                handler.removeCallbacks(changePageRunnable);
+
+            if (followUsRunnable != null)
+                handler.removeCallbacks(followUsRunnable);
+
+            handler = null;
+        }
     }
 
 }
