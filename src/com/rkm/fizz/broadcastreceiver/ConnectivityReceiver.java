@@ -17,10 +17,9 @@ public class ConnectivityReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if (ConnectionDetector.isConnectingToInternet(context)) {
-            PubnubController pubnubController = PubnubController.getInstance();
-            pubnubController.subscribeToChannel();
+            PubnubController.getInstance().subscribeToChannel();
         } else {
-
+            Toast.makeText(context, "İnternet gitti ya la", Toast.LENGTH_LONG).show();
         }
     }
 }

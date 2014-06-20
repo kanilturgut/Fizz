@@ -20,8 +20,8 @@ public class PubnubController {
     static PubnubController pubnubController = null;
     static Pubnub pubnub = null;
     final String TAG = "PubnubController";
-    final String PUBLISH_KEY = "pub-c-13b31cee-ef79-440f-b46d-e3804f3d5435";
-    final String SUBSCRIBE_KEY = "sub-c-3a5a7350-b28d-11e3-b8c3-02ee2ddab7fe";
+    final String PUBLISH_KEY = "pub-c-79ce4f35-20dd-4972-9f8c-8f9d3a4dbe59";
+    final String SUBSCRIBE_KEY = "sub-c-2706dfc2-f87a-11e3-bacb-02ee2ddab7fe";
     final String CHANNEL = "fizz";
     MyQueue myQueue;
 
@@ -35,6 +35,10 @@ public class PubnubController {
             pubnubController = new PubnubController();
 
         return pubnubController;
+    }
+
+    public static void startPubnupOperation() {
+        PubnubController.getInstance().subscribeToChannel();
     }
 
     public void subscribeToChannel() {

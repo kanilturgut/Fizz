@@ -59,7 +59,11 @@ public class MainActivity extends FragmentActivity {
 
         if (!ConnectionDetector.isConnectingToInternet(context)) {
             AlertDialogManager.noInternetConnection(context);
+        }
 
+        if (connectivityReceiver == null) {
+            connectivityReceiver = new ConnectivityReceiver();
+            registerReceiver(connectivityReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -246,7 +250,9 @@ public class MainActivity extends FragmentActivity {
             AQUtility.cleanCacheAsync(this, triggerSize, targetSize);
         }
 
-        if (connectivityReceiver != null)
+        if (connectivityReceiver != null) {
             unregisterReceiver(connectivityReceiver);
+            connectivityReceiver = null;
+        }
     }
 }

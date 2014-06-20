@@ -7,13 +7,11 @@ import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.LinearLayout;
+import com.kanilturgut.mylib.ConnectionDetector;
 import com.rkm.fizz.Constant;
 import com.rkm.fizz.MyQueue;
 import com.rkm.fizz.R;
-import com.rkm.fizz.fragment.CurrentFragment;
-import com.rkm.fizz.fragment.FollowUsFragment;
-import com.rkm.fizz.fragment.FragmentConstants;
-import com.rkm.fizz.fragment.LoadingFragment;
+import com.rkm.fizz.fragment.*;
 import com.rkm.fizz.model.SocialNetwork;
 
 import java.util.Random;
@@ -45,11 +43,11 @@ public class PageChangeController {
         this.context = context;
 
         myQueue = MyQueue.getInstance();
-
         createColors();
 
-        handler = new Handler();
+        PubnubController.getInstance().subscribeToChannel();
 
+        handler = new Handler();
         changePageRunnable = new Runnable() {
             @Override
             public void run() {
@@ -67,8 +65,12 @@ public class PageChangeController {
 
     public void changePage() {
 
-        currentToCurrent(myQueue.moveToEnd());
-        loadingToLoading(myQueue.peek());
+        if (ConnectionDetector.isConnectingToInternet(context)) {
+            currentToCurrent(myQueue.moveToEnd());
+            loadingToLoading(myQueue.peek());
+        } else {
+            mainToNoInternetConnection();
+        }
 
         Drawable newDrawable = drawables[random.nextInt(6)];
         llBackgroundOfFizz.setBackground(newDrawable);
@@ -78,6 +80,15 @@ public class PageChangeController {
 
     public void startApp() {
         handler.postDelayed(changePageRunnable, Constant.PAGE_SHOW_TIME);
+    }
+
+    public void mainToNoInternetConnection() {
+
+        NoInternetFragment noInternetFragment = new NoInternetFragment();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit);
+        fragmentTransaction.replace(R.id.frameMain, noInternetFragment);
+        fragmentTransaction.commit();
     }
 
     /**
