@@ -1,12 +1,12 @@
-package com.rkm.fizz.operation;
+package com.kanilturgut.fizz.operation;
 
 import com.kanilturgut.mylib.Logs;
 import com.pubnub.api.Callback;
 import com.pubnub.api.Pubnub;
 import com.pubnub.api.PubnubError;
 import com.pubnub.api.PubnubException;
-import com.rkm.fizz.MyQueue;
-import com.rkm.fizz.model.SocialNetwork;
+import com.kanilturgut.fizz.MyQueue;
+import com.kanilturgut.fizz.model.SocialNetwork;
 import org.json.JSONException;
 import org.json.JSONObject;
 

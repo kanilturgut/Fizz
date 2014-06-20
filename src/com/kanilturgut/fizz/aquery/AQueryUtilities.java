@@ -1,4 +1,4 @@
-package com.rkm.fizz.aquery;
+package com.kanilturgut.fizz.aquery;
 
 import android.content.Context;
 import com.androidquery.AQuery;

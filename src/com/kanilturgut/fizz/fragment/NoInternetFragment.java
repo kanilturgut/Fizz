@@ -1,4 +1,4 @@
-package com.rkm.fizz.fragment;
+package com.kanilturgut.fizz.fragment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.rkm.fizz.R;
+import com.kanilturgut.fizz.R;
 
 /**
  * Author   : kanilturgut

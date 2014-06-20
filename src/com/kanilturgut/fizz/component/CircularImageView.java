@@ -1,4 +1,4 @@
-package com.rkm.fizz.component;
+package com.kanilturgut.fizz.component;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
-import com.rkm.fizz.R;
+import com.kanilturgut.fizz.R;
 
 
 public class CircularImageView extends ImageView {

@@ -1,11 +1,11 @@
-package com.rkm.fizz.broadcastreceiver;
+package com.kanilturgut.fizz.broadcastreceiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 import com.kanilturgut.mylib.ConnectionDetector;
-import com.rkm.fizz.operation.PubnubController;
+import com.kanilturgut.fizz.operation.PubnubController;
 
 /**
  * Author   : kanilturgut

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.rkm.fizz"
+          package="com.kanilturgut.fizz"
           android:versionCode="1"
           android:versionName="1.0">
 
@@ -20,7 +20,7 @@
                  android:allowBackup="true"
                  android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
 
-        <activity android:name=".activity.MainActivity"
+        <activity android:name="com.kanilturgut.fizz.activity.MainActivity"
                   android:screenOrientation="portrait"
                   android:label="@string/app_name">
             <intent-filter>
@@ -31,7 +31,7 @@
 
 
         <!-- broadcast receiver for system boot up -->
-        <receiver android:name=".broadcastreceiver.BootFinishedReceiver"
+        <receiver android:name="com.kanilturgut.fizz.broadcastreceiver.BootFinishedReceiver"
                   android:enabled="true"
                   android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
 
@@ -41,7 +41,7 @@
             </intent-filter>
 
         </receiver>
-        <receiver android:name=".broadcastreceiver.ConnectivityReceiver"/>
+        <receiver android:name="com.kanilturgut.fizz.broadcastreceiver.ConnectivityReceiver"/>
 
     </application>
 </manifest>

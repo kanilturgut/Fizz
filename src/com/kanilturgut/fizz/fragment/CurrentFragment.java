@@ -1,4 +1,4 @@
-package com.rkm.fizz.fragment;
+package com.kanilturgut.fizz.fragment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,14 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.ImageOptions;
-import com.rkm.fizz.R;
-import com.rkm.fizz.aquery.AQueryUtilities;
-import com.rkm.fizz.component.CircularImageView;
-import com.rkm.fizz.model.SocialNetwork;
+import com.kanilturgut.fizz.R;
+import com.kanilturgut.fizz.aquery.AQueryUtilities;
+import com.kanilturgut.fizz.component.CircularImageView;
+import com.kanilturgut.fizz.model.SocialNetwork;
 
 /**
  * Author   : kanilturgut

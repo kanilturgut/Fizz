@@ -1,4 +1,4 @@
-package com.rkm.fizz.fragment;
+package com.kanilturgut.fizz.fragment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import com.rkm.fizz.R;
-import com.rkm.fizz.operation.PageChangeController;
+import com.kanilturgut.fizz.R;
+import com.kanilturgut.fizz.operation.PageChangeController;
 
 /**
  * Author   : kanilturgut

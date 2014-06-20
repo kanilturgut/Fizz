@@ -1,4 +1,4 @@
-package com.rkm.fizz.activity;
+package com.kanilturgut.fizz.activity;
 
 import android.content.Context;
 import android.content.IntentFilter;
@@ -16,14 +16,14 @@ import com.androidquery.util.AQUtility;
 import com.kanilturgut.mylib.AlertDialogManager;
 import com.kanilturgut.mylib.ConnectionDetector;
 import com.kanilturgut.mylib.Logs;
-import com.rkm.fizz.MyQueue;
-import com.rkm.fizz.R;
-import com.rkm.fizz.aquery.AQueryUtilities;
-import com.rkm.fizz.broadcastreceiver.ConnectivityReceiver;
-import com.rkm.fizz.fragment.FizzFragment;
-import com.rkm.fizz.fragment.SplashFragment;
-import com.rkm.fizz.model.SocialNetwork;
-import com.rkm.fizz.operation.PageChangeController;
+import com.kanilturgut.fizz.MyQueue;
+import com.kanilturgut.fizz.R;
+import com.kanilturgut.fizz.aquery.AQueryUtilities;
+import com.kanilturgut.fizz.broadcastreceiver.ConnectivityReceiver;
+import com.kanilturgut.fizz.fragment.FizzFragment;
+import com.kanilturgut.fizz.fragment.SplashFragment;
+import com.kanilturgut.fizz.model.SocialNetwork;
+import com.kanilturgut.fizz.operation.PageChangeController;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package com.rkm.fizz.model;
+package com.kanilturgut.fizz.model;
 
 import org.json.JSONObject;
 

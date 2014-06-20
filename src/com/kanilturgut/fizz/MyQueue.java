@@ -1,6 +1,6 @@
-package com.rkm.fizz;
+package com.kanilturgut.fizz;
 
-import com.rkm.fizz.model.SocialNetwork;
+import com.kanilturgut.fizz.model.SocialNetwork;
 
 import java.util.LinkedList;
 import java.util.List;

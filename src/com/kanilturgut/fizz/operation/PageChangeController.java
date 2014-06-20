@@ -1,4 +1,4 @@
-package com.rkm.fizz.operation;
+package com.kanilturgut.fizz.operation;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -8,11 +8,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.LinearLayout;
 import com.kanilturgut.mylib.ConnectionDetector;
-import com.rkm.fizz.Constant;
-import com.rkm.fizz.MyQueue;
-import com.rkm.fizz.R;
-import com.rkm.fizz.fragment.*;
-import com.rkm.fizz.model.SocialNetwork;
+import com.kanilturgut.fizz.Constant;
+import com.kanilturgut.fizz.MyQueue;
+import com.kanilturgut.fizz.R;
+import com.kanilturgut.fizz.fragment.*;
+import com.kanilturgut.fizz.model.SocialNetwork;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package com.rkm.fizz.fragment;
+package com.kanilturgut.fizz.fragment;
 
 /**
  * Author   : kanilturgut

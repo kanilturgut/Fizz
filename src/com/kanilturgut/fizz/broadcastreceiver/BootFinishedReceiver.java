@@ -1,10 +1,10 @@
-package com.rkm.fizz.broadcastreceiver;
+package com.kanilturgut.fizz.broadcastreceiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import com.kanilturgut.mylib.Logs;
-import com.rkm.fizz.activity.MainActivity;
+import com.kanilturgut.fizz.activity.MainActivity;
 
 /**
  * Author   : kanilturgut

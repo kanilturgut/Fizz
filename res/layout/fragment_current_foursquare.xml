@@ -46,7 +46,7 @@
 
     </RelativeLayout>
 
-    <com.rkm.fizz.component.CircularImageView
+    <com.kanilturgut.fizz.component.CircularImageView
             android:layout_width="@dimen/current_fragment_circular_image_view"
             android:layout_height="@dimen/current_fragment_circular_image_view"
             android:layout_marginLeft="10dp"

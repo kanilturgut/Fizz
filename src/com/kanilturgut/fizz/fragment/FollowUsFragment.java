@@ -1,4 +1,4 @@
-package com.rkm.fizz.fragment;
+package com.kanilturgut.fizz.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.rkm.fizz.R;
-import com.rkm.fizz.model.SocialNetwork;
+import com.kanilturgut.fizz.R;
+import com.kanilturgut.fizz.model.SocialNetwork;
 
 /**
  * Author   : kanilturgut

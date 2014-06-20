@@ -1,4 +1,4 @@
-package com.rkm.fizz.sharedpreference;
+package com.kanilturgut.fizz.sharedpreference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
