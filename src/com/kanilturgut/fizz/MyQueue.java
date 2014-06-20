@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class MyQueue {
 
+    private final int size = 5000;
+
     private static MyQueue ourInstance = new MyQueue();
 
     public static MyQueue getInstance() {
@@ -28,13 +30,17 @@ public class MyQueue {
      * @param socialNetwork Adds socialNetwork object to end of list
      */
     public void offer(SocialNetwork socialNetwork) {
-        list.add(socialNetwork);
+        if (list.size() < 5000)
+            list.add(socialNetwork);
     }
 
     /**
      * @param socialNetwork Adds params to second index of list
      */
     public void offerToSecond(SocialNetwork socialNetwork) {
+        if (list.size() == 5000)
+            list.remove(4999);
+
         list.add(1, socialNetwork);
     }
 
