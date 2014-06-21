@@ -66,6 +66,8 @@ public class CurrentFragment extends Fragment {
                         view = inflater.inflate(R.layout.fragment_current_foursquare, container, false);
                         foursquarePage(socialNetwork, view);
                 }
+            } else {
+                view = inflater.inflate(R.layout.fragment_no_internet, container, false);
             }
 
 

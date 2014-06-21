@@ -69,7 +69,9 @@ public class PageChangeController {
             currentToCurrent(myQueue.moveToEnd());
             loadingToLoading(myQueue.peek());
         } else {
-            mainToNoInternetConnection();
+            //mainToNoInternetConnection();
+            currentToCurrent(null);
+            loadingToLoading(null);
         }
 
         Drawable newDrawable = drawables[random.nextInt(6)];
@@ -79,16 +81,8 @@ public class PageChangeController {
     }
 
     public void startApp() {
+
         handler.postDelayed(changePageRunnable, Constant.PAGE_SHOW_TIME);
-    }
-
-    public void mainToNoInternetConnection() {
-
-        NoInternetFragment noInternetFragment = new NoInternetFragment();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit);
-        fragmentTransaction.replace(R.id.frameMain, noInternetFragment);
-        fragmentTransaction.commit();
     }
 
     /**

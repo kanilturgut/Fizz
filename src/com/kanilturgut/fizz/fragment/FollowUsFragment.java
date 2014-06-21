@@ -28,17 +28,22 @@ public class FollowUsFragment extends Fragment {
         if (bundle != null) {
             SocialNetwork socialNetwork = (SocialNetwork) bundle.getSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY);
 
-            if (socialNetwork.getType() == SocialNetwork.TYPE_TWITTER) {
-                rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.twitter_follow_us_background));
-                tvFollowUsFragment.setText("#" + socialNetwork.getHashtag() + " hashtagine tweet atabilirsiniz");
-            } else if (socialNetwork.getType() == SocialNetwork.TYPE_INSTAGRAM) {
-                rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.instagram_follow_us_background));
-                tvFollowUsFragment.setText("#" + socialNetwork.getHashtag() + " hashtagine fotoğraflarınızı yollayabilirsiniz");
-            } else if (socialNetwork.getType() == SocialNetwork.TYPE_FOURSQUARE) {
-                rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.foursquare_follow_us_background));
-                tvFollowUsFragment.setText("Mekanımızda check-in yapın, herkes burada olduğunuz görsün");
-            }
+            if (socialNetwork != null) {
 
+                if (socialNetwork.getType() == SocialNetwork.TYPE_TWITTER) {
+                    rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.twitter_follow_us_background));
+                    tvFollowUsFragment.setText("#" + socialNetwork.getHashtag() + " hashtagine tweet atabilirsiniz");
+                } else if (socialNetwork.getType() == SocialNetwork.TYPE_INSTAGRAM) {
+                    rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.instagram_follow_us_background));
+                    tvFollowUsFragment.setText("#" + socialNetwork.getHashtag() + " hashtagine fotoğraflarınızı yollayabilirsiniz");
+                } else if (socialNetwork.getType() == SocialNetwork.TYPE_FOURSQUARE) {
+                    rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.foursquare_follow_us_background));
+                    tvFollowUsFragment.setText("Mekanımızda check-in yapın, herkes burada olduğunuz görsün");
+                }
+
+            } else {
+                view.setVisibility(View.INVISIBLE);
+            }
         }
 
         return view;
