@@ -1,8 +1,13 @@
 package com.kanilturgut.fizz.task;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.fizz.backend.HttpURL;
 import com.kanilturgut.fizz.backend.Requests;
+import com.kanilturgut.fizz.model.User;
+import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.json.JSONException;
@@ -15,21 +20,27 @@ import java.io.IOException;
  * Date     : 20/06/14
  * Time     : 20:13
  */
-public class LoginTask extends AsyncTask<Void, Void, String> {
+public class LoginTask extends AsyncTask<String, Void, String> {
 
+    Context context;
     boolean doNeedInitials;
+    String email, password;
 
-    public LoginTask(boolean bool) {
+    public LoginTask(Context context, boolean bool) {
         this.doNeedInitials = bool;
+        this.context = context;
     }
 
     @Override
-    protected String doInBackground(Void... voids) {
+    protected String doInBackground(String... strings) {
+
+        this.email = strings[0];
+        this.password = strings[1];
 
         JSONObject loginObject = new JSONObject();
         try {
-            loginObject.put("email", "uoy1991@gmail.com");
-            loginObject.put("password", "123");
+            loginObject.put("email", email);
+            loginObject.put("password", password);
         } catch (JSONException e) {
             e.printStackTrace();
             cancel(true);
@@ -63,17 +74,29 @@ public class LoginTask extends AsyncTask<Void, Void, String> {
         super.onPostExecute(response);
 
         if (response != null) {
-            if (doNeedInitials) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
 
-                    String hashtag = jsonObject.getString("hashtag");
+            MySharedPreferences mySharedPreferences = MySharedPreferences.getInstance(context);
+            User user = mySharedPreferences.getFromSharePreferences();
+            if (user.getPassword() == null && user.getEmail() == null) {
+                mySharedPreferences.saveToSharedPreferences(email, password);
 
-                    GetInitialTweetsTask getInitialTweetsTask = new GetInitialTweetsTask(hashtag);
-                    getInitialTweetsTask.execute();
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(intent);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            } else {
+                if (doNeedInitials) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+
+                        String hashtag = jsonObject.getString("hashtag");
+
+                        GetInitialTweetsTask getInitialTweetsTask = new GetInitialTweetsTask(hashtag);
+                        getInitialTweetsTask.execute();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

@@ -14,9 +14,12 @@ import com.kanilturgut.fizz.R;
 import com.kanilturgut.fizz.aquery.AQueryUtilities;
 import com.kanilturgut.fizz.broadcastreceiver.ConnectivityReceiver;
 import com.kanilturgut.fizz.fragment.FizzFragment;
+import com.kanilturgut.fizz.fragment.LoginFragment;
 import com.kanilturgut.fizz.fragment.SplashFragment;
 import com.kanilturgut.fizz.model.SocialNetwork;
+import com.kanilturgut.fizz.model.User;
 import com.kanilturgut.fizz.operation.PageChangeController;
+import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import com.kanilturgut.fizz.task.LoginTask;
 import com.kanilturgut.mylib.AlertDialogManager;
 import com.kanilturgut.mylib.ConnectionDetector;
@@ -32,6 +35,7 @@ public class MainActivity extends FragmentActivity {
     AQueryUtilities aQueryUtilities = null;
     static MyQueue myQueue = null;
     ConnectivityReceiver connectivityReceiver = null;
+    MySharedPreferences mySharedPreferences;
 
     public static List<SocialNetwork> twitterList = new LinkedList<SocialNetwork>();
     public static List<SocialNetwork> instagramList = new LinkedList<SocialNetwork>();
@@ -44,19 +48,31 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        hideSystemBar();
-        checkConnectivity();
-        registerConnectivityRegister();
-
         fragmentManager = getSupportFragmentManager();
         myQueue = MyQueue.getInstance();
 
-        mainToSplash();
+        mySharedPreferences = MySharedPreferences.getInstance(context);
+        User user = getUser();
+        if (user != null && user.getEmail() != null && user.getPassword() != null) {
 
-        aQueryUtilities = AQueryUtilities.getInstance(context);
+            hideSystemBar();
+            checkConnectivity();
+            registerConnectivityRegister();
 
-        LoginTask loginTask = new LoginTask(true);
-        loginTask.execute();
+            mainToSplash();
+
+            aQueryUtilities = AQueryUtilities.getInstance(context);
+
+            LoginTask loginTask = new LoginTask(context, true);
+            loginTask.execute(user.getEmail(), user.getPassword());
+        } else {
+            mainToLogin();
+        }
+    }
+
+
+    private User getUser() {
+        return mySharedPreferences.getFromSharePreferences();
     }
 
     private void checkConnectivity() {
@@ -66,7 +82,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void registerConnectivityRegister() {
-        if (connectivityReceiver == null) {
+        if (connectivityReceiver == null  && getUser().getEmail() != null && getUser().getPassword() != null) {
             connectivityReceiver = new ConnectivityReceiver();
             registerReceiver(connectivityReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
@@ -76,6 +92,13 @@ public class MainActivity extends FragmentActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SplashFragment splashFragment = new SplashFragment();
         fragmentTransaction.replace(R.id.frameMain, splashFragment);
+        fragmentTransaction.commit();
+    }
+
+    public void mainToLogin() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        LoginFragment loginFragment = new LoginFragment();
+        fragmentTransaction.replace(R.id.frameMain, loginFragment);
         fragmentTransaction.commit();
     }
 
