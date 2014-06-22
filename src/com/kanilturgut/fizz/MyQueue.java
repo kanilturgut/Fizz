@@ -91,6 +91,15 @@ public class MyQueue {
         return list.contains(socialNetwork);
     }
 
+    public boolean isContain(String id) {
+        for (int i = 0; i < list.size(); i++) {
+            if (id.equals(list.get(i).getId()))
+                return true;
+        }
+
+        return false;
+    }
+
     public SocialNetwork findPost(String id) throws NullPointerException{
         for (SocialNetwork socialNetwork: list)
             if (id.equals(socialNetwork.getId()))

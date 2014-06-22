@@ -14,6 +14,8 @@ public class HttpURL {
     public static final String INITIAL_TWITTER = "/venue/getInitialTweets";
     public static final String INITIAL_INSTAGRAM = "/venue/getInitialInstagramPosts";
 
+    public static final String GET_ONE_POST = "/venue/getVenuePostDetails";
+
 
     public static String createURL(String url) {
         return domain + url;

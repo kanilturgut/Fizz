@@ -1,6 +1,7 @@
 package com.kanilturgut.fizz.operation;
 
 import com.kanilturgut.fizz.model.Venue;
+import com.kanilturgut.fizz.task.GetOnePostTask;
 import com.kanilturgut.mylib.Logs;
 import com.pubnub.api.Callback;
 import com.pubnub.api.Pubnub;
@@ -78,6 +79,10 @@ public class PubnubController {
 
                             if (pubnupResponse.has("delete_id"))
                                 deleteOperation(pubnupResponse.getString("delete_id"));
+                            else if (pubnupResponse.has("dont_display"))
+                                dontDisplayOperation(pubnupResponse.getString("dont_display"));
+                            else if (pubnupResponse.has("display"))
+                                displayOperation(pubnupResponse.getString("display"));
                             else
                                 addOperation(socialNetwork);
 
@@ -110,5 +115,14 @@ public class PubnubController {
     private void addOperation(SocialNetwork socialNetwork) {
         if (myQueue != null && !myQueue.isContain(socialNetwork))
             myQueue.offerToSecond(socialNetwork);
+    }
+
+    private void dontDisplayOperation(String id) {
+        deleteOperation(id);
+    }
+
+    private void displayOperation(String id) {
+        if (myQueue != null && !myQueue.isContain(id))
+            new GetOnePostTask().execute(id);
     }
 }
