@@ -6,8 +6,9 @@ import android.os.AsyncTask;
 import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.fizz.backend.HttpURL;
 import com.kanilturgut.fizz.backend.Requests;
-import com.kanilturgut.fizz.model.User;
+import com.kanilturgut.fizz.model.Venue;
 import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
+import com.kanilturgut.mylib.Logs;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.json.JSONException;
@@ -22,6 +23,7 @@ import java.io.IOException;
  */
 public class LoginTask extends AsyncTask<String, Void, String> {
 
+    final String TAG = "LoginTask";
     Context context;
     boolean doNeedInitials;
     String email, password;
@@ -76,8 +78,8 @@ public class LoginTask extends AsyncTask<String, Void, String> {
         if (response != null) {
 
             MySharedPreferences mySharedPreferences = MySharedPreferences.getInstance(context);
-            User user = mySharedPreferences.getFromSharePreferences();
-            if (user.getPassword() == null && user.getEmail() == null) {
+            String[] loginInfo = mySharedPreferences.getFromSharePreferences();
+            if (loginInfo[0] == null && loginInfo[1] == null) {
                 mySharedPreferences.saveToSharedPreferences(email, password);
 
                 Intent intent = new Intent(context, MainActivity.class);
@@ -89,9 +91,9 @@ public class LoginTask extends AsyncTask<String, Void, String> {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
 
-                        String hashtag = jsonObject.getString("hashtag");
+                        Venue.fromJSON(jsonObject, password);
 
-                        GetInitialTweetsTask getInitialTweetsTask = new GetInitialTweetsTask(hashtag);
+                        GetInitialTweetsTask getInitialTweetsTask = new GetInitialTweetsTask(Venue.getInstance().getHashtag());
                         getInitialTweetsTask.execute();
 
                     } catch (JSONException e) {
@@ -99,6 +101,9 @@ public class LoginTask extends AsyncTask<String, Void, String> {
                     }
                 }
             }
+        } else {
+            Logs.e(TAG, "ERROR on Login");
+            // TODO ne yapılacak ?
         }
     }
 }

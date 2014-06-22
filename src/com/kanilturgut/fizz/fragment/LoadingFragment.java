@@ -2,6 +2,7 @@ package com.kanilturgut.fizz.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.ImageOptions;
 import com.kanilturgut.fizz.R;
+import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.fizz.aquery.AQueryUtilities;
 import com.kanilturgut.fizz.component.CircularImageView;
 import com.kanilturgut.fizz.model.SocialNetwork;
@@ -42,11 +44,15 @@ public class LoadingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setRequestedOrientation(MainActivity.orientation);
 
         AQueryUtilities aQueryUtilities = AQueryUtilities.getInstance(context);
         aQuery = aQueryUtilities.aQuery;
 
-        animation = AnimationUtils.loadAnimation(context, R.anim.move);
+        if (MainActivity.orientation == Configuration.ORIENTATION_PORTRAIT)
+            animation = AnimationUtils.loadAnimation(context, R.anim.move);
+        else
+            animation = AnimationUtils.loadAnimation(context, R.anim.move_yatay);
     }
 
     @Override

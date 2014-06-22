@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.kanilturgut.fizz.R;
+import com.kanilturgut.fizz.activity.MainActivity;
 
 /**
  * Author   : kanilturgut
@@ -15,6 +16,12 @@ import com.kanilturgut.fizz.R;
 public class SplashFragment extends Fragment {
 
     final String TAG = "SplashFragment";
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().setRequestedOrientation(MainActivity.orientation);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

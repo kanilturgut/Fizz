@@ -8,10 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.kanilturgut.fizz.R;
+import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.fizz.task.LoginTask;
 
 /**
@@ -25,9 +27,17 @@ public class LoginFragment extends Fragment {
     Context context = null;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().setRequestedOrientation(MainActivity.orientation);
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         context = activity;
+
+        activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     @Override

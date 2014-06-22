@@ -1,5 +1,6 @@
 package com.kanilturgut.fizz.operation;
 
+import com.kanilturgut.fizz.model.Venue;
 import com.kanilturgut.mylib.Logs;
 import com.pubnub.api.Callback;
 import com.pubnub.api.Pubnub;
@@ -22,12 +23,13 @@ public class PubnubController {
     final String TAG = "PubnubController";
     final String PUBLISH_KEY = "pub-c-79ce4f35-20dd-4972-9f8c-8f9d3a4dbe59";
     final String SUBSCRIBE_KEY = "sub-c-2706dfc2-f87a-11e3-bacb-02ee2ddab7fe";
-    final String CHANNEL = "fizz";
+    String CHANNEL = "fizz";
     MyQueue myQueue;
 
     private PubnubController() {
         pubnub = new Pubnub(PUBLISH_KEY, SUBSCRIBE_KEY);
         myQueue = MyQueue.getInstance();
+        this.CHANNEL = Venue.getInstance().getHashtag();
     }
 
     public static PubnubController getInstance() {
@@ -95,7 +97,7 @@ public class PubnubController {
 
         SocialNetwork socialNetwork = myQueue.findPost(id);
 
-        if (socialNetwork != null && myQueue.isContain(socialNetwork))
+        if (socialNetwork != null && myQueue != null && myQueue.isContain(socialNetwork))
             myQueue.remove(socialNetwork);
 
     }
@@ -106,7 +108,7 @@ public class PubnubController {
     }
 
     private void addOperation(SocialNetwork socialNetwork) {
-        if (!myQueue.isContain(socialNetwork))
+        if (myQueue != null && !myQueue.isContain(socialNetwork))
             myQueue.offerToSecond(socialNetwork);
     }
 }

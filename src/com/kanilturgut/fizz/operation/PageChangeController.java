@@ -1,18 +1,22 @@
 package com.kanilturgut.fizz.operation;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.LinearLayout;
+import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.mylib.ConnectionDetector;
 import com.kanilturgut.fizz.Constant;
 import com.kanilturgut.fizz.MyQueue;
 import com.kanilturgut.fizz.R;
 import com.kanilturgut.fizz.fragment.*;
 import com.kanilturgut.fizz.model.SocialNetwork;
+import com.kanilturgut.mylib.Logs;
 
 import java.util.Random;
 
@@ -45,7 +49,7 @@ public class PageChangeController {
         myQueue = MyQueue.getInstance();
         createColors();
 
-        PubnubController.getInstance().subscribeToChannel();
+        PubnubController.startPubnupOperation();
 
         handler = new Handler();
         changePageRunnable = new Runnable() {
@@ -66,12 +70,19 @@ public class PageChangeController {
     public void changePage() {
 
         if (ConnectionDetector.isConnectingToInternet(context)) {
-            currentToCurrent(myQueue.moveToEnd());
-            loadingToLoading(myQueue.peek());
+
+            SocialNetwork cur = myQueue.moveToEnd();
+            SocialNetwork lod = myQueue.peek();
+
+            currentToCurrent(cur);
+            loadingToLoading(lod);
+            followUsToFollowUs(lod);
+
         } else {
             //mainToNoInternetConnection();
             currentToCurrent(null);
             loadingToLoading(null);
+            followUsToFollowUs(null);
         }
 
         Drawable newDrawable = drawables[random.nextInt(6)];
@@ -120,7 +131,6 @@ public class PageChangeController {
         }
 
 
-
         followUsRunnable = new Runnable() {
             @Override
             public void run() {
@@ -128,9 +138,11 @@ public class PageChangeController {
             }
         };
 
-        handler.postDelayed(followUsRunnable, Constant.LOADING_FRAGMENT_SHOW_TIME);
+        if (MainActivity.orientation == Configuration.ORIENTATION_PORTRAIT)
+            handler.postDelayed(followUsRunnable, Constant.LOADING_FRAGMENT_SHOW_TIME);
     }
 
+    // for portrait configuration
     public void loadingToFollowUs(SocialNetwork socialNetwork) {
         FollowUsFragment loadingToFollowUs = new FollowUsFragment();
         Bundle bundle = new Bundle();
@@ -142,6 +154,24 @@ public class PageChangeController {
             fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
             fragmentTransaction.replace(R.id.frameLoading, loadingToFollowUs);
             fragmentTransaction.commit();
+        }
+    }
+
+    public void followUsToFollowUs(SocialNetwork socialNetwork) {
+
+        if (Configuration.ORIENTATION_LANDSCAPE == MainActivity.orientation) {
+
+            FollowUsFragment loadingToFollowUs = new FollowUsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY, socialNetwork);
+            loadingToFollowUs.setArguments(bundle);
+
+            if (fragmentManager != null) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                fragmentTransaction.replace(R.id.frameFollowUs, loadingToFollowUs);
+                fragmentTransaction.commit();
+            }
         }
     }
 
@@ -184,5 +214,4 @@ public class PageChangeController {
             handler = null;
         }
     }
-
 }

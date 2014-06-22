@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import com.kanilturgut.fizz.R;
+import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.fizz.operation.PageChangeController;
 
 /**
@@ -28,6 +29,12 @@ public class FizzFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         context = activity;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().setRequestedOrientation(MainActivity.orientation);
     }
 
     @Override

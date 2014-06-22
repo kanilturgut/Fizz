@@ -14,6 +14,7 @@
 
     <!-- normal colors-->
     <color name="white">#FFF</color>
+    <color name="transparent_white">#50FFFFFF</color>
     <color name="black">#000</color>
     <color name="grey">#999</color>
 

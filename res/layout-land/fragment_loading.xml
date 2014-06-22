@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:myTextView="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rlLoadingFragmentBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/loading_fragment_twitter_background">
+
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_centerInParent="true">
+
+        <com.kanilturgut.fizz.component.CircularImageView
+                android:layout_width="@dimen/loading_fragment_circular_image_view"
+                android:layout_height="@dimen/loading_fragment_circular_image_view"
+                android:layout_marginLeft="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/civLoadingFragmentNextUserAvatar"
+                android:layout_marginRight="@dimen/loading_fragment_circular_image_view_right_margin"/>
+
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:layout_centerVertical="true"
+                      android:layout_toRightOf="@+id/civLoadingFragmentNextUserAvatar"
+                      android:layout_gravity="center_vertical">
+
+            <com.kanilturgut.mylib.MyTextView
+                    android:id="@+id/tvLoadingFragmentNextUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/loading_fragment_text_size"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    myTextView:font="fonts/GothamNarrow-Book.otf"
+                    android:text="Onur Can S."/>
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:layout_alignParentRight="true"
+                      android:layout_centerVertical="true"
+                      android:id="@+id/animateView"
+                      android:orientation="horizontal">
+
+            <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
+                       android:id="@+id/ivLoadingFragmentSocialMediaIcon"
+                       android:adjustViewBounds="true"
+                       android:src="@drawable/triangle_twitter"/>
+
+            <View android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/animationViewDevami"
+                  android:background="@color/twitter_blue"/>
+
+            <com.kanilturgut.fizz.component.CircularImageView
+                    android:layout_width="@dimen/current_fragment_circular_image_view"
+                    android:layout_height="@dimen/current_fragment_circular_image_view"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone"
+                    android:id="@+id/civFake"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -2,7 +2,6 @@ package com.kanilturgut.fizz.sharedpreference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.kanilturgut.fizz.model.User;
 
 /**
  * Author   : kanilturgut
@@ -41,12 +40,9 @@ public class MySharedPreferences {
         editor.commit();
     }
 
-    public User getFromSharePreferences() {
-        User user = new User();
-        user.setEmail(sp.getString(PREF_EMAIL, null));
-        user.setPassword(sp.getString(PREF_PASSWORD, null));
+    public String[] getFromSharePreferences() {
 
-        return user;
+        return new String[]{sp.getString(PREF_EMAIL, null), sp.getString(PREF_PASSWORD, null)};
     }
 
 }

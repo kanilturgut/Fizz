@@ -21,7 +21,6 @@
                  android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
 
         <activity android:name="com.kanilturgut.fizz.activity.MainActivity"
-                  android:screenOrientation="portrait"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

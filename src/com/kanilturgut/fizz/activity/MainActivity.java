@@ -2,6 +2,8 @@ package com.kanilturgut.fizz.activity;
 
 import android.content.Context;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -17,7 +19,7 @@ import com.kanilturgut.fizz.fragment.FizzFragment;
 import com.kanilturgut.fizz.fragment.LoginFragment;
 import com.kanilturgut.fizz.fragment.SplashFragment;
 import com.kanilturgut.fizz.model.SocialNetwork;
-import com.kanilturgut.fizz.model.User;
+import com.kanilturgut.fizz.model.Venue;
 import com.kanilturgut.fizz.operation.PageChangeController;
 import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import com.kanilturgut.fizz.task.LoginTask;
@@ -40,6 +42,9 @@ public class MainActivity extends FragmentActivity {
     public static List<SocialNetwork> twitterList = new LinkedList<SocialNetwork>();
     public static List<SocialNetwork> instagramList = new LinkedList<SocialNetwork>();
 
+    public static int orientation;
+    private String[] loginInfo = null;
+
     /**
      * Called when the activity is first created.
      */
@@ -48,30 +53,35 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         fragmentManager = getSupportFragmentManager();
         myQueue = MyQueue.getInstance();
 
+        checkConnectivity();
+
         mySharedPreferences = MySharedPreferences.getInstance(context);
-        User user = getUser();
-        if (user != null && user.getEmail() != null && user.getPassword() != null) {
+        loginInfo = getUser();
+        if (isPrefIsFull()) {
 
             hideSystemBar();
-            checkConnectivity();
             registerConnectivityRegister();
-
             mainToSplash();
 
             aQueryUtilities = AQueryUtilities.getInstance(context);
 
             LoginTask loginTask = new LoginTask(context, true);
-            loginTask.execute(user.getEmail(), user.getPassword());
+            loginTask.execute(loginInfo);
         } else {
             mainToLogin();
         }
     }
 
-
-    private User getUser() {
+    private String[] getUser() {
         return mySharedPreferences.getFromSharePreferences();
     }
 
@@ -82,7 +92,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void registerConnectivityRegister() {
-        if (connectivityReceiver == null  && getUser().getEmail() != null && getUser().getPassword() != null) {
+        if (connectivityReceiver == null && isPrefIsFull()) {
             connectivityReceiver = new ConnectivityReceiver();
             registerReceiver(connectivityReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
@@ -169,5 +179,9 @@ public class MainActivity extends FragmentActivity {
             unregisterReceiver(connectivityReceiver);
             connectivityReceiver = null;
         }
+    }
+
+    private boolean isPrefIsFull() {
+        return (loginInfo != null && loginInfo[0] != null && loginInfo[1] != null);
     }
 }

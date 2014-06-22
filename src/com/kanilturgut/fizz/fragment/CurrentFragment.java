@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.ImageOptions;
 import com.kanilturgut.fizz.R;
+import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.fizz.aquery.AQueryUtilities;
 import com.kanilturgut.fizz.component.CircularImageView;
 import com.kanilturgut.fizz.model.SocialNetwork;
@@ -38,11 +39,10 @@ public class CurrentFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setRequestedOrientation(MainActivity.orientation);
 
         AQueryUtilities aQueryUtilities = AQueryUtilities.getInstance(context);
         aQuery = aQueryUtilities.aQuery;
-
-
     }
 
     @Override
@@ -110,11 +110,11 @@ public class CurrentFragment extends Fragment {
     private void foursquarePage(SocialNetwork socialNetwork, View view) {
 
         TextView tvCurrentFragmentUserFullname = (TextView) view.findViewById(R.id.tvCurrentFragmentUserFullname);
-        TextView tvCurrentFragmentTweet = (TextView) view.findViewById(R.id.tvCurrentFragmentTweet);
+        TextView tvCurrentFragmentFoursquare = (TextView) view.findViewById(R.id.tvCurrentFragmentFoursquare);
         CircularImageView civCurrentFragmentUserAvatar = (CircularImageView) view.findViewById(R.id.civCurrentFragmentUserAvatar);
 
         tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
-        tvCurrentFragmentTweet.setText("Az önce check-in yaptı!");
+        tvCurrentFragmentFoursquare.setText("Az önce check-in yaptı!");
 
 //        adjustFontSize(tvCurrentFragmentTweet, socialNetwork.getText());
 

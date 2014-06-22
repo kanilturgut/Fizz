@@ -5,10 +5,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.kanilturgut.fizz.R;
+import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.fizz.model.SocialNetwork;
+import com.kanilturgut.fizz.model.Venue;
 
 /**
  * Author   : kanilturgut
@@ -18,11 +21,18 @@ import com.kanilturgut.fizz.model.SocialNetwork;
 public class FollowUsFragment extends Fragment {
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().setRequestedOrientation(MainActivity.orientation);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_follow_us, null);
+        View view = inflater.inflate(R.layout.fragment_follow_us, container, false);
 
         RelativeLayout rlFollowUsFragment = (RelativeLayout) view.findViewById(R.id.rlFollowUsFragment);
         TextView tvFollowUsFragment = (TextView) view.findViewById(R.id.tvFollowUsFragment);
+        ImageView ivSocialMediaIcon = (ImageView) view.findViewById(R.id.ivSocialMediaIcon);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -30,15 +40,20 @@ public class FollowUsFragment extends Fragment {
 
             if (socialNetwork != null) {
 
+                Venue venue = Venue.getInstance();
+
                 if (socialNetwork.getType() == SocialNetwork.TYPE_TWITTER) {
                     rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.twitter_follow_us_background));
-                    tvFollowUsFragment.setText("#" + socialNetwork.getHashtag() + " hashtagine tweet atabilirsiniz");
+                    tvFollowUsFragment.setText("#" + venue.getHashtag());
+                    ivSocialMediaIcon.setImageResource(R.drawable.triangle_twitter);
                 } else if (socialNetwork.getType() == SocialNetwork.TYPE_INSTAGRAM) {
                     rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.instagram_follow_us_background));
-                    tvFollowUsFragment.setText("#" + socialNetwork.getHashtag() + " hashtagine fotoğraflarınızı yollayabilirsiniz");
+                    tvFollowUsFragment.setText("#" + venue.getHashtag());
+                    ivSocialMediaIcon.setImageResource(R.drawable.triangle_instagram);
                 } else if (socialNetwork.getType() == SocialNetwork.TYPE_FOURSQUARE) {
                     rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.foursquare_follow_us_background));
-                    tvFollowUsFragment.setText("Mekanımızda check-in yapın, herkes burada olduğunuz görsün");
+                    tvFollowUsFragment.setText(venue.getName());
+                    ivSocialMediaIcon.setImageResource(R.drawable.triangle_foursquare);
                 }
 
             } else {
