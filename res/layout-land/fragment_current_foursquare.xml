@@ -66,7 +66,7 @@
                         android:id="@+id/tvCurrentFragmentFoursquare"
                         android:layout_centerInParent="true"
                         android:gravity="center"
-                        android:textSize="@dimen/current_fragment_twitter_text_size"
+                        android:textSize="@dimen/landscape_current_fragment_post_text_size"
                         android:maxLines="7"
                         android:textColor="@color/white"/>
 
