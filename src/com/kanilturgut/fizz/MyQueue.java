@@ -31,7 +31,8 @@ public class MyQueue {
      */
     public void offer(SocialNetwork socialNetwork) {
         if (list.size() < 5000)
-            list.add(socialNetwork);
+            if (socialNetwork.getDisplayType() == SocialNetwork.DISPLAY_TYPE_NORMAL || socialNetwork.getDisplayType() == SocialNetwork.DISPLAY_TYPE_PROMOTED)
+                list.add(socialNetwork);
     }
 
     /**
@@ -41,7 +42,8 @@ public class MyQueue {
         if (list.size() == 5000)
             list.remove(4999);
 
-        list.add(1, socialNetwork);
+        if (socialNetwork.getDisplayType() == SocialNetwork.DISPLAY_TYPE_NORMAL || socialNetwork.getDisplayType() == SocialNetwork.DISPLAY_TYPE_PROMOTED)
+            list.add(1, socialNetwork);
     }
 
     /**
