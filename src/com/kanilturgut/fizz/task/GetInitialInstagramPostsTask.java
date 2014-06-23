@@ -60,6 +60,8 @@ public class GetInitialInstagramPostsTask extends AsyncTask<Void, Void, String> 
         super.onCancelled();
 
         //TODO ne yapılacak ?
+        GetInitialPromotedPostsTask getInitialPromotedPostsTask = new GetInitialPromotedPostsTask(hashtag);
+        getInitialPromotedPostsTask.execute();
     }
 
     @Override
