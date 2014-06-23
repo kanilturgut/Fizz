@@ -16,16 +16,18 @@ import java.io.IOException;
 
 /**
  * Author   : kanilturgut
- * Date     : 20/06/14
- * Time     : 23:08
+ * Date     : 23/06/14
+ * Time     : 23:20
  */
-public class GetInitialInstagramPostsTask extends AsyncTask<Void, Void, String> {
+public class GetInitialPromotedPostsTask extends AsyncTask<Void, Void, String> {
 
-    private String TAG = "GetInitialTweetsTask";
+    private String TAG = "GetInitialPromotedPostsTask";
     String hashtag;
 
-    public GetInitialInstagramPostsTask(String hashtag) {
+    public GetInitialPromotedPostsTask(String hashtag) {
         this.hashtag = hashtag;
+
+        Logs.i(TAG, "Constructor executed");
     }
 
     @Override
@@ -40,7 +42,7 @@ public class GetInitialInstagramPostsTask extends AsyncTask<Void, Void, String> 
         }
 
         try {
-            HttpResponse httpResponse = Requests.post(HttpURL.INITIAL_INSTAGRAM, tweetsObject.toString());
+            HttpResponse httpResponse = Requests.post(HttpURL.INITIAL_PROMOTED_POSTS, tweetsObject.toString());
             if (Requests.checkStatusCode(httpResponse, HttpStatus.SC_OK))
                 return Requests.readResponse(httpResponse);
             else
@@ -71,11 +73,10 @@ public class GetInitialInstagramPostsTask extends AsyncTask<Void, Void, String> 
                 JSONArray jsonArray = new JSONArray(response);
 
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    MainActivity.instagramList.add(MainActivity.instagramList.size(), SocialNetwork.fromJSON(jsonArray.getJSONObject(i)));
+                    MainActivity.promotedList.add(MainActivity.promotedList.size(), SocialNetwork.fromJSON(jsonArray.getJSONObject(i)));
                 }
 
-                GetInitialPromotedPostsTask getInitialPromotedPostsTask = new GetInitialPromotedPostsTask(hashtag);
-                getInitialPromotedPostsTask.execute();
+                MainActivity.splashToFizz();
 
             } catch (JSONException e) {
                 Logs.e(TAG, "ERROR occured on reading JSON response", e);
@@ -84,3 +85,4 @@ public class GetInitialInstagramPostsTask extends AsyncTask<Void, Void, String> 
 
     }
 }
+

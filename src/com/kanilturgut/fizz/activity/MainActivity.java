@@ -25,6 +25,7 @@ import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import com.kanilturgut.fizz.task.LoginTask;
 import com.kanilturgut.mylib.AlertDialogManager;
 import com.kanilturgut.mylib.ConnectionDetector;
+import com.kanilturgut.mylib.Logs;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class MainActivity extends FragmentActivity {
 
     public static List<SocialNetwork> twitterList = new LinkedList<SocialNetwork>();
     public static List<SocialNetwork> instagramList = new LinkedList<SocialNetwork>();
+    public static List<SocialNetwork> promotedList = new LinkedList<SocialNetwork>();
 
     public static int orientation;
     private String[] loginInfo = null;
@@ -58,6 +60,9 @@ public class MainActivity extends FragmentActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         else
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        //Set TAG of application
+        new Logs("Fizz");
 
         fragmentManager = getSupportFragmentManager();
         myQueue = MyQueue.getInstance();
@@ -114,15 +119,16 @@ public class MainActivity extends FragmentActivity {
 
     public static void splashToFizz() {
 
-        for (int i = 0; i < Math.max(twitterList.size(), instagramList.size()); i++) {
+        for (int i = 0; i < getMax(twitterList.size(), instagramList.size(), promotedList.size()); i++) {
             if (i < twitterList.size())
                 myQueue.offer(twitterList.get(i));
 
             if (i < instagramList.size())
                 myQueue.offer(instagramList.get(i));
 
-            //if (i < foursquareList.size())
-            //    myQueue.offer(foursquareList.get(i));
+            if (i < promotedList.size())
+                myQueue.offer(promotedList.get(i));
+
         }
 
         if (myQueue.size() > 0) {
@@ -135,6 +141,10 @@ public class MainActivity extends FragmentActivity {
             // TODO liste boş yani initialler gelmemiş demektir. Hallet
 
         }
+    }
+
+    private static int getMax(int n1, int n2, int n3) {
+        return Math.max(n1, Math.max(n2, n3));
     }
 
     @Override
