@@ -16,6 +16,8 @@ public class SocialNetwork implements Serializable {
     public static final int TYPE_FOURSQUARE = 2;
     public static final int TYPE_FACEBOOK = 3;
 
+    public static final int TYPE_ADVERTISEMENT = 4;
+
     public static final int DISPLAY_TYPE_NORMAL = 0;
     public static final int DISPLAY_TYPE_PROMOTED = 1;
     public static final int DISPLAY_TYPE_DONT_SHOW = 2;

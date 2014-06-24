@@ -2,6 +2,7 @@ package com.kanilturgut.fizz.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.kanilturgut.fizz.R;
 import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.fizz.aquery.AQueryUtilities;
 import com.kanilturgut.fizz.component.CircularImageView;
+import com.kanilturgut.fizz.model.Advertisement;
 import com.kanilturgut.fizz.model.SocialNetwork;
 
 /**
@@ -65,6 +67,10 @@ public class CurrentFragment extends Fragment {
                     case SocialNetwork.TYPE_FOURSQUARE:
                         view = inflater.inflate(R.layout.fragment_current_foursquare, container, false);
                         foursquarePage(socialNetwork, view);
+                        break;
+                    case SocialNetwork.TYPE_ADVERTISEMENT:
+                        view = inflater.inflate(R.layout.fragment_advertisement, container, false);
+                        advertisementPage(socialNetwork, view);
                 }
             } else {
                 view = inflater.inflate(R.layout.fragment_no_internet, container, false);
@@ -84,18 +90,20 @@ public class CurrentFragment extends Fragment {
 
         tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
 
-        String[] twitterText =socialNetwork.getText().split(" ");
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String str: twitterText) {
-            if (str.contains("http://t.co/"))
-                continue;
-            else
-                stringBuilder.append(str + " ");
+        String tweetPost = socialNetwork.getText();
+        if (tweetPost != null) {
+            String[] twitterText = tweetPost.split(" ");
+            StringBuilder stringBuilder = new StringBuilder();
+            for (String str: twitterText) {
+                if (str.contains("http://t.co/"))
+                    continue;
+                else
+                    stringBuilder.append(str + " ");
+            }
+
+            tvCurrentFragmentTweet.setText(stringBuilder);
         }
 
-        tvCurrentFragmentTweet.setText(stringBuilder);
-
-//        adjustFontSize(tvCurrentFragmentTweet, socialNetwork.getText());
 
         ImageOptions options = new ImageOptions();
         options.memCache = true;
@@ -159,6 +167,32 @@ public class CurrentFragment extends Fragment {
                 aQuery.id(ivCurrentFragmentImageOfPost).image(socialNetwork.getImage(), options);
             }
 
+        }
+    }
+
+    private void advertisementPage(SocialNetwork socialNetwork, View view) {
+
+        Advertisement advertisement = (Advertisement) socialNetwork;
+        String imageURL = "";
+        if (MainActivity.orientation == Configuration.ORIENTATION_PORTRAIT)
+            imageURL = advertisement.getVerticalImageUrl();
+        else
+            imageURL = advertisement.getHorizontalImageUrl();
+
+        ImageView ivAdvertisementFragment = (ImageView) view.findViewById(R.id.ivAdvertisementFragment);
+
+        ImageOptions options = new ImageOptions();
+        options.memCache = true;
+        options.targetWidth = 0;
+
+        if (imageURL != null && !imageURL.isEmpty()) {
+            Bitmap bitmap = aQuery.getCachedImage(imageURL);
+            if (bitmap == null) {
+                aQuery.id(ivAdvertisementFragment).image(imageURL, options);
+            }
+            else {
+                ivAdvertisementFragment.setImageBitmap(bitmap);
+            }
         }
     }
 

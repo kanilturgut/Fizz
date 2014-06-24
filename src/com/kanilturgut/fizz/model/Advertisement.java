@@ -7,13 +7,14 @@ import org.json.JSONObject;
  * Date     : 24/06/14
  * Time     : 17:32
  */
-public class Advertisement {
+public class Advertisement extends SocialNetwork{
 
     String id;
     String horizontalImageUrl;
     String verticalImageUrl;
     int initialDisplayCount;
     int remainingDisplayCount;
+    int type;
 
     public String getId() {
         return id;
@@ -55,6 +56,14 @@ public class Advertisement {
         this.remainingDisplayCount = remainingDisplayCount;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     public static Advertisement fromJSON(JSONObject jsonObject) {
         Advertisement advertisement = new Advertisement();
 
@@ -63,7 +72,9 @@ public class Advertisement {
         advertisement.setVerticalImageUrl(jsonObject.optString("verticalImageUrl"));
         advertisement.setRemainingDisplayCount(jsonObject.optInt("remainingDisplayCount"));
         advertisement.setInitialDisplayCount(jsonObject.optInt("initialDisplayCount"));
+        advertisement.setType(SocialNetwork.TYPE_ADVERTISEMENT);
 
         return advertisement;
     }
+
 }

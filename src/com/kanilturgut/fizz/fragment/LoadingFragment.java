@@ -66,7 +66,6 @@ public class LoadingFragment extends Fragment {
         RelativeLayout rlLoadingFragmentBackground = (RelativeLayout) view.findViewById(R.id.rlLoadingFragmentBackground);
 
         LinearLayout animationView = (LinearLayout) view.findViewById(R.id.animateView);
-        animationView.startAnimation(animation);
 
         View animationViewDevami = view.findViewById(R.id.animationViewDevami);
 
@@ -75,45 +74,53 @@ public class LoadingFragment extends Fragment {
             final SocialNetwork socialNetwork = (SocialNetwork) bundle.getSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY);
 
             if (socialNetwork != null) {
-                //Generic
-                tvLoadingFragmentNextUserName.setText(socialNetwork.getUserFullname());
-                ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_twitter);
 
-                final ImageOptions options = new ImageOptions();
-                options.memCache = true;
-                options.targetWidth = 0;
-                Bitmap bitmap = aQuery.getCachedImage(socialNetwork.getProfileImage());
-                if (bitmap == null) {
-                    aQuery.id(circularImageView).image(socialNetwork.getProfileImage(), options);
+                if (socialNetwork.getType() == SocialNetwork.TYPE_ADVERTISEMENT) {
+
                 } else {
-                    circularImageView.setImageBitmap(bitmap);
-                }
 
+                    animationView.startAnimation(animation);
 
-                if (socialNetwork.getType() == SocialNetwork.TYPE_TWITTER) {
-                    animationViewDevami.setBackgroundColor(getResources().getColor(R.color.twitter_blue));
-                    rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_twitter_background));
+                    //Generic
+                    tvLoadingFragmentNextUserName.setText(socialNetwork.getUserFullname());
                     ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_twitter);
 
-                } else if (socialNetwork.getType() == SocialNetwork.TYPE_INSTAGRAM) {
-
-                    final CircularImageView civFake = (CircularImageView) view.findViewById(R.id.civFake);
-
-                    animationViewDevami.setBackgroundColor(getResources().getColor(R.color.instagram_blue));
-                    rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_instagram_background));
-                    ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_instagram);
-
-                    if (!socialNetwork.getImage().equals("")) {
-                        Bitmap instagramImage = aQuery.getCachedImage(socialNetwork.getImage());
-                        if (instagramImage == null)
-                            aQuery.id(civFake).image(socialNetwork.getImage(), options);
+                    final ImageOptions options = new ImageOptions();
+                    options.memCache = true;
+                    options.targetWidth = 0;
+                    Bitmap bitmap = aQuery.getCachedImage(socialNetwork.getProfileImage());
+                    if (bitmap == null) {
+                        aQuery.id(circularImageView).image(socialNetwork.getProfileImage(), options);
+                    } else {
+                        circularImageView.setImageBitmap(bitmap);
                     }
-                } else if (socialNetwork.getType() == SocialNetwork.TYPE_FOURSQUARE) {
-                    animationViewDevami.setBackgroundColor(getResources().getColor(R.color.foursquare_blue));
-                    rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_foursquare_background));
-                    ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_foursquare);
-                }
 
+
+                    if (socialNetwork.getType() == SocialNetwork.TYPE_TWITTER) {
+                        animationViewDevami.setBackgroundColor(getResources().getColor(R.color.twitter_blue));
+                        rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_twitter_background));
+                        ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_twitter);
+
+                    } else if (socialNetwork.getType() == SocialNetwork.TYPE_INSTAGRAM) {
+
+                        final CircularImageView civFake = (CircularImageView) view.findViewById(R.id.civFake);
+
+                        animationViewDevami.setBackgroundColor(getResources().getColor(R.color.instagram_blue));
+                        rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_instagram_background));
+                        ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_instagram);
+
+                        if (!socialNetwork.getImage().equals("")) {
+                            Bitmap instagramImage = aQuery.getCachedImage(socialNetwork.getImage());
+                            if (instagramImage == null)
+                                aQuery.id(civFake).image(socialNetwork.getImage(), options);
+                        }
+                    } else if (socialNetwork.getType() == SocialNetwork.TYPE_FOURSQUARE) {
+                        animationViewDevami.setBackgroundColor(getResources().getColor(R.color.foursquare_blue));
+                        rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_foursquare_background));
+                        ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_foursquare);
+                    }
+
+                }
             } else {
                 view.setVisibility(View.INVISIBLE);
             }

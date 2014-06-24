@@ -126,7 +126,7 @@ public class MainActivity extends FragmentActivity {
 
     public static void splashToFizz() {
 
-        for (int i = 0; i < getMax(twitterList.size(), instagramList.size(), promotedList.size()); i++) {
+        for (int i = 0; i < getMax(twitterList.size(), instagramList.size(), promotedList.size(), advertisementList.size()); i++) {
             if (i < twitterList.size())
                 myQueue.offer(twitterList.get(i));
 
@@ -135,11 +135,13 @@ public class MainActivity extends FragmentActivity {
 
             int a = MainActivity.advertisementList.size();
 
-            if (i < promotedList.size()) {
+            if (i < promotedList.size())
                 myQueue.offer(promotedList.get(i));
-            }
 
-
+            /*
+            if (i < advertisementList.size())
+                myQueue.offer(advertisementList.get(i));
+                */
 
         }
 
@@ -159,8 +161,8 @@ public class MainActivity extends FragmentActivity {
 
     }
 
-    private static int getMax(int n1, int n2, int n3) {
-        return Math.max(n1, Math.max(n2, n3));
+    private static int getMax(int n1, int n2, int n3, int n4) {
+        return Math.max(Math.max(n1, n2), Math.max(n3, n4));
     }
 
     @Override
