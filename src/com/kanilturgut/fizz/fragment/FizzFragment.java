@@ -66,4 +66,11 @@ public class FizzFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        PageChangeController.cancelAllRunnables();
+    }
 }

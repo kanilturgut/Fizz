@@ -16,6 +16,8 @@ public class HttpURL {
     public static final String INITIAL_PROMOTED_POSTS = "/venue/getPromotedVenuePosts";
 
     public static final String GET_ONE_POST = "/venue/getVenuePostDetails";
+    public static final String UPDATE_VENUE_LOCATION = "/venue/updateVenueLocation";
+
 
 
     public static String createURL(String url) {

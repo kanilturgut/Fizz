@@ -1,6 +1,7 @@
 package com.kanilturgut.fizz.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -21,8 +22,10 @@ import com.kanilturgut.fizz.fragment.SplashFragment;
 import com.kanilturgut.fizz.model.SocialNetwork;
 import com.kanilturgut.fizz.model.Venue;
 import com.kanilturgut.fizz.operation.PageChangeController;
+import com.kanilturgut.fizz.service.FizzService;
 import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import com.kanilturgut.fizz.task.LoginTask;
+import com.kanilturgut.fizz.task.UpdateVenueLocationTask;
 import com.kanilturgut.mylib.AlertDialogManager;
 import com.kanilturgut.mylib.ConnectionDetector;
 import com.kanilturgut.mylib.Logs;
@@ -63,6 +66,8 @@ public class MainActivity extends FragmentActivity {
 
         //Set TAG of application
         new Logs("Fizz");
+
+        startService(new Intent(context, FizzService.class));
 
         fragmentManager = getSupportFragmentManager();
         myQueue = MyQueue.getInstance();
@@ -141,6 +146,10 @@ public class MainActivity extends FragmentActivity {
             // TODO liste boş yani initialler gelmemiş demektir. Hallet
 
         }
+
+        //Update venue location
+        new UpdateVenueLocationTask().execute();
+
     }
 
     private static int getMax(int n1, int n2, int n3) {
@@ -170,7 +179,7 @@ public class MainActivity extends FragmentActivity {
     protected void onPause() {
         super.onPause();
 
-        PageChangeController.cancelAllRunnables();
+
     }
 
     @Override
