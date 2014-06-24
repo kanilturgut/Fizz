@@ -19,6 +19,7 @@ import com.kanilturgut.fizz.broadcastreceiver.ConnectivityReceiver;
 import com.kanilturgut.fizz.fragment.FizzFragment;
 import com.kanilturgut.fizz.fragment.LoginFragment;
 import com.kanilturgut.fizz.fragment.SplashFragment;
+import com.kanilturgut.fizz.model.Advertisement;
 import com.kanilturgut.fizz.model.SocialNetwork;
 import com.kanilturgut.fizz.model.Venue;
 import com.kanilturgut.fizz.operation.PageChangeController;
@@ -46,6 +47,7 @@ public class MainActivity extends FragmentActivity {
     public static List<SocialNetwork> twitterList = new LinkedList<SocialNetwork>();
     public static List<SocialNetwork> instagramList = new LinkedList<SocialNetwork>();
     public static List<SocialNetwork> promotedList = new LinkedList<SocialNetwork>();
+    public static List<Advertisement> advertisementList = new LinkedList<Advertisement>();
 
     public static int orientation;
     private String[] loginInfo = null;
@@ -131,8 +133,13 @@ public class MainActivity extends FragmentActivity {
             if (i < instagramList.size())
                 myQueue.offer(instagramList.get(i));
 
-            if (i < promotedList.size())
+            int a = MainActivity.advertisementList.size();
+
+            if (i < promotedList.size()) {
                 myQueue.offer(promotedList.get(i));
+            }
+
+
 
         }
 
