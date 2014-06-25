@@ -138,10 +138,8 @@ public class MainActivity extends FragmentActivity {
             if (i < promotedList.size())
                 myQueue.offer(promotedList.get(i));
 
-            /*
             if (i < advertisementList.size())
                 myQueue.offer(advertisementList.get(i));
-                */
 
         }
 

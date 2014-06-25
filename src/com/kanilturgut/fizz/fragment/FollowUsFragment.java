@@ -13,6 +13,8 @@ import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.fizz.model.SocialNetwork;
 import com.kanilturgut.fizz.model.Venue;
 
+import java.util.Random;
+
 /**
  * Author   : kanilturgut
  * Date     : 20/05/14
@@ -20,10 +22,14 @@ import com.kanilturgut.fizz.model.Venue;
  */
 public class FollowUsFragment extends Fragment {
 
+    Random random;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setRequestedOrientation(MainActivity.orientation);
+
+        random = new Random();
     }
 
     @Override
@@ -54,6 +60,24 @@ public class FollowUsFragment extends Fragment {
                     rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.foursquare_follow_us_background));
                     tvFollowUsFragment.setText(venue.getName());
                     ivSocialMediaIcon.setImageResource(R.drawable.triangle_foursquare);
+                } else if (socialNetwork.getType() == SocialNetwork.TYPE_ADVERTISEMENT) {
+
+                    int index = random.nextInt(3);
+
+                    if (index == 0) {
+                        rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.twitter_follow_us_background));
+                        tvFollowUsFragment.setText("#" + venue.getHashtag());
+                        ivSocialMediaIcon.setImageResource(R.drawable.triangle_twitter);
+                    } else if (index == 1) {
+                        rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.instagram_follow_us_background));
+                        tvFollowUsFragment.setText("#" + venue.getHashtag());
+                        ivSocialMediaIcon.setImageResource(R.drawable.triangle_instagram);
+                    } else {
+                        rlFollowUsFragment.setBackgroundColor(getResources().getColor(R.color.foursquare_follow_us_background));
+                        tvFollowUsFragment.setText(venue.getName());
+                        ivSocialMediaIcon.setImageResource(R.drawable.triangle_foursquare);
+                    }
+
                 }
 
             } else {

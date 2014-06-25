@@ -21,6 +21,7 @@ import com.kanilturgut.fizz.R;
 import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.fizz.aquery.AQueryUtilities;
 import com.kanilturgut.fizz.component.CircularImageView;
+import com.kanilturgut.fizz.model.Advertisement;
 import com.kanilturgut.fizz.model.SocialNetwork;
 
 /**
@@ -59,7 +60,6 @@ public class LoadingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_loading, container, false);
 
-
         TextView tvLoadingFragmentNextUserName = (TextView) view.findViewById(R.id.tvLoadingFragmentNextUserName);
         CircularImageView circularImageView = (CircularImageView) view.findViewById(R.id.civLoadingFragmentNextUserAvatar);
         ImageView ivLoadingFragmentSocialMediaIcon = (ImageView) view.findViewById(R.id.ivLoadingFragmentSocialMediaIcon);
@@ -76,6 +76,35 @@ public class LoadingFragment extends Fragment {
             if (socialNetwork != null) {
 
                 if (socialNetwork.getType() == SocialNetwork.TYPE_ADVERTISEMENT) {
+                    animationView.startAnimation(animation);
+
+                    tvLoadingFragmentNextUserName.setText("Fizz");
+                    ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_fizz);
+                    animationViewDevami.setBackgroundColor(getResources().getColor(R.color.instagram_blue));
+                    rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_instagram_background));
+
+                    final CircularImageView civFake = (CircularImageView) view.findViewById(R.id.civFake);
+
+                    Advertisement advertisement = (Advertisement) socialNetwork;
+                    String imageURL = "";
+                    if (MainActivity.orientation == Configuration.ORIENTATION_PORTRAIT)
+                        imageURL = advertisement.getVerticalImageUrl();
+                    else
+                        imageURL = advertisement.getHorizontalImageUrl();
+
+                    ImageOptions options = new ImageOptions();
+                    options.memCache = true;
+                    options.targetWidth = 0;
+
+                    if (imageURL != null && !imageURL.isEmpty()) {
+                        Bitmap bitmap = aQuery.getCachedImage(imageURL);
+                        if (bitmap == null) {
+                            aQuery.id(civFake).image(imageURL, options);
+                        }
+                        else {
+                            civFake.setImageBitmap(bitmap);
+                        }
+                    }
 
                 } else {
 
