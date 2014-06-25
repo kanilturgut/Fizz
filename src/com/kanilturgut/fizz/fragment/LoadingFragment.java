@@ -125,24 +125,22 @@ public class LoadingFragment extends Fragment {
                     }
 
 
+                    final CircularImageView civFake = (CircularImageView) view.findViewById(R.id.civFake);
+                    if (!socialNetwork.getImage().equals("")) {
+                        Bitmap instagramImage = aQuery.getCachedImage(socialNetwork.getImage());
+                        if (instagramImage == null)
+                            aQuery.id(civFake).image(socialNetwork.getImage(), options);
+                    }
+
                     if (socialNetwork.getType() == SocialNetwork.TYPE_TWITTER) {
                         animationViewDevami.setBackgroundColor(getResources().getColor(R.color.twitter_blue));
                         rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_twitter_background));
                         ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_twitter);
 
                     } else if (socialNetwork.getType() == SocialNetwork.TYPE_INSTAGRAM) {
-
-                        final CircularImageView civFake = (CircularImageView) view.findViewById(R.id.civFake);
-
                         animationViewDevami.setBackgroundColor(getResources().getColor(R.color.instagram_blue));
                         rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_instagram_background));
                         ivLoadingFragmentSocialMediaIcon.setImageResource(R.drawable.triangle_instagram);
-
-                        if (!socialNetwork.getImage().equals("")) {
-                            Bitmap instagramImage = aQuery.getCachedImage(socialNetwork.getImage());
-                            if (instagramImage == null)
-                                aQuery.id(civFake).image(socialNetwork.getImage(), options);
-                        }
                     } else if (socialNetwork.getType() == SocialNetwork.TYPE_FOURSQUARE) {
                         animationViewDevami.setBackgroundColor(getResources().getColor(R.color.foursquare_blue));
                         rlLoadingFragmentBackground.setBackground(getResources().getDrawable(R.drawable.loading_fragment_foursquare_background));

@@ -87,6 +87,7 @@ public class CurrentFragment extends Fragment {
         TextView tvCurrentFragmentUserFullname = (TextView) view.findViewById(R.id.tvCurrentFragmentUserFullname);
         TextView tvCurrentFragmentTweet = (TextView) view.findViewById(R.id.tvCurrentFragmentTweet);
         CircularImageView civCurrentFragmentUserAvatar = (CircularImageView) view.findViewById(R.id.civCurrentFragmentUserAvatar);
+        ImageView ivCurrentFragmentImageOfPost = (ImageView) view.findViewById(R.id.ivCurrentFragmentImageOfPost);
 
         tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
 
@@ -113,6 +114,18 @@ public class CurrentFragment extends Fragment {
             aQuery.id(civCurrentFragmentUserAvatar).image(socialNetwork.getProfileImage(), options);
         else
             civCurrentFragmentUserAvatar.setImageBitmap(bitmap);
+
+
+        if (!socialNetwork.getImage().equals("") && MainActivity.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Bitmap bmp = aQuery.getCachedImage(socialNetwork.getImage());
+            if (bmp != null) {
+                ivCurrentFragmentImageOfPost.setImageBitmap(bmp);
+            } else {
+                aQuery.id(ivCurrentFragmentImageOfPost).image(socialNetwork.getImage(), options);
+            }
+
+        }
+
     }
 
     private void foursquarePage(SocialNetwork socialNetwork, View view) {
