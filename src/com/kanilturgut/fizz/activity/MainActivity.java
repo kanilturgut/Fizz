@@ -6,14 +6,13 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+
 import com.androidquery.util.AQUtility;
-import com.kanilturgut.fizz.BuildConfig;
 import com.kanilturgut.fizz.MyQueue;
 import com.kanilturgut.fizz.R;
 import com.kanilturgut.fizz.aquery.AQueryUtilities;
@@ -23,8 +22,6 @@ import com.kanilturgut.fizz.fragment.LoginFragment;
 import com.kanilturgut.fizz.fragment.SplashFragment;
 import com.kanilturgut.fizz.model.Advertisement;
 import com.kanilturgut.fizz.model.SocialNetwork;
-import com.kanilturgut.fizz.model.Venue;
-import com.kanilturgut.fizz.operation.PageChangeController;
 import com.kanilturgut.fizz.service.FizzService;
 import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import com.kanilturgut.fizz.task.LoginTask;
@@ -135,8 +132,6 @@ public class MainActivity extends FragmentActivity {
             if (i < instagramList.size())
                 myQueue.offer(instagramList.get(i));
 
-            int a = MainActivity.advertisementList.size();
-
             if (i < promotedList.size())
                 myQueue.offer(promotedList.get(i));
 
@@ -161,8 +156,13 @@ public class MainActivity extends FragmentActivity {
 
     }
 
-    private static int getMax(int n1, int n2, int n3, int n4) {
-        return Math.max(Math.max(n1, n2), Math.max(n3, n4));
+    private static int getMax(int... integers) {
+        int size = 0;
+        for (int anInt:integers)
+            if (anInt > size)
+                size = anInt;
+
+        return size;
     }
 
     @Override
