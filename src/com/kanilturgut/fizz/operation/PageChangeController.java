@@ -8,8 +8,11 @@ import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import com.kanilturgut.fizz.activity.MainActivity;
+import com.kanilturgut.fizz.model.Advertisement;
 import com.kanilturgut.mylib.ConnectionDetector;
 import com.kanilturgut.fizz.Constant;
 import com.kanilturgut.fizz.MyQueue;
@@ -29,6 +32,7 @@ public class PageChangeController {
 
     FragmentManager fragmentManager = null;
     LinearLayout llBackgroundOfFizz;
+    FrameLayout frameFizz;
     Context context;
     int[] colors;
     Random random;
@@ -41,9 +45,10 @@ public class PageChangeController {
     static Runnable changePageRunnable = null;
     static Runnable followUsRunnable = null;
 
-    private PageChangeController(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, Context context) {
+    private PageChangeController(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, FrameLayout frameFizz, Context context) {
         this.fragmentManager = fragmentManager;
         this.llBackgroundOfFizz = llBackgroundOfFizz;
+        this.frameFizz = frameFizz;
         this.context = context;
 
         myQueue = MyQueue.getInstance();
@@ -60,9 +65,9 @@ public class PageChangeController {
         };
     }
 
-    public static PageChangeController getInstance(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, Context context) {
+    public static PageChangeController getInstance(FragmentManager fragmentManager, LinearLayout llBackgroundOfFizz, FrameLayout frameFizz, Context context) {
         if (pageChangeController == null)
-            pageChangeController = new PageChangeController(fragmentManager, llBackgroundOfFizz, context);
+            pageChangeController = new PageChangeController(fragmentManager, llBackgroundOfFizz, frameFizz, context);
 
         return pageChangeController;
     }
@@ -74,10 +79,15 @@ public class PageChangeController {
             SocialNetwork cur = myQueue.moveToEnd();
             SocialNetwork lod = myQueue.peek();
 
-            currentToCurrent(cur);
-            loadingToLoading(lod);
-            followUsToFollowUs(lod);
-
+            if (cur.getType() == SocialNetwork.TYPE_ADVERTISEMENT) {
+                frameFizz.setVisibility(View.VISIBLE);
+                fizzToAdvertisement((Advertisement) cur);
+            } else {
+                frameFizz.setVisibility(View.INVISIBLE);
+                currentToCurrent(cur);
+                loadingToLoading(lod);
+                followUsToFollowUs(lod);
+            }
         } else {
             //mainToNoInternetConnection();
             currentToCurrent(null);
@@ -173,6 +183,22 @@ public class PageChangeController {
                 fragmentTransaction.commit();
             }
         }
+    }
+
+    public void fizzToAdvertisement(Advertisement advertisement) {
+
+        AdvertisementFragment advertisementFragment = new AdvertisementFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY, advertisement);
+        advertisementFragment.setArguments(bundle);
+
+        if (fragmentManager != null) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit);
+            fragmentTransaction.replace(R.id.frameFizz, advertisementFragment);
+            fragmentTransaction.commit();
+        }
+
     }
 
     void createColors() {

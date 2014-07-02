@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import com.kanilturgut.fizz.R;
 import com.kanilturgut.fizz.activity.MainActivity;
@@ -23,6 +24,7 @@ public class FizzFragment extends Fragment {
     final String TAG = "FizzFragment";
 
     LinearLayout llBackgroundOfFizz;
+    FrameLayout frameFizz;
     Context context;
 
     @Override
@@ -42,11 +44,12 @@ public class FizzFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fizz, container, false);
 
         llBackgroundOfFizz = (LinearLayout) view.findViewById(R.id.llBackgroundOfFizz);
+        frameFizz = (FrameLayout) view.findViewById(R.id.frameFizz);
 
         fizzToCurrent();
         fizzToLoading();
 
-        PageChangeController pageChangeController = PageChangeController.getInstance(getFragmentManager(), llBackgroundOfFizz, context);
+        PageChangeController pageChangeController = PageChangeController.getInstance(getFragmentManager(), llBackgroundOfFizz, frameFizz, context);
         pageChangeController.changePage();
 
         return view;
