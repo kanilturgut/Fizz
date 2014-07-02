@@ -50,7 +50,7 @@ public class AdvertisementFragment extends Fragment {
         if (bundle != null) {
             Advertisement advertisement = (Advertisement) bundle.getSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY);
 
-            String url = "http://p1.pichost.me/i/9/1321574.jpg";
+            String url = "http://kusadasirestaurantlari.com/uploads/600x340_5de99f0cf805cc376564435b1a626a72.jpg";
 
             ImageView ivAdvertisementFragment = (ImageView) view.findViewById(R.id.ivAdvertisementFragment);
 
