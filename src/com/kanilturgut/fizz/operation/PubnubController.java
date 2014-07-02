@@ -1,6 +1,10 @@
 package com.kanilturgut.fizz.operation;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.kanilturgut.fizz.model.Venue;
+import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import com.kanilturgut.fizz.task.GetOnePostTask;
 import com.kanilturgut.mylib.Logs;
 import com.pubnub.api.Callback;
@@ -19,6 +23,7 @@ import org.json.JSONObject;
  */
 public class PubnubController {
 
+    Context context;
     static PubnubController pubnubController = null;
     static Pubnub pubnub = null;
     final String TAG = "PubnubController";
@@ -27,22 +32,31 @@ public class PubnubController {
     String CHANNEL = "fizz";
     MyQueue myQueue;
 
-    private PubnubController() {
+    private PubnubController(Context context) {
         pubnub = new Pubnub(PUBLISH_KEY, SUBSCRIBE_KEY);
         myQueue = MyQueue.getInstance();
         this.CHANNEL = Venue.getInstance().getHashtag();
+        this.context = context;
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Pubnup", Context.MODE_PRIVATE);
+        String uuid = sharedPreferences.getString("uuid", null);
+        if (uuid == null || uuid.length() == 0) {
+            uuid = pubnub.uuid();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("uuid", uuid);
+            editor.apply();
+        }
+
+        pubnub.setUUID(uuid);
     }
 
-    public static PubnubController getInstance() {
+    public static PubnubController getInstance(Context context) {
         if (pubnubController == null)
-            pubnubController = new PubnubController();
+            pubnubController = new PubnubController(context);
 
         return pubnubController;
     }
 
-    public static void startPubnupOperation() {
-        PubnubController.getInstance().subscribeToChannel();
-    }
 
     public void subscribeToChannel() {
 

@@ -54,7 +54,7 @@ public class PageChangeController {
         myQueue = MyQueue.getInstance();
         createColors();
 
-        PubnubController.startPubnupOperation();
+        PubnubController.getInstance(context).subscribeToChannel();
 
         handler = new Handler();
         changePageRunnable = new Runnable() {

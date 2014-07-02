@@ -23,7 +23,7 @@ public class ConnectivityReceiver extends BroadcastReceiver {
 
         if (ConnectionDetector.isConnectingToInternet(context)) {
             if (Venue.getInstance().getHashtag() != null)
-                PubnubController.startPubnupOperation();
+                PubnubController.getInstance(context).subscribeToChannel();
         } else {
             Logs.d(TAG, "Device is not connected to internet");
         }
