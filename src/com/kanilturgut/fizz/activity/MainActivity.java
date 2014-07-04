@@ -123,7 +123,7 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.commit();
     }
 
-    public static void splashToFizz() {
+    public static void mainToFizz() {
 
         for (int i = 0; i < getMax(twitterList.size(), instagramList.size(), promotedList.size(), advertisementList.size()); i++) {
             if (i < twitterList.size())
