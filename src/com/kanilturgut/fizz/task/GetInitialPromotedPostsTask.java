@@ -62,8 +62,7 @@ public class GetInitialPromotedPostsTask extends AsyncTask<Void, Void, String> {
         super.onCancelled();
 
         //TODO ne yapılacak ?
-        GetInitialAdvertisementsTask getInitialAdvertisementsTask = new GetInitialAdvertisementsTask();
-        getInitialAdvertisementsTask.execute();
+        startNextProcess();
     }
 
     @Override
@@ -77,15 +76,17 @@ public class GetInitialPromotedPostsTask extends AsyncTask<Void, Void, String> {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     MainActivity.promotedList.add(MainActivity.promotedList.size(), SocialNetwork.fromJSON(jsonArray.getJSONObject(i)));
                 }
-
-                GetInitialAdvertisementsTask getInitialAdvertisementsTask = new GetInitialAdvertisementsTask();
-                getInitialAdvertisementsTask.execute();
-
             } catch (JSONException e) {
                 Logs.e(TAG, "ERROR occured on reading JSON response", e);
             }
         }
 
+        startNextProcess();
+    }
+
+    private void startNextProcess() {
+        GetInitialAdvertisementsTask getInitialAdvertisementsTask = new GetInitialAdvertisementsTask();
+        getInitialAdvertisementsTask.execute();
     }
 }
 

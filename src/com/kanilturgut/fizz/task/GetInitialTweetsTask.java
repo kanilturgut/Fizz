@@ -60,8 +60,7 @@ public class GetInitialTweetsTask extends AsyncTask<Void, Void, String> {
         super.onCancelled();
 
         //TODO ne yapılacak ?
-        GetInitialInstagramPostsTask task = new GetInitialInstagramPostsTask(hashtag);
-        task.execute();
+        startNextProcess();
     }
 
     @Override
@@ -76,13 +75,16 @@ public class GetInitialTweetsTask extends AsyncTask<Void, Void, String> {
                     MainActivity.twitterList.add(MainActivity.twitterList.size(), SocialNetwork.fromJSON(jsonArray.getJSONObject(i)));
                 }
 
-                GetInitialInstagramPostsTask task = new GetInitialInstagramPostsTask(hashtag);
-                task.execute();
-
             } catch (JSONException e) {
                 Logs.e(TAG, "ERROR occured on reading JSON response", e);
             }
         }
 
+        startNextProcess();
+    }
+
+    private void startNextProcess() {
+        GetInitialInstagramPostsTask task = new GetInitialInstagramPostsTask(hashtag);
+        task.execute();
     }
 }

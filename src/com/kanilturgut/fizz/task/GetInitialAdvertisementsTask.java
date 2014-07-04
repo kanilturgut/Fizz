@@ -36,11 +36,19 @@ public class GetInitialAdvertisementsTask extends AsyncTask<Void, Void, String> 
                 return null;
         } catch (JSONException e) {
             e.printStackTrace();
+            cancel(true);
         } catch (IOException e) {
             e.printStackTrace();
+            cancel(true);
         }
 
         return null;
+    }
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+        startNextProcess();
     }
 
     @Override
@@ -55,12 +63,15 @@ public class GetInitialAdvertisementsTask extends AsyncTask<Void, Void, String> 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     MainActivity.advertisementList.add(MainActivity.advertisementList.size(), Advertisement.fromJSON(jsonArray.getJSONObject(i)));
                 }
-
-                MainActivity.splashToFizz();
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+
+        startNextProcess();
+    }
+
+    private void startNextProcess() {
+        MainActivity.mainToFizz();
     }
 }
