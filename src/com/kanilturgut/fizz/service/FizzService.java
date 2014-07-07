@@ -1,6 +1,7 @@
 package com.kanilturgut.fizz.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Binder;
@@ -11,6 +12,7 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationRequest;
+import com.kanilturgut.fizz.operation.PubnubController;
 
 /**
  * Author   : kanilturgut
@@ -21,6 +23,8 @@ public class FizzService extends Service implements
         GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener,
         com.google.android.gms.location.LocationListener {
+
+    Context context = this;
 
     public static final int UPDATE_INTERVAL = 5 * 1000;
     public static final int FAST_CEILING = 1 * 1000;
@@ -53,6 +57,7 @@ public class FizzService extends Service implements
         mLocationRequest.setInterval(UPDATE_INTERVAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setFastestInterval(FAST_CEILING);
+        mLocationRequest.setNumUpdates(2);
 
         mLocationClient = new LocationClient(this, this, this);
 
@@ -75,6 +80,9 @@ public class FizzService extends Service implements
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
+
+        //Start Pubnup First
+        PubnubController.getInstance(context).subscribeToChannel();
 
         if (!servicesConnected() || mLocationClient.isConnected()
                 || mInProgress)
@@ -140,8 +148,6 @@ public class FizzService extends Service implements
         if (stopServiceCounter == 3) {
             if (mLocationClient != null)
                 mLocationClient.removeLocationUpdates(this);
-
-            stopSelf();
         }
 
     }

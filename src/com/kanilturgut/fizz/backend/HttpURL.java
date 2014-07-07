@@ -19,6 +19,8 @@ public class HttpURL {
     public static final String GET_ONE_POST = "/venue/getVenuePostDetails";
     public static final String UPDATE_VENUE_LOCATION = "/venue/updateVenueLocation";
 
+    public static final String POST_COMMAND_OUTPUT = "/venue/updateVenueLocation";
+
 
 
 

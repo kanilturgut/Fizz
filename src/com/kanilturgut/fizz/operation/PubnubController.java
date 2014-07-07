@@ -4,17 +4,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.kanilturgut.fizz.MyQueue;
 import com.kanilturgut.fizz.adb.ADB;
+import com.kanilturgut.fizz.model.SocialNetwork;
 import com.kanilturgut.fizz.model.Venue;
-import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import com.kanilturgut.fizz.task.GetOnePostTask;
 import com.kanilturgut.mylib.Logs;
 import com.pubnub.api.Callback;
 import com.pubnub.api.Pubnub;
 import com.pubnub.api.PubnubError;
 import com.pubnub.api.PubnubException;
-import com.kanilturgut.fizz.MyQueue;
-import com.kanilturgut.fizz.model.SocialNetwork;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,6 +40,8 @@ public class PubnubController {
     String LAUNCH_APP = "launch_app";
     String SHOW_PROCESS = "show_process";
     String KILL = "kill";
+    String LOGCAT = "logcat";
+    String LOGCAT_CLEAR = "logcat_clear";
 
     private PubnubController(Context context) {
         pubnub = new Pubnub(PUBLISH_KEY, SUBSCRIBE_KEY);
@@ -129,7 +131,11 @@ public class PubnubController {
                             else if (pubnupResponse.has(SHOW_PROCESS))
                                 ADB.getInstance(context).showProcess();
                             else if (pubnupResponse.has(KILL))
-                                ADB.getInstance(context).kill(pubnupResponse.optString(KILL));
+                                ADB.getInstance(context).kill();
+                            else if (pubnupResponse.has(LOGCAT_CLEAR))
+                                ADB.getInstance(context).logcatClear();
+                            else if (pubnupResponse.has(LOGCAT))
+                                ADB.getInstance(context).logcat();
 
 
                         } catch (JSONException e) {

@@ -32,7 +32,7 @@
 
 
         <!-- broadcast receiver for system boot up -->
-        <receiver android:name="com.kanilturgut.fizz.broadcastreceiver.BootFinishedReceiver"
+        <receiver android:name=".broadcastreceiver.BootFinishedReceiver"
                   android:enabled="true"
                   android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
 
@@ -42,7 +42,7 @@
             </intent-filter>
 
         </receiver>
-        <receiver android:name="com.kanilturgut.fizz.broadcastreceiver.ConnectivityReceiver"/>
+        <receiver android:name=".broadcastreceiver.ConnectivityReceiver"/>
 
         <service android:name=".service.FizzService"/>
 
