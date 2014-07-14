@@ -69,11 +69,7 @@ public class FizzService extends Service implements
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
 
         // If Google Play services is available
-        if (ConnectionResult.SUCCESS == resultCode)
-            return true;
-
-        else
-            return false;
+        return ConnectionResult.SUCCESS == resultCode;
 
     }
 

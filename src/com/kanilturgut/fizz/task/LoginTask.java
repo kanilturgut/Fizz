@@ -7,6 +7,7 @@ import com.kanilturgut.fizz.activity.MainActivity;
 import com.kanilturgut.fizz.backend.HttpURL;
 import com.kanilturgut.fizz.backend.Requests;
 import com.kanilturgut.fizz.model.Venue;
+import com.kanilturgut.fizz.service.FizzService;
 import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import com.kanilturgut.mylib.Logs;
 import org.apache.http.HttpResponse;
@@ -92,6 +93,8 @@ public class LoginTask extends AsyncTask<String, Void, String> {
                         JSONObject jsonObject = new JSONObject(response);
 
                         Venue.fromJSON(jsonObject, password);
+
+                        context.startService(new Intent(context, FizzService.class));
 
                         GetInitialTweetsTask getInitialTweetsTask = new GetInitialTweetsTask(Venue.getInstance().getHashtag());
                         getInitialTweetsTask.execute();

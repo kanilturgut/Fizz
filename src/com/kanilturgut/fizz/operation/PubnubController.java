@@ -81,7 +81,7 @@ public class PubnubController {
 
     public void subscribeToChannel() {
 
-        if (pubnub != null) {
+        if (pubnub != null && CHANNEL != null) {
             try {
                 pubnub.subscribe(CHANNEL, new Callback() {
 

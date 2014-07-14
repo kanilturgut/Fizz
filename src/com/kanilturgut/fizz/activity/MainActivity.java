@@ -22,6 +22,7 @@ import com.kanilturgut.fizz.fragment.LoginFragment;
 import com.kanilturgut.fizz.fragment.SplashFragment;
 import com.kanilturgut.fizz.model.Advertisement;
 import com.kanilturgut.fizz.model.SocialNetwork;
+import com.kanilturgut.fizz.operation.PubnubController;
 import com.kanilturgut.fizz.service.FizzService;
 import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import com.kanilturgut.fizz.task.LoginTask;
@@ -67,8 +68,6 @@ public class MainActivity extends FragmentActivity {
 
         //Set TAG of application
         new Logs("Fizz");
-
-        startService(new Intent(context, FizzService.class));
 
         fragmentManager = getSupportFragmentManager();
         myQueue = MyQueue.getInstance();
@@ -158,7 +157,7 @@ public class MainActivity extends FragmentActivity {
 
     private static int getMax(int... integers) {
         int size = 0;
-        for (int anInt:integers)
+        for (int anInt : integers)
             if (anInt > size)
                 size = anInt;
 
