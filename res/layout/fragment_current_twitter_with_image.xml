@@ -12,6 +12,7 @@
         android:background="@android:color/transparent" />
 
     <RelativeLayout
+        android:id="@+id/rlCurrentFragmentHeader"
         android:layout_width="match_parent"
         android:layout_height="165dp"
         android:background="@color/white"
@@ -66,40 +67,42 @@
         android:layout_alignParentTop="true"
         android:id="@+id/civCurrentFragmentUserAvatar" />
 
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/ivCurrentFragmentImageOfPost"
-        android:layout_below="@+id/civCurrentFragmentUserAvatar"
-        android:contentDescription="@string/contentDescription"
-        android:src="@drawable/balon" />
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rlCurrentFragmentPostBackground"
         android:background="@color/post_background"
-        android:layout_below="@+id/civCurrentFragmentUserAvatar">
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:layout_below="@+id/rlCurrentFragmentHeader">
+
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ivCurrentFragmentBackgroundOfTweet"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:scaleType="centerCrop"
+            android:id="@+id/ivCurrentFragmentImageOfPost"
             android:contentDescription="@string/contentDescription"
             android:src="@drawable/balon" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvCurrentFragmentTweet"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:textSize="@dimen/current_fragment_twitter_text_size"
-            android:maxLines="10"
-            android:textColor="@color/white" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/post_background">
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvCurrentFragmentTweet"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textSize="@dimen/current_fragment_twitter_text_size_with_image"
+                android:maxLines="5"
+                android:textColor="@color/white" />
 
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

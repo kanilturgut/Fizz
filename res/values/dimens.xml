@@ -9,6 +9,7 @@
     <!-- current fragment -->
     <dimen name="current_fragment_header_text_size">36sp</dimen>
     <dimen name="current_fragment_twitter_text_size">48sp</dimen>
+    <dimen name="current_fragment_twitter_text_size_with_image">32sp</dimen>
     <dimen name="current_fragment_foursquare_text_size">48sp</dimen>
     <dimen name="current_fragment_instagram_text_size">36sp</dimen>
 

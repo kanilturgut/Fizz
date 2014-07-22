@@ -6,12 +6,14 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.androidquery.AQuery;
 import com.androidquery.callback.ImageOptions;
 import com.kanilturgut.fizz.R;
@@ -57,7 +59,12 @@ public class CurrentFragment extends Fragment {
             if (socialNetwork != null) {
                 switch (socialNetwork.getType()) {
                     case SocialNetwork.TYPE_TWITTER:
-                        view = inflater.inflate(R.layout.fragment_current_twitter, container, false);
+
+                        if (socialNetwork.getImage() != null && !TextUtils.isEmpty(socialNetwork.getImage()))
+                            view = inflater.inflate(R.layout.fragment_current_twitter_with_image, container, false);
+                        else
+                            view = inflater.inflate(R.layout.fragment_current_twitter, container, false);
+
                         twitterPage(socialNetwork, view);
                         break;
                     case SocialNetwork.TYPE_INSTAGRAM:
@@ -95,7 +102,7 @@ public class CurrentFragment extends Fragment {
         if (tweetPost != null) {
             String[] twitterText = tweetPost.split(" ");
             StringBuilder stringBuilder = new StringBuilder();
-            for (String str: twitterText) {
+            for (String str : twitterText) {
                 if (str.contains("http://t.co/"))
                     continue;
                 else
@@ -116,7 +123,7 @@ public class CurrentFragment extends Fragment {
             civCurrentFragmentUserAvatar.setImageBitmap(bitmap);
 
 
-        if (!socialNetwork.getImage().equals("") && MainActivity.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (!socialNetwork.getImage().equals("")) {
             Bitmap bmp = aQuery.getCachedImage(socialNetwork.getImage());
             if (bmp != null) {
                 ivCurrentFragmentImageOfPost.setImageBitmap(bmp);
@@ -202,8 +209,7 @@ public class CurrentFragment extends Fragment {
             Bitmap bitmap = aQuery.getCachedImage(imageURL);
             if (bitmap == null) {
                 aQuery.id(ivAdvertisementFragment).image(imageURL, options);
-            }
-            else {
+            } else {
                 ivAdvertisementFragment.setImageBitmap(bitmap);
             }
         }
