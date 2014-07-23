@@ -46,19 +46,6 @@ public class AdvertisementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_advertisement, container, false);
 
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            Advertisement advertisement = (Advertisement) bundle.getSerializable(FragmentConstants.BUNDLE_SOCIAL_NETWORK_KEY);
-
-            String url = "http://kusadasirestaurantlari.com/uploads/600x340_5de99f0cf805cc376564435b1a626a72.jpg";
-
-            ImageView ivAdvertisementFragment = (ImageView) view.findViewById(R.id.ivAdvertisementFragment);
-
-            aQuery.id(ivAdvertisementFragment).image(url);
-
-        }
-
-
         return view;
     }
 }

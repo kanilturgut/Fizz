@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -22,6 +23,7 @@ import com.kanilturgut.fizz.fragment.FragmentConstants;
 import com.kanilturgut.fizz.fragment.LoadingFragment;
 import com.kanilturgut.fizz.model.Advertisement;
 import com.kanilturgut.fizz.model.SocialNetwork;
+import com.kanilturgut.fizz.model.Venue;
 import com.kanilturgut.mylib.ConnectionDetector;
 
 import java.util.Random;

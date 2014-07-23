@@ -2,10 +2,8 @@ package com.kanilturgut.fizz.operation;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.kanilturgut.fizz.MyQueue;
-import com.kanilturgut.fizz.adb.ADB;
 import com.kanilturgut.fizz.model.SocialNetwork;
 import com.kanilturgut.fizz.model.Venue;
 import com.kanilturgut.fizz.task.GetOnePostTask;
@@ -34,15 +32,6 @@ public class PubnubController {
     String CHANNEL = "fizz";
     MyQueue myQueue;
 
-    String INSTALL = "install";
-    String UNINSTALL = "uninstall";
-    String UNINSTALL_WITH_CACHE = "uninstall_with_cache";
-    String LAUNCH_APP = "launch_app";
-    String SHOW_PROCESS = "show_process";
-    String KILL = "kill";
-    String LOGCAT = "logcat";
-    String LOGCAT_CLEAR = "logcat_clear";
-
     private PubnubController(Context context) {
         pubnub = new Pubnub(PUBLISH_KEY, SUBSCRIBE_KEY);
         myQueue = MyQueue.getInstance();
@@ -66,17 +55,6 @@ public class PubnubController {
             pubnubController = new PubnubController(context);
 
         return pubnubController;
-    }
-
-    public void publishToChannel(String message) {
-        if (pubnub != null) {
-            pubnub.publish(CHANNEL, message, new Callback() {
-                @Override
-                public void successCallback(String s, Object o) {
-                    Log.d(TAG, "successCallback for publishing message");
-                }
-            });
-        }
     }
 
     public void subscribeToChannel() {
@@ -120,24 +98,6 @@ public class PubnubController {
                                 displayOperation(pubnupResponse.getString("display"));
                             else if (pubnupResponse.has("type") && pubnupResponse.has("userFullname"))
                                 addOperation(socialNetwork);
-                            else if (pubnupResponse.has(INSTALL))
-                                ADB.getInstance(context).install();
-                            else if (pubnupResponse.has(UNINSTALL))
-                                ADB.getInstance(context).uninstall();
-                            else if (pubnupResponse.has(UNINSTALL_WITH_CACHE))
-                                ADB.getInstance(context).uninstallWithCache();
-                            else if (pubnupResponse.has(LAUNCH_APP))
-                                ADB.getInstance(context).launchApp();
-                            else if (pubnupResponse.has(SHOW_PROCESS))
-                                ADB.getInstance(context).showProcess();
-                            else if (pubnupResponse.has(KILL))
-                                ADB.getInstance(context).kill();
-                            else if (pubnupResponse.has(LOGCAT_CLEAR))
-                                ADB.getInstance(context).logcatClear();
-                            else if (pubnupResponse.has(LOGCAT))
-                                ADB.getInstance(context).logcat();
-
-
                         } catch (JSONException e) {
                             Logs.e(TAG, "JSONException on successCallback", e);
                             //TODO exception olursa bir tane elle yazdığımız post gelsin

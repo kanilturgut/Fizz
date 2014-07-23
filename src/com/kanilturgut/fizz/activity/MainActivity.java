@@ -1,7 +1,6 @@
 package com.kanilturgut.fizz.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -22,8 +21,6 @@ import com.kanilturgut.fizz.fragment.LoginFragment;
 import com.kanilturgut.fizz.fragment.SplashFragment;
 import com.kanilturgut.fizz.model.Advertisement;
 import com.kanilturgut.fizz.model.SocialNetwork;
-import com.kanilturgut.fizz.operation.PubnubController;
-import com.kanilturgut.fizz.service.FizzService;
 import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import com.kanilturgut.fizz.task.LoginTask;
 import com.kanilturgut.fizz.task.UpdateVenueLocationTask;
