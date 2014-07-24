@@ -16,7 +16,7 @@
     <dimen name="current_fragment_circular_image_view">200dp</dimen>
     <dimen name="current_fragment_circular_image_view_margin">20dp</dimen>
 
-    <dimen name="follow_us_fragment_text_size">36sp</dimen>
+    <dimen name="follow_us_fragment_text_size">30sp</dimen>
 
     <!-- landscape -->
     <dimen name="landscape_current_fragment_header_text_size">44sp</dimen>
