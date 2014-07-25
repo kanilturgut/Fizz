@@ -2,6 +2,7 @@ package com.kanilturgut.fizz.operation;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import com.kanilturgut.fizz.MyQueue;
 import com.kanilturgut.fizz.model.SocialNetwork;
@@ -26,16 +27,16 @@ public class PubnubController {
     Context context;
     static PubnubController pubnubController = null;
     static Pubnub pubnub = null;
-    final String TAG = "PubnubController";
+    static final String TAG = "PubnubController";
     final String PUBLISH_KEY = "pub-c-79ce4f35-20dd-4972-9f8c-8f9d3a4dbe59";
     final String SUBSCRIBE_KEY = "sub-c-2706dfc2-f87a-11e3-bacb-02ee2ddab7fe";
-    String CHANNEL = "fizz";
+    static String CHANNEL = "fizz";
     MyQueue myQueue;
 
     private PubnubController(Context context) {
         pubnub = new Pubnub(PUBLISH_KEY, SUBSCRIBE_KEY);
         myQueue = MyQueue.getInstance();
-        this.CHANNEL = Venue.getInstance().getHashtag();
+        CHANNEL = Venue.getInstance().getHashtag();
         this.context = context;
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("Pubnup", Context.MODE_PRIVATE);
@@ -50,14 +51,31 @@ public class PubnubController {
         pubnub.setUUID(uuid);
     }
 
+    public void killPubnupInstance() {
+        pubnubController = null;
+    }
+
     public static PubnubController getInstance(Context context) {
+        Logs.d(TAG, "PubnubController.getInstance");
         if (pubnubController == null)
             pubnubController = new PubnubController(context);
+
+        if (Venue.getInstance().getHashtag() != null &&
+                !TextUtils.isEmpty(Venue.getInstance().getHashtag()))
+            CHANNEL = Venue.getInstance().getHashtag();
 
         return pubnubController;
     }
 
+    public void unsubscribeToChannel() {
+        if (pubnub != null && CHANNEL != null) {
+            pubnub.unsubscribeAll();
+            Logs.d(TAG, "unsubscribeToChannel");
+        }
+    }
+
     public void subscribeToChannel() {
+        Logs.d(TAG, "PubnubController.getInstance().subscribeToChannel");
 
         if (pubnub != null && CHANNEL != null) {
             try {
@@ -107,6 +125,11 @@ public class PubnubController {
             } catch (PubnubException e) {
                 Logs.e(TAG, "ERROR on attaching channel " + CHANNEL, e);
             }
+        } else {
+            if (pubnub == null)
+                Logs.d(TAG, "pubnup null");
+            if (CHANNEL == null)
+                Logs.d(TAG, "channel null");
         }
     }
 

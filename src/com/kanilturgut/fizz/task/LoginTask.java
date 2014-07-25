@@ -92,6 +92,7 @@ public class LoginTask extends AsyncTask<String, Void, String> {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
 
+                        Logs.d(TAG, "Login finished");
                         Venue.fromJSON(jsonObject, password);
 
                         context.startService(new Intent(context, FizzService.class));

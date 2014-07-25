@@ -21,6 +21,7 @@ import com.kanilturgut.fizz.fragment.LoginFragment;
 import com.kanilturgut.fizz.fragment.SplashFragment;
 import com.kanilturgut.fizz.model.Advertisement;
 import com.kanilturgut.fizz.model.SocialNetwork;
+import com.kanilturgut.fizz.operation.PubnubController;
 import com.kanilturgut.fizz.sharedpreference.MySharedPreferences;
 import com.kanilturgut.fizz.task.LoginTask;
 import com.kanilturgut.fizz.task.UpdateVenueLocationTask;
@@ -203,6 +204,10 @@ public class MainActivity extends FragmentActivity {
             unregisterReceiver(connectivityReceiver);
             connectivityReceiver = null;
         }
+
+        PubnubController.getInstance(context).unsubscribeToChannel();
+        PubnubController.getInstance(context).killPubnupInstance();
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     private boolean isPrefIsFull() {
