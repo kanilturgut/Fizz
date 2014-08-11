@@ -60,7 +60,8 @@
             <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent"
                             android:layout_weight="1">
 
-                <TextView
+                <com.kanilturgut.mylib.MyTextView
+                        myTextView:font="fonts/GothamNarrow-Book.otf"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:padding="20dp"
                         android:id="@+id/tvCurrentFragmentFoursquare"

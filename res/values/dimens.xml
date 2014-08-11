@@ -19,7 +19,7 @@
     <dimen name="follow_us_fragment_text_size">30sp</dimen>
 
     <!-- landscape -->
-    <dimen name="landscape_current_fragment_header_text_size">44sp</dimen>
+    <dimen name="landscape_current_fragment_header_text_size">55sp</dimen>
     <dimen name="landscape_current_fragment_circular_image_view">175dp</dimen>
     <dimen name="landscape_current_fragment_post_text_size">44sp</dimen>
 
