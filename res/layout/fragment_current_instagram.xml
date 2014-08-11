@@ -26,7 +26,7 @@
                     android:textSize="@dimen/current_fragment_header_text_size"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    myTextView:font="fonts/GothamXNarrow-Light.otf"/>
+                    myTextView:font="fonts/GothamNarrow-Book.otf"/>
 
         </LinearLayout>
 
@@ -66,7 +66,8 @@
                         android:background="@android:color/transparent"
                         android:padding="20dp">
 
-            <TextView
+            <com.kanilturgut.mylib.MyTextView
+                    myTextView:font="fonts/GothamNarrow-Book.otf"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:id="@+id/tvCurrentFragmentInstagramPost"
                     android:layout_centerInParent="true"
