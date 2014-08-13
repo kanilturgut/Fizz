@@ -51,11 +51,16 @@
                       android:orientation="horizontal"
                       android:layout_below="@+id/rlCurrentFragmentHeader">
 
-            <ImageView android:layout_width="0dp" android:layout_height="wrap_content"
-                       android:layout_weight="1"
-                       android:scaleType="fitXY"
-                       android:contentDescription="@string/contentDescription"
-                       android:src="@drawable/checkin"/>
+            <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:scaleType="fitXY"
+                           android:contentDescription="@string/contentDescription"
+                           android:layout_centerInParent="true"
+                           android:src="@drawable/checkin_small"/>
+
+            </RelativeLayout>
 
             <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent"
                             android:layout_weight="1">
