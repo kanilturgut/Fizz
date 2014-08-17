@@ -33,7 +33,7 @@
                 android:id="@+id/linearLayout">
 
 
-            <com.kanilturgut.mylib.MyTextView
+            <com.kanilturgut.mylib.view.MyTextView
                     android:id="@+id/tvCurrentFragmentUserFullname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                 android:contentDescription="@string/contentDescription"
                 android:src="@drawable/balon"/>
 
-        <com.kanilturgut.mylib.MyTextView
+        <com.kanilturgut.mylib.view.MyTextView
                 myTextView:font="fonts/GothamNarrow-Book.otf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

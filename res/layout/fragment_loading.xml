@@ -26,7 +26,7 @@
                       android:layout_toRightOf="@+id/civLoadingFragmentNextUserAvatar"
                       android:layout_gravity="center_vertical">
 
-            <com.kanilturgut.mylib.MyTextView
+            <com.kanilturgut.mylib.view.MyTextView
                     android:id="@+id/tvLoadingFragmentNextUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

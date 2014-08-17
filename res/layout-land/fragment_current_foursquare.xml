@@ -23,7 +23,7 @@
                           android:layout_toLeftOf="@+id/ivSocialMediaIcon"
                           android:id="@+id/linearLayout">
 
-                <com.kanilturgut.mylib.MyTextView
+                <com.kanilturgut.mylib.view.MyTextView
                         android:id="@+id/tvCurrentFragmentUserFullname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent"
                             android:layout_weight="1">
 
-                <com.kanilturgut.mylib.MyTextView
+                <com.kanilturgut.mylib.view.MyTextView
                         myTextView:font="fonts/GothamNarrow-Book.otf"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:padding="20dp"

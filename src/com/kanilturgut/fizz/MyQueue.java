@@ -59,8 +59,15 @@ public class MyQueue {
     public SocialNetwork moveToEnd() {
 
         SocialNetwork tmp = poll();
+
         if (tmp.getType() != SocialNetwork.TYPE_FOURSQUARE)
             offer(tmp);
+        else {
+            tmp.decreaseShowingCount();
+            if (tmp.getShowingCount() > 0)
+                offer(tmp);
+        }
+
         return tmp;
     }
 

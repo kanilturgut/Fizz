@@ -1,5 +1,7 @@
 package com.kanilturgut.fizz.model;
 
+import com.kanilturgut.fizz.Constant;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -34,6 +36,8 @@ public class SocialNetwork implements Serializable {
     String foreign_id;
     String id;
     String creationDate;
+
+    int showingCount;
 
     public int getType() {
         return type;
@@ -123,6 +127,18 @@ public class SocialNetwork implements Serializable {
         this.creationDate = creationDate;
     }
 
+    public int getShowingCount() {
+        return showingCount;
+    }
+
+    public void setShowingCount(int showingCount) {
+        this.showingCount = showingCount;
+    }
+
+    public void decreaseShowingCount() {
+        this.showingCount--;
+    }
+
     public static SocialNetwork fromJSON(JSONObject jsonObject) {
         SocialNetwork socialNetwork = new SocialNetwork();
         socialNetwork.setType(jsonObject.optInt("type"));
@@ -136,6 +152,12 @@ public class SocialNetwork implements Serializable {
         socialNetwork.setForeign_id(jsonObject.optString("foreign_id"));
         socialNetwork.setId(jsonObject.optString("_id"));
         socialNetwork.setCreationDate(jsonObject.optString("creationDate"));
+
+        try {
+            socialNetwork.setShowingCount(jsonObject.getInt("showingCount"));
+        } catch (JSONException e) {
+            socialNetwork.setShowingCount(Constant.POST_SHOWING_COUNT);
+        }
 
         return socialNetwork;
     }

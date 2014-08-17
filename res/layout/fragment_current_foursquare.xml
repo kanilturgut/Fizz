@@ -25,7 +25,7 @@
                       android:id="@+id/linearLayout">
 
 
-            <com.kanilturgut.mylib.MyTextView
+            <com.kanilturgut.mylib.view.MyTextView
                     android:id="@+id/tvCurrentFragmentUserFullname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                     android:padding="50dp"
                     android:layout_below="@+id/civCurrentFragmentUserAvatar">
 
-        <com.kanilturgut.mylib.MyTextView
+        <com.kanilturgut.mylib.view.MyTextView
                 myTextView:font="fonts/GothamNarrow-Book.otf"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:id="@+id/tvCurrentFragmentTweet"

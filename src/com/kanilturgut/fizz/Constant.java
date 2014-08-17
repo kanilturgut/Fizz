@@ -13,4 +13,6 @@ public class Constant {
     public static final int FOLLOW_US_FRAGMENT_SHOW_TIME = 6 * 1000;
 
     public static final int BACKGROUND_TRANSITION_TIME = 4 * 1000;
+
+    public static final int POST_SHOWING_COUNT = 10;
 }
