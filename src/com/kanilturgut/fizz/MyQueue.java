@@ -30,7 +30,7 @@ public class MyQueue {
      * @param socialNetwork Adds socialNetwork object to end of list
      */
     public void offer(SocialNetwork socialNetwork) {
-        if (list.size() < 5000)
+        if (list.size() < size)
             if (socialNetwork.getDisplayType() == SocialNetwork.DISPLAY_TYPE_NORMAL || socialNetwork.getDisplayType() == SocialNetwork.DISPLAY_TYPE_PROMOTED)
                 list.add(socialNetwork);
     }
@@ -39,8 +39,8 @@ public class MyQueue {
      * @param socialNetwork Adds params to second index of list
      */
     public void offerToSecond(SocialNetwork socialNetwork) {
-        if (list.size() == 5000)
-            list.remove(4999);
+        if (list.size() == size)
+            list.remove(size - 1);
 
         if (socialNetwork.getDisplayType() == SocialNetwork.DISPLAY_TYPE_NORMAL || socialNetwork.getDisplayType() == SocialNetwork.DISPLAY_TYPE_PROMOTED)
             list.add(1, socialNetwork);
@@ -90,10 +90,7 @@ public class MyQueue {
     }
 
     public boolean isEmpty() {
-        if (list == null)
-            return true;
-        else
-            return list.size() == 0;
+        return list == null || list.size() == 0;
     }
 
     public boolean isContain(SocialNetwork socialNetwork) {
@@ -101,8 +98,8 @@ public class MyQueue {
     }
 
     public boolean isContain(String id) {
-        for (int i = 0; i < list.size(); i++) {
-            if (id.equals(list.get(i).getId()))
+        for (SocialNetwork aList : list) {
+            if (id.equals(aList.getId()))
                 return true;
         }
 
