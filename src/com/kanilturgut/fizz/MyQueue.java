@@ -36,6 +36,15 @@ public class MyQueue {
     }
 
     /**
+     *
+     * @param socialNetwork Adds params to given index of list
+     * @param index index of list
+     */
+    public void offerToIndex(SocialNetwork socialNetwork, int index) {
+        list.add(index, socialNetwork);
+    }
+
+    /**
      * @param socialNetwork Adds params to second index of list
      */
     public void offerToSecond(SocialNetwork socialNetwork) {
@@ -65,7 +74,7 @@ public class MyQueue {
         else {
             tmp.decreaseShowingCount();
             if (tmp.getShowingCount() > 0)
-                offer(tmp);
+                offerToIndex(tmp, Constant.FOURSQUARE_POST_INDEX);
         }
 
         return tmp;
