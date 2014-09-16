@@ -3,4 +3,6 @@
     <string name="app_name">Fizz</string>
 
     <string name="contentDescription">image</string>
+
+    <string name="welcome">Hoşgeldiniz </string>
 </resources>
