@@ -142,7 +142,7 @@ public class CurrentFragment extends Fragment {
         CircularImageView civCurrentFragmentUserAvatar = (CircularImageView) view.findViewById(R.id.civCurrentFragmentUserAvatar);
 
         tvCurrentFragmentUserFullname.setText(socialNetwork.getUserFullname());
-        tvCurrentFragmentFoursquare.setText(getResources().getString(R.string.welcome) + " " +socialNetwork.getUserFullname());
+        tvCurrentFragmentFoursquare.setText(getResources().getString(R.string.welcome) + " " + socialNetwork.getUserFullname());
 
 //        adjustFontSize(tvCurrentFragmentTweet, socialNetwork.getText());
 
