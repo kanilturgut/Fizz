@@ -17,5 +17,6 @@ public class Constant {
     public static final int POST_SHOWING_COUNT = 10;
     public static final int FOURSQUARE_POST_INDEX = 15;
 
+    
 
 }
