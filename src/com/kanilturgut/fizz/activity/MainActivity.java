@@ -87,6 +87,13 @@ public class MainActivity extends FragmentActivity {
         } else {
             mainToLogin();
         }
+
+        findViewById(R.id.frameMain).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideSystemBar();
+            }
+        });
     }
 
     private String[] getUser() {
